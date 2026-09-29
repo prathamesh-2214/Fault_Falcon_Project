@@ -1,0 +1,12 @@
+# text files use LF everywhere; the Windows launcher keeps CRLF
+* text=auto eol=lf
+*.bat text eol=crlf
+
+# binary data: never convert
+*.png binary
+*.svg text
+*.sqlite binary
+*.sqlite3 binary
+*.parquet binary
+*.bin binary
+*.pickle binary

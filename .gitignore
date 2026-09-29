@@ -1,0 +1,16 @@
+# Python environment (recreated by run.bat / run.sh)
+.venv/
+__pycache__/
+*.pyc
+
+# fine-tuned model: too large for GitHub (share it separately, place it in models/smollm2-360m-ff-chat/)
+models/
+
+# raw LogHub samples (only needed to rebuild the dataset)
+data/raw/
+
+# runtime state the app writes while it runs
+var/graph_state.sqlite*
+
+# notebook leftovers
+.ipynb_checkpoints/

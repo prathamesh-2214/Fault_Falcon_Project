@@ -1,0 +1,22 @@
+# App / engine environment. Python 3.10. See CLAUDE.md for why these pins exist.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.1.2
+transformers==4.33.0
+tokenizers==0.13.3
+accelerate==0.23.0
+sentencepiece
+numpy<2
+pandas
+pyarrow
+chromadb
+drain3
+streamlit
+plotly
+matplotlib
+scikit-learn
+requests
+tabulate
+pytest
+langgraph
+langgraph-checkpoint-sqlite
+streaming-llm @ git+https://github.com/mit-han-lab/streaming-llm.git
