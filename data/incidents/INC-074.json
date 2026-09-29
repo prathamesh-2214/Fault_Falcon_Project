@@ -1,0 +1,92 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-07-01T19:16:31.348315+00:00",
+ "incident_start": "2026-07-01T19:16:31.348315+00:00",
+ "source": "synthetic",
+ "scenario_type": "WEBHOOK_RETRY",
+ "planned_cause": "notification-svc",
+ "anomaly_id": "evt_3246",
+ "mitigated_at": "2026-07-01T23:21:25.374396+00:00",
+ "id": "INC-074",
+ "scenario_family": "planned",
+ "scenario_title": "Webhook retries without jitter exhausted Lambda concurrency",
+ "category": "config",
+ "title": "Throttling (429) on billing-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "billing-svc: 429 rate > 1 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "throttle"
+ },
+ "impact": "Customers were throttled on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-07-01 19:16-23:26: billing-svc: 281 of 364 log lines were non-INFO between 2026-07-01 19:16 and 2026-07-01 23:26 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "c.f.b.client.NotificationClient - call to notification-svc failed: HTTP 429 Too Many Requests",
+  "c.f.b.api.UsageController - account <*> requested usage for a closed period"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 281,
+  "lines": 364,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-074",
+ "scenario_event_ids": [
+  "evt_3239",
+  "evt_3258"
+ ],
+ "cause_event_id": "evt_3239",
+ "culprit_change_id": "chg_1794",
+ "contributing_ids": [],
+ "cause_service": "notification-svc",
+ "blast_radius": [
+  "notification-svc",
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change raised {key} {old} -> {new}; one failing customer endpoint multiplied invocations until notification-svc hit its Lambda concurrency limit and invoice e-mails were throttled.",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old}; add exponential backoff with jitter and a per-endpoint circuit breaker."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_3244",
+  "evt_3241",
+  "evt_3243"
+ ],
+ "remediation_ids": [
+  "evt_3258"
+ ],
+ "expected_files": [
+  "config/notification-svc.yaml"
+ ],
+ "expected_params": [
+  "webhook.max_retries"
+ ],
+ "culprit": {
+  "change_id": "chg_1794",
+  "event_id": "evt_3239",
+  "file": "config/notification-svc.yaml",
+  "line": 33,
+  "symbol": "webhook.max_retries",
+  "diff": "@@ -32,3 +32,3 @@ webhook.max_retries\n webhook:\n-  max_retries: 3\n+  max_retries: 24\n   # managed by the platform team",
+  "param_key": "webhook.max_retries"
+ },
+ "rca": {
+  "macro": "Config change raised webhook.max_retries 3 -> 24; one failing customer endpoint multiplied invocations until notification-svc hit its Lambda concurrency limit and invoice e-mails were throttled.",
+  "micro": "config/notification-svc.yaml:33 sets webhook.max_retries 3 -> 24.",
+  "remediation": "Revert webhook.max_retries to 3; add exponential backoff with jitter and a per-endpoint circuit breaker."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `c.f.b.client.NotificationClient - call to notification-svc failed: HTTP 429 Too `."
+ ]
+}

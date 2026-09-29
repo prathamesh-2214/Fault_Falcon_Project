@@ -1,0 +1,98 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-06-22T07:54:52.164833+00:00",
+ "incident_start": "2026-06-22T07:54:52.164833+00:00",
+ "source": "synthetic",
+ "scenario_type": "NULL_DEREF",
+ "planned_cause": "coord-svc",
+ "anomaly_id": "evt_2922",
+ "mitigated_at": "2026-06-22T12:44:11.501899+00:00",
+ "id": "INC-068",
+ "scenario_family": "planned",
+ "scenario_title": "Null dereference after a removed guard",
+ "category": "code",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-06-22 07:54-12:44: api-gateway: 357 of 480 log lines were non-INFO between 2026-06-22 07:54 and 2026-06-22 12:44 UTC (peak error ratio 0.89 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 0.481 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.889,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 357,
+  "lines": 480,
+  "p95_latency": 0.481,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-068",
+ "scenario_event_ids": [
+  "evt_2910",
+  "evt_2911",
+  "evt_2912",
+  "evt_2913",
+  "evt_2914",
+  "evt_2916",
+  "evt_2948"
+ ],
+ "cause_event_id": "evt_2916",
+ "culprit_change_id": "chg_1594",
+ "contributing_ids": [],
+ "cause_service": "coord-svc",
+ "blast_radius": [
+  "coord-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} removed a null/nil guard; requests for records without the optional field now crash the handler.",
+  "micro": "{file}:{line} ({symbol}) drops the null check before dereferencing the field.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; restore the guard at {file}:{line}; add a test with the optional field missing."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_2917",
+  "evt_2920",
+  "evt_2918"
+ ],
+ "remediation_ids": [
+  "evt_2948"
+ ],
+ "expected_files": [
+  "coord/quorum/FastLeaderElection.java",
+  "coord/session/SessionTracker.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_1594",
+  "event_id": "evt_2916",
+  "file": "coord/session/SessionTracker.java",
+  "line": 172,
+  "symbol": "SessionTrackerImpl.run",
+  "diff": "@@ -171,5 +171,2 @@ SessionTrackerImpl.run\n   public Result handle(Event event) {\n-    if (event.getAccount() == null) {\n-      return Result.skipped();\n-    }\n     Account acct = event.getAccount().resolve();",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v1.16.0 of coord-svc removed a null/nil guard; requests for records without the optional field now crash the handler.",
+  "micro": "coord/session/SessionTracker.java:172 (SessionTrackerImpl.run) drops the null check before dereferencing the field.",
+  "remediation": "Roll back coord-svc v1.16.0 -> v1.15.0; restore the guard at coord/session/SessionTracker.java:172; add a test with the optional field missing."
+ },
+ "action_items": [
+  "Add a regression test covering SessionTrackerImpl.run (coord/session/SessionTracker.java).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

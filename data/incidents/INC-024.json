@@ -1,0 +1,73 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-04-11T05:54:52.541224+00:00",
+ "incident_start": "2026-04-11T05:54:52.541224+00:00",
+ "source": "synthetic",
+ "scenario_type": "TRAFFIC_SPIKE",
+ "planned_cause": "api-gateway",
+ "anomaly_id": "evt_1195",
+ "mitigated_at": "2026-04-11T10:31:23.089209+00:00",
+ "id": "INC-024",
+ "scenario_family": "planned",
+ "scenario_title": "Traffic spike from one customer",
+ "category": "external",
+ "title": "Throttling (429) on api-gateway",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "api-gateway: 429 rate > 1 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "throttle"
+ },
+ "impact": "Customers were throttled on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-04-11 05:54-10:34: api-gateway: 201 of 326 log lines were non-INFO between 2026-04-11 05:54 and 2026-04-11 10:34 UTC (peak error ratio 0.8 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 0.55 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "POST /v1/servers <*> <*> <*>",
+  "GET /v1/servers <*> <*> <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.8,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 201,
+  "lines": 326,
+  "p95_latency": 0.55,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-024",
+ "scenario_event_ids": [],
+ "cause_event_id": null,
+ "culprit_change_id": null,
+ "contributing_ids": [],
+ "cause_service": "api-gateway",
+ "blast_radius": [
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "No change explains the anomaly: a customer's batch integration sent 12x its usual request rate for 40 minutes.",
+  "micro": "",
+  "remediation": "No rollback needed; per-customer throttling for that account; no change was rolled back."
+ },
+ "_decoy_window_h": null,
+ "_fix": "none",
+ "external_factor": "a customer's batch integration sent 12x its usual request rate for 40 minutes",
+ "decoy_ids": [
+  "evt_1194",
+  "evt_1193"
+ ],
+ "remediation_ids": [],
+ "expected_files": [],
+ "expected_params": [],
+ "culprit": null,
+ "rca": {
+  "macro": "No change explains the anomaly: a customer's batch integration sent 12x its usual request rate for 40 minutes.",
+  "micro": "",
+  "remediation": "No rollback needed; per-customer throttling for that account; no change was rolled back."
+ },
+ "action_items": [
+  "Alert on the error signature `POST /v1/servers <*> <*> <*>`."
+ ]
+}

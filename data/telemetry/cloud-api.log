@@ -1,0 +1,161 @@
+2026-06-05T16:39:31Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:41:33Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:43:51Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:43:55Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:44:06Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:47:01Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:48:47Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.2563291
+2026-06-05T16:49:42Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.2714450
+2026-06-05T16:51:10Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:51:33Z INFO  [synthetic] Active base files: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:52:32Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:53:18Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1583 time: 0.1911871
+2026-06-05T16:53:34Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:56:44Z INFO  [synthetic] 10.11.10.1 "POST /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers HTTP/1.1" status: 202 len: 733 time: 0.5000288
+2026-06-05T16:57:55Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:58:12Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T16:59:46Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:01:08Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:02:09Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1759 time: 0.2896700
+2026-06-05T17:03:45Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:04:26Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:06:06Z INFO  [synthetic] [instance: 127e769a-4fe6-4548-93b1-513ac51e0452] VM Resumed (Lifecycle Event)
+2026-06-05T17:06:31Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:06:33Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 211 time: 0.0951850
+2026-06-05T17:08:30Z INFO  [synthetic] image 0673dd71-34c5-4fbb-86c4-40623fbe45b4 at (/var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742): checking
+2026-06-05T17:09:44Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:10:45Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:12:37Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:12:50Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:13:34Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:16:57Z INFO  [synthetic] 10.11.10.1 "POST /v2/e9746973ac574c6b8a9e8857f56a7608/os-server-external-events HTTP/1.1" status: 200 len: 380 time: 0.0867331
+2026-06-05T17:17:35Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:18:18Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1874 time: 0.1886330
+2026-06-05T17:18:43Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:19:04Z INFO  [synthetic] [instance: 43204226-2f87-4da7-b7ee-4d20cc66e846] Deleting instance files /var/lib/nova/instances/43204226-2f87-4da7-b7ee-4d20cc66e846_del
+2026-06-05T17:19:11Z INFO  [synthetic] HTTP exception thrown: No instances found for any event
+2026-06-05T17:19:29Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:20:47Z INFO  [synthetic] image 0673dd71-34c5-4fbb-86c4-40623fbe45b4 at (/var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742): in use: on this node 1 local, 0 on other nodes sharing this instance storage
+2026-06-05T17:22:06Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:22:39Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:22:44Z INFO  [synthetic] Compute_service record updated for cp-1.slowvm1.tcloud-pg0.utah.cloudlab.us:cp-1.slowvm1.tcloud-pg0.utah.cloudlab.us
+2026-06-05T17:24:03Z INFO  [synthetic] Removing base or swap file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:24:26Z INFO  [synthetic] 10.11.10.1 "DELETE /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/95960536-049b-41f6-9049-05fc479b6a7c HTTP/1.1" status: 204 len: 203 time: 0.2639730
+2026-06-05T17:25:02Z INFO  [synthetic] [instance: bf8c824d-f099-4433-a41e-e3da7578262e] disk limit not specified, defaulting to unlimited
+2026-06-05T17:25:41Z INFO  [synthetic] 10.11.21.132,10.11.10.1 "GET /openstack/2013-10-17/meta_data.json HTTP/1.1" status: 200 len: 967 time: 0.0009539
+2026-06-05T17:26:39Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:26:43Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:27:09Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:27:34Z INFO  [synthetic] image 0673dd71-34c5-4fbb-86c4-40623fbe45b4 at (/var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742): in use: on this node 1 local, 0 on other nodes sharing this instance storage
+2026-06-05T17:29:12Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:29:32Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:29:57Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:30:49Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:31:05Z INFO  [synthetic] Active base files: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:31:26Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.2597642
+2026-06-05T17:32:38Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:34:20Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1575 time: 0.1955159
+2026-06-05T17:34:41Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:34:45Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:35:23Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:37:07Z INFO  [synthetic] [instance: b562ef10-ba2d-48ae-bf4a-18666cba4a51] Total disk: 15 GB, used: 0.00 GB
+2026-06-05T17:37:25Z INFO  [synthetic] [instance: fecdd5a9-3ca0-4c82-9336-63b7774f738e] Deletion of /var/lib/nova/instances/fecdd5a9-3ca0-4c82-9336-63b7774f738e_del complete
+2026-06-05T17:38:19Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:38:30Z INFO  [synthetic] 10.11.21.143,10.11.10.1 "GET /openstack/2013-10-17/vendor_data.json HTTP/1.1" status: 200 len: 124 time: 0.2143800
+2026-06-05T17:38:41Z INFO  [synthetic] [instance: d54b44eb-2d1a-4aa2-ba6b-074d35f8f12c] Claim successful
+2026-06-05T17:39:14Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.2732630
+2026-06-05T17:39:15Z INFO  [synthetic] [instance: 127e769a-4fe6-4548-93b1-513ac51e0452] Took 20.29 seconds to spawn the instance on the hypervisor.
+2026-06-05T17:39:30Z INFO  [synthetic] [instance: be793e89-2cc3-4f99-9884-9c6a624a84bc] vcpu limit not specified, defaulting to unlimited
+2026-06-05T17:39:34Z INFO  [synthetic] Active base files: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:40:19Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:40:22Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.2751970
+2026-06-05T17:43:23Z INFO  [synthetic] 10.11.21.131,10.11.10.1 "GET /openstack/2013-10-17/meta_data.json HTTP/1.1" status: 200 len: 967 time: 0.2374320
+2026-06-05T17:45:49Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:46:49Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:47:09Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:48:07Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:50:37Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:51:15Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:51:17Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:51:29Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:51:50Z INFO  [synthetic] [instance: af5f7392-f7d4-4298-b647-c98924c64aa1] During sync_power_state the instance has a pending task (spawning). Skip.
+2026-06-05T17:52:56Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:53:15Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T17:55:46Z INFO  [synthetic] [instance: 17288ea8-cbf4-4f0e-94fe-853fd2735f29] memory limit: 96258.00 MB, free: 95746.00 MB
+2026-06-05T17:56:20Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.2626600
+2026-06-05T17:58:28Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:00:54Z INFO  [synthetic] Removable base files: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:00:59Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:01:13Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:02:09Z INFO  [synthetic] 10.11.21.128,10.11.10.1 "GET /openstack/2013-10-17/vendor_data.json HTTP/1.1" status: 200 len: 124 time: 0.2283430
+2026-06-05T18:02:12Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:03:40Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:03:55Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:04:10Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.2491281
+2026-06-05T18:05:38Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:06:48Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:07:53Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:09:46Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:10:52Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:12:39Z INFO  [synthetic] [instance: d96a117b-0193-4549-bdcc-63b917273d1d] VM Started (Lifecycle Event)
+2026-06-05T18:15:37Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:16:55Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:17:10Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:19:01Z INFO  [synthetic] [instance: af5f7392-f7d4-4298-b647-c98924c64aa1] During sync_power_state the instance has a pending task (spawning). Skip.
+2026-06-05T18:20:23Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.2608259
+2026-06-05T18:20:25Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:21:04Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:23:32Z INFO  [synthetic] [instance: 7e7cc42f-3cb9-4d91-804c-f5a32d54f1c5] vcpu limit not specified, defaulting to unlimited
+2026-06-05T18:23:41Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:24:19Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:26:03Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:26:14Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:26:24Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:27:01Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:27:26Z INFO  [synthetic] [instance: d6b7bd36-2943-4363-9235-fffdd89ea40e] Took 20.05 seconds to build instance.
+2026-06-05T18:28:28Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:28:51Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:28:59Z INFO  [synthetic] Active base files: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:29:44Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:29:50Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.4212601
+2026-06-05T18:30:58Z INFO  [synthetic] Active base files: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:31:24Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1910 time: 0.2472789
+2026-06-05T18:33:48Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.2524779
+2026-06-05T18:36:43Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:37:02Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:39:17Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:39:36Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1874 time: 0.2087660
+2026-06-05T18:39:56Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:40:00Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:40:14Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:40:39Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:40:50Z INFO  [synthetic] Active base files: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:40:55Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:41:00Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.2700448
+2026-06-05T18:45:05Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.2676780
+2026-06-05T18:45:07Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:47:05Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1910 time: 0.2654040
+2026-06-05T18:49:03Z INFO  [synthetic] Removable base files: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:49:09Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:49:32Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:50:15Z INFO  [synthetic] [instance: faf974ea-cba5-4e1b-93f4-3a3bc606006f] Took 19.47 seconds to spawn the instance on the hypervisor.
+2026-06-05T18:50:56Z WARN  [synthetic] Unknown base file: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T18:53:09Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1916 time: 0.2779312
+2026-06-05T18:58:02Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1893 time: 0.3706589
+2026-06-05T18:58:58Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 211 time: 0.1033430
+2026-06-05T19:04:15Z INFO  [synthetic] 10.11.10.1 "GET /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/detail HTTP/1.1" status: 200 len: 1910 time: 0.2722361
+2026-06-05T19:06:02Z INFO  [synthetic] [instance: fecdd5a9-3ca0-4c82-9336-63b7774f738e] During sync_power_state the instance has a pending task (spawning). Skip.
+2026-06-05T19:07:24Z INFO  [synthetic] 10.11.21.140,10.11.10.1 "GET /openstack/2013-10-17/vendor_data.json HTTP/1.1" status: 200 len: 124 time: 0.0006189
+2026-06-05T19:09:44Z INFO  [synthetic] [instance: 78dc1847-8848-49cc-933e-9239b12c9dcf] VM Paused (Lifecycle Event)
+2026-06-05T19:13:02Z INFO  [synthetic] 10.11.10.1 "POST /v2/e9746973ac574c6b8a9e8857f56a7608/os-server-external-events HTTP/1.1" status: 200 len: 380 time: 0.0913219
+2026-06-05T19:14:22Z INFO  [synthetic] [instance: ae3a1b5d-eec1-45bb-b76a-c59d83b1471f] disk limit not specified, defaulting to unlimited
+2026-06-05T19:14:24Z INFO  [synthetic] 10.11.10.1 "DELETE /v2/54fadb412c4e40cdbaed9335e4c35a9e/servers/bf8c824d-f099-4433-a41e-e3da7578262e HTTP/1.1" status: 204 len: 203 time: 0.2631681
+2026-06-05T19:14:37Z INFO  [synthetic] [instance: af5f7392-f7d4-4298-b647-c98924c64aa1] Total disk: 15 GB, used: 0.00 GB
+2026-06-05T19:17:45Z INFO  [synthetic] 10.11.21.133,10.11.10.1 "GET /latest/meta-data/block-device-mapping/ami HTTP/1.1" status: 200 len: 119 time: 0.4668469
+2026-06-05T19:27:09Z INFO  [synthetic] Active base files: /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742
+2026-06-05T19:28:00Z INFO  [synthetic] image 0673dd71-34c5-4fbb-86c4-40623fbe45b4 at (/var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742): checking
+2026-06-05T19:28:08Z INFO  [synthetic] [instance: 96abccce-8d1f-4e07-b6d1-4b2ab87e23b4] Total vcpu: 16 VCPU, used: 0.00 VCPU
+2026-06-05T19:29:11Z INFO  [synthetic] [instance: c62f4f25-982c-4ea2-b5e4-93000edfcfbf] Total memory: 64172 MB, used: 512.00 MB
+2026-06-05T19:30:09Z INFO  [synthetic] 10.11.21.142,10.11.10.1 "GET /openstack/2013-10-17 HTTP/1.1" status: 200 len: 157 time: 0.0008900
+2026-06-05T19:32:09Z INFO  [synthetic] [instance: af5f7392-f7d4-4298-b647-c98924c64aa1] memory limit: 96258.00 MB, free: 95746.00 MB
+2026-06-05T19:37:38Z INFO  [synthetic] [instance: b562ef10-ba2d-48ae-bf4a-18666cba4a51] During sync_power_state the instance has a pending task (spawning). Skip.

@@ -1,0 +1,92 @@
+{
+ "service": "auth-svc",
+ "planned_start": "2026-08-10T08:18:52.160480+00:00",
+ "incident_start": "2026-08-10T08:18:52.160480+00:00",
+ "source": "synthetic",
+ "scenario_type": "REDIS_DOWNSIZE",
+ "planned_cause": "session-cache",
+ "anomaly_id": "evt_4229",
+ "mitigated_at": "2026-08-10T12:43:45.965228+00:00",
+ "id": "INC-098",
+ "scenario_family": "planned",
+ "scenario_title": "ElastiCache node downsized, evictions",
+ "category": "infra",
+ "title": "Authentication failures on auth-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "auth-svc: authentication-failure rate > 5 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "auth"
+ },
+ "impact": "Users were logged out or rejected on auth-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] auth-svc 2026-08-10 08:18-12:48: auth-svc: 244 of 343 log lines were non-INFO between 2026-08-10 08:18 and 2026-08-10 12:48 UTC (peak error ratio 1.0 vs baseline median 0.0). 3 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "{\"level\":\"warn\",\"msg\":\"session not found, forcing <*>",
+  "{\"level\":\"error\",\"msg\":\"session lookup failed\",\"err\":\"redis: <*>",
+  "{\"level\":\"warn\",\"msg\":\"login failed: bad <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 244,
+  "lines": 343,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-098",
+ "scenario_event_ids": [
+  "evt_4209",
+  "evt_4257"
+ ],
+ "cause_event_id": "evt_4209",
+ "culprit_change_id": "chg_2310",
+ "contributing_ids": [],
+ "cause_service": "session-cache",
+ "blast_radius": [
+  "session-cache",
+  "auth-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change moved {svc} to {new}; memory ran out, Redis evicted sessions and users were logged out in waves.",
+  "micro": "{file}:{line} sets {key} {old} -> {new} on {resource}.",
+  "remediation": "Restore {key} = {old} on {resource}; alarm on Evictions and DatabaseMemoryUsagePercentage."
+ },
+ "_decoy_window_h": 8.0,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_4225",
+  "evt_4224"
+ ],
+ "remediation_ids": [
+  "evt_4257"
+ ],
+ "expected_files": [
+  "infra/session-cache.tf"
+ ],
+ "expected_params": [
+  "redis_node_type"
+ ],
+ "culprit": {
+  "change_id": "chg_2310",
+  "event_id": "evt_4209",
+  "file": "infra/session-cache.tf",
+  "line": 69,
+  "symbol": "aws_elasticache_replication_group.session_cache",
+  "diff": "@@ -68,3 +68,3 @@ aws_elasticache_replication_group.session_cache\n resource \"aws_elasticache_replication_group\" \"session_cache\" {\n-  node_type = \"cache.r6g.xlarge\"\n+  node_type = \"cache.t4g.medium\"\n   tags = local.tags",
+  "param_key": "redis_node_type"
+ },
+ "rca": {
+  "macro": "Terraform change moved session-cache to cache.t4g.medium; memory ran out, Redis evicted sessions and users were logged out in waves.",
+  "micro": "infra/session-cache.tf:69 sets redis_node_type cache.r6g.xlarge -> cache.t4g.medium on aws_elasticache_replication_group.session_cache.",
+  "remediation": "Restore redis_node_type = cache.r6g.xlarge on aws_elasticache_replication_group.session_cache; alarm on Evictions and DatabaseMemoryUsagePercentage."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `{\"level\":\"warn\",\"msg\":\"session not found, forcing <*>`."
+ ]
+}

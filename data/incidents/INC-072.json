@@ -1,0 +1,103 @@
+{
+ "service": "compute-svc",
+ "planned_start": "2026-06-28T18:49:55.119681+00:00",
+ "incident_start": "2026-06-28T18:49:55.119681+00:00",
+ "source": "synthetic",
+ "scenario_type": "CIOD_LEAK",
+ "planned_cause": "node-svc",
+ "anomaly_id": "evt_3131",
+ "mitigated_at": "2026-06-28T21:46:09.207202+00:00",
+ "id": "INC-072",
+ "scenario_family": "complex",
+ "scenario_title": "Memory leak in the program loader",
+ "category": "code",
+ "title": "Elevated 5xx errors on compute-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "compute-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on compute-svc",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] compute-svc 2026-06-28 18:49-18:59: compute-svc: 7 of 11 log lines were non-INFO between 2026-06-28 18:49 and 2026-06-28 18:59 UTC (peak error ratio 0.64 vs baseline median 0.0). 1 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "Call to <*> failed: HTTP 503 Service Unavailable"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.636,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 7,
+  "lines": 11,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-072",
+ "scenario_event_ids": [
+  "evt_3038",
+  "evt_3108",
+  "evt_3109",
+  "evt_3112",
+  "evt_3113",
+  "evt_3120",
+  "evt_3121",
+  "evt_3143",
+  "evt_3144"
+ ],
+ "cause_event_id": "evt_3121",
+ "culprit_change_id": "chg_1697",
+ "contributing_ids": [
+  "evt_3038"
+ ],
+ "cause_service": "node-svc",
+ "blast_radius": [
+  "node-svc",
+  "compute-svc",
+  "storage-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of node-svc leaks one program-image buffer per failed load; the smaller instance type from the earlier launch-template change ran out of memory first.",
+  "micro": "{file}:{line} ({symbol}) drops free(image_buf) on the error path.",
+  "remediation": "Roll back node-svc {version_to} -> {version_from}; restore free(image_buf) at {file}:{line}; add a leak check (valgrind) to the ppd suite."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_3124",
+  "evt_3126",
+  "evt_3125"
+ ],
+ "remediation_ids": [
+  "evt_3143",
+  "evt_3144"
+ ],
+ "expected_files": [
+  "node/ciod/ciod_loader.c",
+  "node/io/lustre_mount.c",
+  "node/kernel/ras_handler.c"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_1697",
+  "event_id": "evt_3121",
+  "file": "node/ciod/ciod_loader.c",
+  "line": 170,
+  "symbol": "ciod_load_program",
+  "diff": "@@ -168,5 +168,4 @@ ciod_load_program\n     rc = ciod_copy_image(job, image_buf, len);\n     if (rc != 0) {\n-        free(image_buf);\n-        return -EIO;\n+        return -EIO;  /* image_buf is reused by the next load */\n     }",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v5.14.0 of node-svc leaks one program-image buffer per failed load; the smaller instance type from the earlier launch-template change ran out of memory first.",
+  "micro": "node/ciod/ciod_loader.c:170 (ciod_load_program) drops free(image_buf) on the error path.",
+  "remediation": "Roll back node-svc v5.14.0 -> v5.13.0; restore free(image_buf) at node/ciod/ciod_loader.c:170; add a leak check (valgrind) to the ppd suite."
+ },
+ "action_items": [
+  "Add a regression test covering ciod_load_program (node/ciod/ciod_loader.c).",
+  "Alert on the error signature `Call to <*> failed: HTTP 503 Service Unavailable`."
+ ]
+}

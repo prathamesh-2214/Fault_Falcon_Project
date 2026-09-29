@@ -1,0 +1,101 @@
+{
+ "service": "storage-svc",
+ "incident_start": "2026-08-28T22:04:48+00:00",
+ "planned_start": "2026-08-28T22:04:48+00:00",
+ "anomaly_id": "evt_4906",
+ "source": "loghub",
+ "planned_cause": null,
+ "error_templates": [
+  "<*> exception while serving <*> to <*>"
+ ],
+ "scenario_type": "FLAG_DORMANT",
+ "mitigated_at": "2026-08-29T03:03:09.681790+00:00",
+ "id": "INC-115",
+ "scenario_family": "complex",
+ "scenario_title": "Feature flag enabled a dormant code path",
+ "category": "config",
+ "title": "Elevated 5xx errors on storage-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "storage-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on storage-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] storage-svc 2026-08-28 22:04-23:02: storage-svc: 11 of 19 log lines were non-INFO between 2026-08-28 22:04 and 2026-08-28 23:02 UTC (peak error ratio 0.6 vs baseline median 0.0). 1 error templates, 0 first seen in this span.",
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.6,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 11,
+  "lines": 19,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-115",
+ "scenario_event_ids": [
+  "evt_4647",
+  "evt_4648",
+  "evt_4659",
+  "evt_4660",
+  "evt_4664",
+  "evt_4665",
+  "evt_4897",
+  "evt_4928"
+ ],
+ "cause_event_id": "evt_4897",
+ "culprit_change_id": "chg_2555",
+ "contributing_ids": [
+  "evt_4665"
+ ],
+ "cause_service": "storage-svc",
+ "blast_radius": [
+  "storage-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change turned {key} on, activating a code path shipped days earlier.",
+  "micro": "{file}:{line} ({symbol}), deployed in {culprit_event}, runs only when the flag is on and skips the safety check of the old path.",
+  "remediation": "Turn feature.fast_ack off again in config/storage-svc.yaml; fix the flag-guarded branch at {file}:{line} before re-enabling."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_4903",
+  "evt_4902",
+  "evt_4900"
+ ],
+ "remediation_ids": [
+  "evt_4928"
+ ],
+ "expected_files": [
+  "config/storage-svc.yaml"
+ ],
+ "expected_params": [
+  "feature.fast_ack"
+ ],
+ "culprit": {
+  "change_id": "chg_2555",
+  "event_id": "evt_4665",
+  "file": "storage/datanode/PacketResponder.java",
+  "line": 237,
+  "symbol": "PacketResponder.run",
+  "diff": "@@ -236,2 +236,5 @@ PacketResponder.run\n     boolean ackBeforeFlush = false;\n+    if (flags.isOn(\"fast_ack\")) {\n+      ackBeforeFlush = true;  // lower latency\n+    }\n     sendAck(seqno, ackBeforeFlush);",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Config change turned feature.fast_ack on, activating a code path shipped days earlier.",
+  "micro": "storage/datanode/PacketResponder.java:237 (PacketResponder.run), deployed in evt_4665, runs only when the flag is on and skips the safety check of the old path.",
+  "remediation": "Turn feature.fast_ack off again in config/storage-svc.yaml; fix the flag-guarded branch at storage/datanode/PacketResponder.java:237 before re-enabling."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Add a regression test covering PacketResponder.run (storage/datanode/PacketResponder.java).",
+  "Alert on the error signature `<*> exception while serving <*> to <*>`."
+ ]
+}

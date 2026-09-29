@@ -1,0 +1,100 @@
+{
+ "service": "coord-svc",
+ "planned_start": "2026-06-13T19:20:59.647012+00:00",
+ "incident_start": "2026-06-13T19:20:59.647012+00:00",
+ "source": "synthetic",
+ "scenario_type": "HOTFIX_REGRESSION",
+ "planned_cause": "coord-svc",
+ "anomaly_id": "evt_2710",
+ "mitigated_at": "2026-06-13T22:02:07.582604+00:00",
+ "id": "INC-063",
+ "scenario_family": "planned",
+ "scenario_title": "Hotfix patch serialised requests with a global lock",
+ "category": "code",
+ "title": "Latency and timeouts on coord-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "coord-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on coord-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] coord-svc 2026-06-13 19:20-22:00: coord-svc: 120 of 184 log lines were non-INFO between 2026-06-13 19:20 and 2026-06-13 22:00 UTC (peak error ratio 0.83 vs baseline median 0.0). 3 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "request waited <*> ms for the global lock",
+  "request timed out after 30000 ms (lock contention)",
+  "Interrupting SendWorker"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.833,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 120,
+  "lines": 184,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-063",
+ "scenario_event_ids": [
+  "evt_2680",
+  "evt_2681",
+  "evt_2683",
+  "evt_2685",
+  "evt_2687",
+  "evt_2688",
+  "evt_2703",
+  "evt_2704",
+  "evt_2720"
+ ],
+ "cause_event_id": "evt_2704",
+ "culprit_change_id": "chg_1489",
+ "contributing_ids": [
+  "evt_2688"
+ ],
+ "cause_service": "coord-svc",
+ "blast_radius": [
+  "coord-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Hotfix patch {version_to} of {svc} fixed a race by adding a global lock; every request then waited on that lock and latency exploded under load.",
+  "micro": "{file}:{line} ({symbol}) wraps the whole request in one global lock.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; fix the race with a per-key lock at {file}:{line}; load-test hotfixes before prod."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_2707",
+  "evt_2706"
+ ],
+ "remediation_ids": [
+  "evt_2720"
+ ],
+ "expected_files": [
+  "coord/quorum/FastLeaderElection.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_1489",
+  "event_id": "evt_2704",
+  "file": "coord/quorum/FastLeaderElection.java",
+  "line": 73,
+  "symbol": "FastLeaderElection.lookForLeader",
+  "diff": "@@ -73,2 +73,2 @@ FastLeaderElection.lookForLeader\n-  public Result handle(Request r) {\n+  public synchronized Result handle(Request r) {  // HOTFIX race\n     return process(r);",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Hotfix patch v1.13.1 of coord-svc fixed a race by adding a global lock; every request then waited on that lock and latency exploded under load.",
+  "micro": "coord/quorum/FastLeaderElection.java:73 (FastLeaderElection.lookForLeader) wraps the whole request in one global lock.",
+  "remediation": "Roll back coord-svc v1.13.1 -> v1.13.0; fix the race with a per-key lock at coord/quorum/FastLeaderElection.java:73; load-test hotfixes before prod."
+ },
+ "action_items": [
+  "Add a regression test covering FastLeaderElection.lookForLeader (coord/quorum/FastLeaderElection.java).",
+  "Alert on the error signature `request waited <*> ms for the global lock`."
+ ]
+}

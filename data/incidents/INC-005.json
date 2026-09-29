@@ -1,0 +1,101 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-03-11T09:56:37.831278+00:00",
+ "incident_start": "2026-03-11T09:56:37.831278+00:00",
+ "source": "synthetic",
+ "scenario_type": "CROSS_SERVICE",
+ "planned_cause": "auth-svc",
+ "anomaly_id": "evt_348",
+ "mitigated_at": "2026-03-11T14:21:52.789770+00:00",
+ "id": "INC-005",
+ "scenario_family": "complex",
+ "scenario_title": "Release-train cascade down the dependency chain",
+ "category": "code",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-03-11 09:56-14:26: api-gateway: 221 of 354 log lines were non-INFO between 2026-03-11 09:56 and 2026-03-11 14:26 UTC (peak error ratio 0.92 vs baseline median 0.0). 1 error templates, 0 first seen in this span. Peak p95 latency 0.503 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "POST <*> <*> <*> target=auth-svc"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.917,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 221,
+  "lines": 354,
+  "p95_latency": 0.503,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-005",
+ "scenario_event_ids": [
+  "evt_303",
+  "evt_305",
+  "evt_312",
+  "evt_313",
+  "evt_323",
+  "evt_324",
+  "evt_296",
+  "evt_297",
+  "evt_315",
+  "evt_319",
+  "evt_329",
+  "evt_331",
+  "evt_381"
+ ],
+ "cause_event_id": "evt_324",
+ "culprit_change_id": "chg_175",
+ "contributing_ids": [],
+ "cause_service": "auth-svc",
+ "blast_radius": [
+  "auth-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Release train {cycle} shipped FEAT-116 (Token refresh v2) across services; the {svc} part ({version_to}) broke, and the failure surfaced in {alert_svc} through the dependency chain. The later parts of the same feature were harmless.",
+  "micro": "{file}:{line} ({symbol}) divides the token lifetime by 60 (minutes vs seconds).",
+  "remediation": "Roll back {svc} {version_to} -> {version_from} (the other services' parts of FEAT-116 can stay); fix {file}:{line}; add a cross-service load test to the train."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_331",
+  "evt_337",
+  "evt_342"
+ ],
+ "remediation_ids": [
+  "evt_381"
+ ],
+ "expected_files": [
+  "auth/internal/token/issuer.go",
+  "auth/internal/token/refresh.go"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_175",
+  "event_id": "evt_324",
+  "file": "auth/internal/token/issuer.go",
+  "line": 238,
+  "symbol": "Issuer.Issue",
+  "diff": "@@ -237,3 +237,3 @@ Issuer.Issue\n \tclaims := newClaims(acct)\n-\tclaims.ExpiresAt = now.Add(i.ttl)\n+\tclaims.ExpiresAt = now.Add(i.ttl / 60)\n \treturn i.sign(claims)",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Release train RT-26.11 shipped FEAT-116 (Token refresh v2) across services; the auth-svc part (v3.4.0) broke, and the failure surfaced in api-gateway through the dependency chain. The later parts of the same feature were harmless.",
+  "micro": "auth/internal/token/issuer.go:238 (Issuer.Issue) divides the token lifetime by 60 (minutes vs seconds).",
+  "remediation": "Roll back auth-svc v3.4.0 -> v3.3.0 (the other services' parts of FEAT-116 can stay); fix auth/internal/token/issuer.go:238; add a cross-service load test to the train."
+ },
+ "action_items": [
+  "Add a regression test covering Issuer.Issue (auth/internal/token/issuer.go).",
+  "Alert on the error signature `POST <*> <*> <*> target=auth-svc`."
+ ]
+}

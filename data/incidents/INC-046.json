@@ -1,0 +1,97 @@
+{
+ "service": "compute-svc",
+ "planned_start": "2026-05-17T09:19:36.519310+00:00",
+ "incident_start": "2026-05-17T09:19:36.519310+00:00",
+ "source": "synthetic",
+ "scenario_type": "PARTIAL_ROLLBACK",
+ "planned_cause": "compute-svc",
+ "anomaly_id": "evt_1994",
+ "mitigated_at": "2026-05-17T13:01:54.998586+00:00",
+ "id": "INC-046",
+ "scenario_family": "special",
+ "scenario_title": "Partial rollback of a bad deploy",
+ "category": "code",
+ "title": "Elevated 5xx errors on compute-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "compute-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on compute-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] compute-svc 2026-05-17 09:19-13:09: compute-svc: 163 of 245 log lines were non-INFO between 2026-05-17 09:19 and 2026-05-17 13:09 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 1 first seen in this span.",
+ "error_templates": [
+  "unhandled error in request handler: <*> failures in 60 s",
+  "Failed to renew lease for [DFSClient_NONMAPREDUCE_1537864556_1] for <*> seconds. Will retry shortly ..."
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 163,
+  "lines": 245,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-046",
+ "scenario_event_ids": [
+  "evt_1982",
+  "evt_1983",
+  "evt_1984",
+  "evt_1986",
+  "evt_1988",
+  "evt_1990",
+  "evt_1992",
+  "evt_2012"
+ ],
+ "cause_event_id": "evt_1990",
+ "culprit_change_id": "chg_1116",
+ "contributing_ids": [],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} introduced a regression.",
+  "micro": "{file}:{line} ({symbol}) changes the condition / constant shown in the diff.",
+  "remediation": "Complete the rollback of {svc} to {version_from} on all nodes; revert {file}:{line}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_1992",
+  "evt_1991"
+ ],
+ "remediation_ids": [
+  "evt_2012"
+ ],
+ "expected_files": [
+  "compute/dfs/LeaseRenewer.java",
+  "compute/scheduler/TaskRunner.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_1116",
+  "event_id": "evt_1990",
+  "file": "compute/dfs/LeaseRenewer.java",
+  "line": 195,
+  "symbol": "LeaseRenewer.renew",
+  "diff": "@@ -194,4 +194,4 @@ LeaseRenewer.renew\n     attempt++;\n-    if (attempt < maxAttempts) {\n+    if (attempt > maxAttempts) {\n       return retry(request);\n     }",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v2.14.0 of compute-svc introduced a regression.",
+  "micro": "compute/dfs/LeaseRenewer.java:195 (LeaseRenewer.renew) changes the condition / constant shown in the diff.",
+  "remediation": "Complete the rollback of compute-svc to v2.13.0 on all nodes; revert compute/dfs/LeaseRenewer.java:195."
+ },
+ "action_items": [
+  "Add a regression test covering LeaseRenewer.renew (compute/dfs/LeaseRenewer.java).",
+  "Alert on the error signature `unhandled error in request handler: <*> failures in 60 s`."
+ ]
+}

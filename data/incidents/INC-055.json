@@ -1,0 +1,98 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-06-01T01:11:01.593501+00:00",
+ "incident_start": "2026-06-01T01:11:01.593501+00:00",
+ "source": "synthetic",
+ "scenario_type": "SKIPPED_TEST",
+ "planned_cause": "storage-svc",
+ "anomaly_id": "evt_2390",
+ "mitigated_at": "2026-06-01T03:51:32.014723+00:00",
+ "id": "INC-055",
+ "scenario_family": "special",
+ "scenario_title": "Regression behind a skipped load suite",
+ "category": "code",
+ "title": "Latency and timeouts on api-gateway",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "api-gateway: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-06-01 01:11-02:21: api-gateway: 45 of 74 log lines were non-INFO between 2026-06-01 01:11 and 2026-06-01 02:21 UTC (peak error ratio 0.87 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 27.271 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.867,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 45,
+  "lines": 74,
+  "p95_latency": 27.271,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-055",
+ "scenario_event_ids": [
+  "evt_2379",
+  "evt_2381",
+  "evt_2382",
+  "evt_2383",
+  "evt_2384",
+  "evt_2385",
+  "evt_2412"
+ ],
+ "cause_event_id": "evt_2385",
+ "culprit_change_id": "chg_1299",
+ "contributing_ids": [],
+ "cause_service": "storage-svc",
+ "blast_radius": [
+  "storage-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} introduced a regression that only the skipped ppd load suite would have caught.",
+  "micro": "{file}:{line} ({symbol}) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; revert {file}:{line}. Make the ppd load suite mandatory."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_2387"
+ ],
+ "remediation_ids": [
+  "evt_2412"
+ ],
+ "expected_files": [
+  "storage/datanode/BlockWriter.java",
+  "storage/datanode/DataXceiver.java",
+  "storage/namenode/BlockManager.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_1299",
+  "event_id": "evt_2385",
+  "file": "storage/datanode/DataXceiver.java",
+  "line": 47,
+  "symbol": "DataXceiver.readBlock",
+  "diff": "@@ -46,2 +46,2 @@ DataXceiver.readBlock\n   // records per flush\n-  private static final int BATCH = 512;\n+  private static final int BATCH = 1;",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v4.7.0 of storage-svc introduced a regression that only the skipped ppd load suite would have caught.",
+  "micro": "storage/datanode/DataXceiver.java:47 (DataXceiver.readBlock) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back storage-svc v4.7.0 -> v4.6.0; revert storage/datanode/DataXceiver.java:47. Make the ppd load suite mandatory."
+ },
+ "action_items": [
+  "Make the ppd load test suite mandatory before prod.",
+  "Add a regression test covering DataXceiver.readBlock (storage/datanode/DataXceiver.java).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

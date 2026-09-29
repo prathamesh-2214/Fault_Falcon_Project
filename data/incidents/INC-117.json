@@ -1,0 +1,106 @@
+{
+ "service": "compute-svc",
+ "incident_start": "2026-08-29T08:38:24+00:00",
+ "planned_start": "2026-08-29T08:38:24+00:00",
+ "anomaly_id": "evt_4948",
+ "source": "loghub",
+ "planned_cause": null,
+ "error_templates": [
+  "Address change detected. Old: <*> New: <*>",
+  "Failed to renew lease for [DFSClient_NONMAPREDUCE_1537864556_1] for <*> seconds. Will retry shortly ...",
+  "Slow ReadProcessor read fields took 65020ms (threshold=30000ms); ack: seqno: -2 status: SUCCESS status: ERROR downstreamAckTimeNanos: 0, targets: [<IP>, <IP>]",
+  "DFSOutputStream ResponseProcessor exception for block BP-1347369012-<IP>-1444972147527:blk_1073743512_2731",
+  "Error Recovery for block BP-1347369012-<IP>-1444972147527:blk_1073743512_2731 in pipeline <IP>, <IP>: bad datanode <IP>"
+ ],
+ "scenario_type": "RETRY_STORM",
+ "mitigated_at": "2026-08-29T11:42:44.861691+00:00",
+ "id": "INC-117",
+ "scenario_family": "complex",
+ "scenario_title": "Retry storm after backoff removal",
+ "category": "code",
+ "title": "Latency and timeouts on compute-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "compute-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on compute-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] compute-svc 2026-08-29 08:38-09:36: compute-svc: 21 of 22 log lines were non-INFO between 2026-08-29 08:38 and 2026-08-29 09:36 UTC (peak error ratio 1.0 vs baseline median 0.83). 7 error templates, 5 first seen in this span.",
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.833,
+  "error_lines": 21,
+  "lines": 22,
+  "p95_latency": null,
+  "reasons": [
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-117",
+ "scenario_event_ids": [
+  "evt_4929",
+  "evt_4901",
+  "evt_4904",
+  "evt_4925",
+  "evt_4927",
+  "evt_4944",
+  "evt_4945",
+  "evt_4958",
+  "evt_4972"
+ ],
+ "cause_event_id": "evt_4945",
+ "culprit_change_id": "chg_2701",
+ "contributing_ids": [
+  "evt_4929"
+ ],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "compute-svc",
+  "cloud-api",
+  "api-gateway",
+  "storage-svc",
+  "coord-svc"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of compute-svc removed exponential backoff from ResourceManager calls; combined with retry.max raised earlier it created a retry storm.",
+  "micro": "{file}:{line} ({symbol}) replaces exponential backoff with a constant BASE_BACKOFF_MS.",
+  "remediation": "Roll back compute-svc {version_to} -> {version_from}; restore `backoffMs = Math.min(backoffMs * 2, MAX_BACKOFF_MS)` at {file}:{line}; revert retry.max to its previous value."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_4946",
+  "evt_4947"
+ ],
+ "remediation_ids": [
+  "evt_4958",
+  "evt_4972"
+ ],
+ "expected_files": [
+  "compute/mapreduce/ShuffleHandler.java",
+  "compute/rpc/RMClient.java",
+  "compute/scheduler/TaskRunner.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2701",
+  "event_id": "evt_4945",
+  "file": "compute/rpc/RMClient.java",
+  "line": 171,
+  "symbol": "RMClient.allocate",
+  "diff": "@@ -169,5 +169,5 @@ RMClient.allocate\n       } catch (IOException e) {\n         attempts++;\n-        backoffMs = Math.min(backoffMs * 2, MAX_BACKOFF_MS);\n+        backoffMs = BASE_BACKOFF_MS;  // simpler: constant retry interval\n         Thread.sleep(backoffMs);\n       }",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v2.42.0 of compute-svc removed exponential backoff from ResourceManager calls; combined with retry.max raised earlier it created a retry storm.",
+  "micro": "compute/rpc/RMClient.java:171 (RMClient.allocate) replaces exponential backoff with a constant BASE_BACKOFF_MS.",
+  "remediation": "Roll back compute-svc v2.42.0 -> v2.41.0; restore `backoffMs = Math.min(backoffMs * 2, MAX_BACKOFF_MS)` at compute/rpc/RMClient.java:171; revert retry.max to its previous value."
+ },
+ "action_items": [
+  "Add a regression test covering RMClient.allocate (compute/rpc/RMClient.java).",
+  "Alert on the error signature `Address change detected. Old: <*> New: <*>`."
+ ]
+}

@@ -1,0 +1,121 @@
+id,split,start,alert,severity,title,scenario,category,cause_component,cause,breaking_line,file,logs
+INC-001,dev,2026-03-04T15:44,billing-svc,SEV-2,Processing errors on billing-svc,CONTRACT_BREAK,code,cloud-api,evt_91,chg_71,cloud-api/nova/usage/publisher.py,synthetic
+INC-002,heldout,2026-03-06T15:47,api-gateway,SEV-3,Elevated 5xx errors on api-gateway,DEPENDENCY_UPGRADE,code,auth-svc,evt_142,chg_93,auth/go.mod,synthetic
+INC-003,dev,2026-03-08T05:14,billing-svc,SEV-2,Connection failures on billing-svc,RDS_MAX_CONNECTIONS,infra,billing-db,evt_201,chg_102,infra/billing-db.tf,synthetic
+INC-004,dev,2026-03-09T14:20,api-gateway,SEV-2,Latency and timeouts on api-gateway,MISSING_INDEX,data,cloud-api,evt_242,chg_116,cloud-api/db/migrations/V84__cleanup_indexes.sql,synthetic
+INC-005,dev,2026-03-11T09:56,api-gateway,SEV-3,Elevated 5xx errors on api-gateway,CROSS_SERVICE,code,auth-svc,evt_324,chg_175,auth/internal/token/issuer.go,synthetic
+INC-006,dev,2026-03-12T17:57,api-gateway,SEV-3,Latency and timeouts on api-gateway,TIMEOUT_UNIT,code,cloud-api,evt_396,chg_198,cloud-api/nova/compute/client.py,synthetic
+INC-007,dev,2026-03-14T15:35,node-svc,SEV-1,Elevated 5xx errors on node-svc,CIOD_LEAK,code,node-svc,evt_428,chg_218,node/ciod/ciod_loader.c,synthetic
+INC-008,dev,2026-03-16T08:38,api-gateway,SEV-1,Connection failures on api-gateway,LB_HEALTHCHECK,infra,api-gateway,evt_467,chg_228,infra/api-gateway.tf,synthetic
+INC-009,heldout,2026-03-17T19:48,auth-svc,SEV-2,Connection failures on auth-svc,LB_HEALTHCHECK,infra,auth-svc,evt_534,chg_282,infra/auth-svc.tf,synthetic
+INC-010,heldout,2026-03-19T16:39,api-gateway,SEV-2,Elevated 5xx errors on api-gateway,CROSS_SERVICE,code,billing-svc,evt_573,chg_305,billing/repo/InvoiceRepository.java,synthetic
+INC-011,heldout,2026-03-21T01:35,notification-svc,SEV-2,Processing errors on notification-svc,CERT_EXPIRY,external,notification-svc,,,,synthetic
+INC-012,dev,2026-03-22T14:31,api-gateway,SEV-1,Elevated 5xx errors on api-gateway,CONSUMER_CONCURRENCY,config,billing-svc,evt_650,chg_320,config/billing-svc.yaml,synthetic
+INC-013,dev,2026-03-24T11:49,api-gateway,SEV-2,Latency and timeouts on api-gateway,TIMEOUT_UNIT,code,billing-svc,evt_732,chg_393,billing/client/NotificationClient.java,synthetic
+INC-014,dev,2026-03-25T19:23,cloud-api,SEV-2,Connection failures on cloud-api,RDS_MAINTENANCE,infra,meta-db,evt_765,chg_413,infra/meta-db.tf,synthetic
+INC-015,dev,2026-03-27T14:52,api-gateway,SEV-2,Missing resources on api-gateway,IAM_POLICY,infra,image-svc,evt_811,chg_425,infra/image-svc.tf,synthetic
+INC-016,heldout,2026-03-29T04:57,api-gateway,SEV-3,Latency and timeouts on api-gateway,IMAGE_CACHE_SYNC,code,cloud-api,evt_855,chg_443,cloud-api/nova/image/cache.py,synthetic
+INC-017,dev,2026-03-30T17:10,api-gateway,SEV-1,Elevated 5xx errors on api-gateway,BAD_DEPLOY,code,api-gateway,evt_891,chg_463,gateway/transforms/request_mapper.py,synthetic
+INC-018,dev,2026-04-01T10:13,api-gateway,SEV-1,Latency and timeouts on api-gateway,DB_MIGRATION,data,cloud-api,evt_962,chg_525,cloud-api/db/migrations/V40__servers_feat133.sql,synthetic
+INC-019,dev,2026-04-03T10:25,cloud-api,SEV-3,Elevated 5xx errors on cloud-api,FLAG_DORMANT,config,compute-svc,evt_993,chg_474,compute/scheduler/TaskRunner.java,synthetic
+INC-020,dev,2026-04-05T01:05,node-svc,SEV-2,Elevated 5xx errors on node-svc,LATENT_DISK,infra,node-svc,evt_634,chg_314,infra/node-svc.tf,synthetic
+INC-021,dev,2026-04-06T15:03,compute-svc,SEV-2,Elevated 5xx errors on compute-svc,MEMORY_INFRA,infra,compute-svc,evt_977,chg_534,infra/compute-svc.tf,synthetic
+INC-022,dev,2026-04-08T04:19,billing-svc,SEV-3,Elevated 5xx errors on billing-svc,PARTIAL_ROLLBACK,code,notification-svc,evt_1137,chg_620,notify/ses_client.py,synthetic
+INC-023,dev,2026-04-09T13:07,api-gateway,SEV-3,Elevated 5xx errors on api-gateway,REDIS_SG_PORT,infra,session-cache,evt_1164,chg_633,infra/session-cache.tf,synthetic
+INC-024,dev,2026-04-11T05:54,api-gateway,SEV-1,Throttling (429) on api-gateway,TRAFFIC_SPIKE,external,api-gateway,,,,synthetic
+INC-025,dev,2026-04-13T05:28,api-gateway,SEV-3,Elevated 5xx errors on api-gateway,BAD_DEPLOY,code,api-gateway,evt_1210,chg_656,gateway/transforms/request_mapper.py,synthetic
+INC-026,dev,2026-04-14T16:35,api-gateway,SEV-2,Elevated 5xx errors on api-gateway,REDIS_NOEVICTION,infra,session-cache,evt_1256,chg_695,infra/session-cache.tf,synthetic
+INC-027,dev,2026-04-16T07:30,billing-svc,SEV-3,Processing errors on billing-svc,SQS_VISIBILITY,infra,usage-queue,evt_1294,chg_713,infra/usage-queue.tf,synthetic
+INC-028,dev,2026-04-17T19:20,billing-svc,SEV-2,Throttling (429) on billing-svc,SES_THROTTLED,external,notification-svc,,,,synthetic
+INC-029,dev,2026-04-19T07:53,api-gateway,SEV-2,Elevated 5xx errors on api-gateway,BAD_DEPLOY,code,cloud-api,evt_1353,chg_734,cloud-api/nova/compute/client.py,synthetic
+INC-030,dev,2026-04-21T08:30,cloud-api,SEV-2,Elevated 5xx errors on cloud-api,AWS_S3_DEGRADED,external,object-store,,,,synthetic
+INC-031,heldout,2026-04-22T13:45,compute-svc,SEV-2,Latency and timeouts on compute-svc,EBS_THROUGHPUT,infra,storage-svc,evt_1368,chg_739,infra/storage-svc.tf,synthetic
+INC-032,dev,2026-04-24T12:57,api-gateway,SEV-2,Elevated 5xx errors on api-gateway,DEPENDENCY_UPGRADE,code,billing-svc,evt_1493,chg_843,billing/pom.xml,synthetic
+INC-033,dev,2026-04-25T19:53,compute-svc,SEV-3,Latency and timeouts on compute-svc,RETRY_STORM,code,compute-svc,evt_1548,chg_862,compute/rpc/RMClient.java,synthetic
+INC-034,heldout,2026-04-27T17:24,api-gateway,SEV-2,Throttling (429) on api-gateway,TRAFFIC_SPIKE,external,api-gateway,,,,synthetic
+INC-035,dev,2026-04-29T07:10,api-gateway,SEV-2,Elevated 5xx errors on api-gateway,REDIS_SG_PORT,infra,session-cache,evt_1626,chg_919,infra/session-cache.tf,synthetic
+INC-036,dev,2026-04-30T19:26,notification-svc,SEV-2,Throttling (429) on notification-svc,WEBHOOK_RETRY,config,notification-svc,evt_1645,chg_927,config/notification-svc.yaml,synthetic
+INC-037,heldout,2026-05-02T07:52,billing-svc,SEV-1,Processing errors on billing-svc,CONTRACT_BREAK,code,cloud-api,evt_1674,chg_939,cloud-api/nova/usage/publisher.py,synthetic
+INC-038,dev,2026-05-04T08:25,auth-svc,SEV-2,Elevated 5xx errors on auth-svc,ECS_MEMORY,infra,auth-svc,evt_1707,chg_951,infra/auth-svc.tf,synthetic
+INC-039,dev,2026-05-05T18:34,compute-svc,SEV-3,Elevated 5xx errors on compute-svc,MEMORY_HEAP,config,compute-svc,evt_1741,chg_968,config/compute-svc.yaml,synthetic
+INC-040,dev,2026-05-07T10:41,cloud-api,SEV-2,Elevated 5xx errors on cloud-api,ECS_MEMORY,infra,image-svc,evt_1796,chg_1022,infra/image-svc.tf,synthetic
+INC-041,dev,2026-05-09T03:59,billing-svc,SEV-3,Processing errors on billing-svc,SQS_REDRIVE,infra,usage-queue,evt_1826,chg_1032,infra/usage-queue.tf,synthetic
+INC-042,dev,2026-05-10T13:25,api-gateway,SEV-2,Elevated 5xx errors on api-gateway,REDIS_NOEVICTION,infra,session-cache,evt_1846,chg_1040,infra/session-cache.tf,synthetic
+INC-043,dev,2026-05-12T10:54,cloud-api,SEV-1,Missing resources on cloud-api,S3_LIFECYCLE,infra,object-store,evt_1840,chg_1036,infra/object-store.tf,synthetic
+INC-044,dev,2026-05-13T19:30,node-svc,SEV-1,Latency and timeouts on node-svc,CONFIG_CHANGE,config,node-svc,evt_1946,chg_1098,config/node-svc.yaml,synthetic
+INC-045,dev,2026-05-15T17:07,billing-svc,SEV-1,Processing errors on billing-svc,SQS_REDRIVE,infra,usage-queue,evt_1960,chg_1104,infra/usage-queue.tf,synthetic
+INC-046,dev,2026-05-17T09:19,compute-svc,SEV-1,Elevated 5xx errors on compute-svc,PARTIAL_ROLLBACK,code,compute-svc,evt_1990,chg_1116,compute/dfs/LeaseRenewer.java,synthetic
+INC-047,dev,2026-05-18T19:15,cloud-api,SEV-1,Missing resources on cloud-api,IAM_POLICY,infra,image-svc,evt_2025,chg_1132,infra/image-svc.tf,synthetic
+INC-048,dev,2026-05-20T14:06,api-gateway,SEV-3,Elevated 5xx errors on api-gateway,NULL_DEREF,code,compute-svc,evt_2113,chg_1183,compute/rpc/RMClient.java,synthetic
+INC-049,dev,2026-05-22T02:05,compute-svc,SEV-1,Connection failures on compute-svc,ELECTION_PORT,infra,coord-svc,evt_2148,chg_1193,infra/coord-svc.tf,synthetic
+INC-050,dev,2026-05-23T14:46,api-gateway,SEV-1,Latency and timeouts on api-gateway,ALB_IDLE_TIMEOUT,infra,api-gateway,evt_2198,chg_1203,infra/api-gateway.tf,synthetic
+INC-051,dev,2026-05-25T07:24,billing-svc,SEV-2,Authentication failures on billing-svc,SECRET_ROTATION,infra,billing-db,evt_2218,chg_1212,infra/billing-db.tf,synthetic
+INC-052,heldout,2026-05-26T19:51,billing-svc,SEV-2,Throttling (429) on billing-svc,SES_THROTTLED,external,notification-svc,,,,synthetic
+INC-053,dev,2026-05-28T12:43,billing-svc,SEV-3,Elevated 5xx errors on billing-svc,CONSUMER_CONCURRENCY,config,billing-svc,evt_2315,chg_1277,config/billing-svc.yaml,synthetic
+INC-054,dev,2026-05-30T01:43,notification-svc,SEV-1,Processing errors on notification-svc,CERT_EXPIRY,external,notification-svc,,,,synthetic
+INC-055,dev,2026-06-01T01:11,api-gateway,SEV-1,Latency and timeouts on api-gateway,SKIPPED_TEST,code,storage-svc,evt_2385,chg_1299,storage/datanode/DataXceiver.java,synthetic
+INC-056,dev,2026-06-02T18:35,billing-svc,SEV-2,Connection failures on billing-svc,RDS_MAINTENANCE,infra,billing-db,evt_2466,chg_1351,infra/billing-db.tf,synthetic
+INC-057,heldout,2026-06-04T08:13,billing-svc,SEV-1,Processing errors on billing-svc,SQS_REDRIVE,infra,usage-queue,evt_2504,chg_1369,infra/usage-queue.tf,synthetic
+INC-058,dev,2026-06-05T14:26,api-gateway,SEV-1,Latency and timeouts on api-gateway,IMAGE_CACHE_SYNC,code,cloud-api,evt_2535,chg_1382,cloud-api/nova/image/cache.py,synthetic
+INC-059,heldout,2026-06-07T11:43,billing-svc,SEV-2,Throttling (429) on billing-svc,WEBHOOK_RETRY,config,notification-svc,evt_2557,chg_1399,config/notification-svc.yaml,synthetic
+INC-060,dev,2026-06-09T05:33,coord-svc,SEV-1,Latency and timeouts on coord-svc,HOTFIX_REGRESSION,code,coord-svc,evt_2605,chg_1423,coord/server/NIOServerCnxn.java,synthetic
+INC-061,dev,2026-06-10T19:05,api-gateway,SEV-2,Latency and timeouts on api-gateway,DB_POOL,config,cloud-api,evt_2655,chg_1466,config/cloud-api.yaml,synthetic
+INC-062,dev,2026-06-12T12:01,api-gateway,SEV-1,Elevated 5xx errors on api-gateway,MEMORY_HEAP,config,billing-svc,evt_2682,chg_1477,config/billing-svc.yaml,synthetic
+INC-063,dev,2026-06-13T19:20,coord-svc,SEV-1,Latency and timeouts on coord-svc,HOTFIX_REGRESSION,code,coord-svc,evt_2704,chg_1489,coord/quorum/FastLeaderElection.java,synthetic
+INC-064,dev,2026-06-15T18:33,storage-svc,SEV-2,Elevated 5xx errors on storage-svc,MEMORY_INFRA,infra,node-svc,evt_2697,chg_1485,infra/node-svc.tf,synthetic
+INC-065,dev,2026-06-17T10:29,auth-svc,SEV-2,Latency and timeouts on auth-svc,CACHE_TTL,config,auth-svc,evt_2810,chg_1560,config/auth-svc.yaml,synthetic
+INC-066,dev,2026-06-18T18:22,billing-svc,SEV-2,Throttling (429) on billing-svc,LAMBDA_CONCURRENCY,infra,notification-svc,evt_2837,chg_1570,infra/notification-svc.tf,synthetic
+INC-067,dev,2026-06-20T10:58,billing-svc,SEV-1,Latency and timeouts on billing-svc,N_PLUS_ONE,code,billing-svc,evt_2870,chg_1582,billing/invoice/InvoiceService.java,synthetic
+INC-068,dev,2026-06-22T07:54,api-gateway,SEV-3,Elevated 5xx errors on api-gateway,NULL_DEREF,code,coord-svc,evt_2916,chg_1594,coord/session/SessionTracker.java,synthetic
+INC-069,heldout,2026-06-23T18:16,cloud-api,SEV-2,Connection failures on cloud-api,ELECTION_PORT,infra,coord-svc,evt_3004,chg_1652,infra/coord-svc.tf,synthetic
+INC-070,dev,2026-06-25T11:54,auth-svc,SEV-2,Authentication failures on auth-svc,REDIS_DOWNSIZE,infra,session-cache,evt_3046,chg_1664,infra/session-cache.tf,synthetic
+INC-071,dev,2026-06-26T19:59,billing-svc,SEV-3,Processing errors on billing-svc,CONTRACT_BREAK,code,cloud-api,evt_3080,chg_1678,cloud-api/nova/usage/publisher.py,synthetic
+INC-072,heldout,2026-06-28T18:49,compute-svc,SEV-1,Elevated 5xx errors on compute-svc,CIOD_LEAK,code,node-svc,evt_3121,chg_1697,node/ciod/ciod_loader.c,synthetic
+INC-073,dev,2026-06-30T09:34,billing-svc,SEV-1,Latency and timeouts on billing-svc,DB_POOL,config,billing-svc,evt_3179,chg_1728,config/billing-svc.yaml,synthetic
+INC-074,dev,2026-07-01T19:16,billing-svc,SEV-1,Throttling (429) on billing-svc,WEBHOOK_RETRY,config,notification-svc,evt_3239,chg_1794,config/notification-svc.yaml,synthetic
+INC-075,dev,2026-07-03T10:50,cloud-api,SEV-1,Latency and timeouts on cloud-api,ASG_CAPACITY,infra,node-svc,evt_3264,chg_1803,infra/node-svc.tf,synthetic
+INC-076,dev,2026-07-05T06:21,api-gateway,SEV-3,Latency and timeouts on api-gateway,DB_MIGRATION,data,compute-svc,evt_3313,chg_1823,compute/db/migrations/V49__jobs_feat104.sql,synthetic
+INC-077,dev,2026-07-06T15:26,api-gateway,SEV-2,Throttling (429) on api-gateway,APIGW_THROTTLE,infra,api-gateway,evt_3359,chg_1836,infra/api-gateway.tf,synthetic
+INC-078,heldout,2026-07-08T15:40,compute-svc,SEV-1,Elevated 5xx errors on compute-svc,LATENT_DISK,infra,storage-svc,evt_3099,chg_1682,infra/storage-svc.tf,synthetic
+INC-079,dev,2026-07-10T07:29,api-gateway,SEV-1,Latency and timeouts on api-gateway,ALB_IDLE_TIMEOUT,infra,api-gateway,evt_3446,chg_1900,infra/api-gateway.tf,synthetic
+INC-080,dev,2026-07-11T21:32,auth-svc,SEV-3,Latency and timeouts on auth-svc,CACHE_TTL,config,auth-svc,evt_3466,chg_1908,config/auth-svc.yaml,synthetic
+INC-081,dev,2026-07-13T11:46,storage-svc,SEV-1,Latency and timeouts on storage-svc,CONFIG_CHANGE,config,storage-svc,evt_3495,chg_1918,config/storage-svc.yaml,synthetic
+INC-082,dev,2026-07-14T19:37,api-gateway,SEV-3,Latency and timeouts on api-gateway,SKIPPED_TEST,code,cloud-api,evt_3557,chg_1958,cloud-api/nova/image/cache.py,synthetic
+INC-083,dev,2026-07-16T18:41,storage-svc,SEV-2,Latency and timeouts on storage-svc,EBS_THROUGHPUT,infra,storage-svc,evt_3520,chg_1925,infra/storage-svc.tf,synthetic
+INC-084,dev,2026-07-18T08:14,api-gateway,SEV-2,Elevated 5xx errors on api-gateway,MEMORY_LEAK,code,billing-svc,evt_3615,chg_1991,billing/consumer/UsageEventConsumer.java,synthetic
+INC-085,dev,2026-07-19T22:41,api-gateway,SEV-2,Latency and timeouts on api-gateway,MISSING_INDEX,data,compute-svc,evt_3662,chg_2012,compute/db/migrations/V90__cleanup_indexes.sql,synthetic
+INC-086,dev,2026-07-21T10:12,billing-svc,SEV-1,Elevated 5xx errors on billing-svc,BREAKER_SENSITIVE,config,billing-svc,evt_3745,chg_2073,config/billing-svc.yaml,synthetic
+INC-087,dev,2026-07-23T07:33,node-svc,SEV-1,Elevated 5xx errors on node-svc,LATENT_DISK,infra,node-svc,evt_3372,chg_1839,infra/node-svc.tf,synthetic
+INC-088,heldout,2026-07-24T15:59,api-gateway,SEV-3,Elevated 5xx errors on api-gateway,MEMORY_LEAK,code,billing-svc,evt_3793,chg_2097,billing/consumer/UsageEventConsumer.java,synthetic
+INC-089,dev,2026-07-26T16:09,cloud-api,SEV-1,Elevated 5xx errors on cloud-api,DEPENDENCY_UPGRADE,code,image-svc,evt_3834,chg_2120,images/go.mod,synthetic
+INC-090,dev,2026-07-28T06:50,storage-svc,SEV-3,Latency and timeouts on storage-svc,EBS_THROUGHPUT,infra,storage-svc,evt_3820,chg_2111,infra/storage-svc.tf,synthetic
+INC-091,heldout,2026-07-29T14:06,image-svc,SEV-1,Latency and timeouts on image-svc,SKIPPED_TEST,code,image-svc,evt_3961,chg_2188,images/internal/verify/checksum.go,synthetic
+INC-092,dev,2026-07-31T12:40,api-gateway,SEV-1,Throttling (429) on api-gateway,APIGW_THROTTLE,infra,api-gateway,evt_3994,chg_2207,infra/api-gateway.tf,synthetic
+INC-093,heldout,2026-08-01T22:29,billing-svc,SEV-2,Processing errors on billing-svc,SQS_VISIBILITY,infra,usage-queue,evt_4012,chg_2216,infra/usage-queue.tf,synthetic
+INC-094,heldout,2026-08-03T12:44,api-gateway,SEV-1,Latency and timeouts on api-gateway,RDS_DOWNSIZE,infra,billing-db,evt_4032,chg_2219,infra/billing-db.tf,synthetic
+INC-095,dev,2026-08-05T10:19,billing-svc,SEV-3,Latency and timeouts on billing-svc,N_PLUS_ONE,code,billing-svc,evt_4123,chg_2282,billing/invoice/InvoiceService.java,synthetic
+INC-096,dev,2026-08-06T17:29,api-gateway,SEV-1,Connection failures on api-gateway,ELECTION_PORT,infra,coord-svc,evt_4160,chg_2294,infra/coord-svc.tf,synthetic
+INC-097,dev,2026-08-08T12:22,billing-svc,SEV-3,Throttling (429) on billing-svc,LAMBDA_CONCURRENCY,infra,notification-svc,evt_4191,chg_2304,infra/notification-svc.tf,synthetic
+INC-098,dev,2026-08-10T08:18,auth-svc,SEV-1,Authentication failures on auth-svc,REDIS_DOWNSIZE,infra,session-cache,evt_4209,chg_2310,infra/session-cache.tf,synthetic
+INC-099,dev,2026-08-11T14:26,image-svc,SEV-1,Elevated 5xx errors on image-svc,AWS_S3_DEGRADED,external,object-store,,,,synthetic
+INC-100,dev,2026-08-13T14:29,api-gateway,SEV-2,Elevated 5xx errors on api-gateway,FLAG_DORMANT,config,storage-svc,evt_4335,chg_2317,storage/datanode/PacketResponder.java,synthetic
+INC-101,dev,2026-08-14T18:43,cloud-api,SEV-1,Missing resources on cloud-api,S3_LIFECYCLE,infra,object-store,evt_4325,chg_2377,infra/object-store.tf,synthetic
+INC-102,dev,2026-08-16T16:10,cloud-api,SEV-1,Connection failures on cloud-api,RDS_MAX_CONNECTIONS,infra,meta-db,evt_4400,chg_2398,infra/meta-db.tf,synthetic
+INC-103,dev,2026-08-18T07:43,billing-svc,SEV-3,Authentication failures on billing-svc,SECRET_ROTATION,infra,billing-db,evt_4457,chg_2428,infra/billing-db.tf,synthetic
+INC-104,heldout,2026-08-19T19:31,compute-svc,SEV-2,Elevated 5xx errors on compute-svc,PARTIAL_ROLLBACK,code,compute-svc,evt_4530,chg_2496,compute/rpc/RMClient.java,synthetic
+INC-105,dev,2026-08-21T07:58,compute-svc,SEV-3,Latency and timeouts on compute-svc,ASG_CAPACITY,infra,compute-svc,evt_4544,chg_2503,infra/compute-svc.tf,synthetic
+INC-106,dev,2026-08-23T05:39,api-gateway,SEV-1,Elevated 5xx errors on api-gateway,BREAKER_SENSITIVE,config,billing-svc,evt_4585,chg_2513,config/billing-svc.yaml,synthetic
+INC-107,dev,2026-08-24T17:58,billing-svc,SEV-1,Latency and timeouts on billing-svc,RDS_DOWNSIZE,infra,billing-db,evt_4582,chg_2510,infra/billing-db.tf,synthetic
+INC-108,heldout,2026-08-26T08:35,api-gateway,SEV-1,Latency and timeouts on api-gateway,RETRY_STORM,code,compute-svc,evt_4684,chg_2571,compute/rpc/RMClient.java,synthetic
+INC-109,dev,2026-08-28T01:26,cloud-api,SEV-3,Elevated 5xx errors on cloud-api,CROSS_SERVICE,code,storage-svc,evt_4749,chg_2610,storage/datanode/BlockWriter.java,loghub
+INC-110,dev,2026-08-28T01:55,storage-svc,SEV-2,Latency and timeouts on storage-svc,EBS_THROUGHPUT,infra,storage-svc,evt_4669,chg_2558,infra/storage-svc.tf,loghub
+INC-111,dev,2026-08-28T03:21,node-svc,SEV-1,Elevated 5xx errors on node-svc,CIOD_LEAK,code,node-svc,evt_4773,chg_2623,node/ciod/ciod_loader.c,loghub
+INC-112,heldout,2026-08-28T15:50,cloud-api,SEV-1,Latency and timeouts on cloud-api,DB_MIGRATION,data,compute-svc,evt_4860,chg_2652,compute/db/migrations/V68__jobs_feat115.sql,loghub
+INC-113,heldout,2026-08-28T18:43,compute-svc,SEV-1,Elevated 5xx errors on compute-svc,FLAG_DORMANT,config,compute-svc,evt_4877,chg_2584,compute/scheduler/TaskRunner.java,loghub
+INC-114,dev,2026-08-28T20:09,node-svc,SEV-3,Latency and timeouts on node-svc,TIMEOUT_UNIT,code,node-svc,evt_4887,chg_2672,node/io/lustre_mount.c,loghub
+INC-115,dev,2026-08-28T22:04,storage-svc,SEV-3,Elevated 5xx errors on storage-svc,FLAG_DORMANT,config,storage-svc,evt_4897,chg_2555,storage/datanode/PacketResponder.java,loghub
+INC-116,heldout,2026-08-29T07:12,storage-svc,SEV-3,Latency and timeouts on storage-svc,TIMEOUT_UNIT,code,storage-svc,evt_4939,chg_2697,storage/datanode/DataXceiver.java,loghub
+INC-117,dev,2026-08-29T08:38,compute-svc,SEV-3,Latency and timeouts on compute-svc,RETRY_STORM,code,compute-svc,evt_4945,chg_2701,compute/rpc/RMClient.java,loghub
+INC-118,dev,2026-08-29T23:02,cloud-api,SEV-3,Latency and timeouts on cloud-api,IMAGE_CACHE_SYNC,code,cloud-api,evt_4988,chg_2718,cloud-api/nova/image/cache.py,loghub
+INC-119,dev,2026-08-30T11:02,coord-svc,SEV-2,Connection failures on coord-svc,ELECTION_PORT,infra,coord-svc,evt_5018,chg_2730,infra/coord-svc.tf,loghub
+INC-120,heldout,2026-08-30T13:26,node-svc,SEV-1,Elevated 5xx errors on node-svc,BAD_DEPLOY,code,node-svc,evt_5034,chg_2735,node/io/lustre_mount.c,loghub

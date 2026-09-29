@@ -1,0 +1,97 @@
+{
+ "service": "node-svc",
+ "planned_start": "2026-04-05T01:05:41.298685+00:00",
+ "incident_start": "2026-04-05T01:05:41.298685+00:00",
+ "source": "synthetic",
+ "scenario_type": "LATENT_DISK",
+ "planned_cause": "node-svc",
+ "anomaly_id": "evt_1028",
+ "mitigated_at": "2026-04-05T05:53:21.816323+00:00",
+ "id": "INC-020",
+ "scenario_family": "simple",
+ "scenario_title": "Latent disk shrink",
+ "category": "infra",
+ "title": "Elevated 5xx errors on node-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "node-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on node-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] node-svc 2026-04-05 01:05-05:55: node-svc: 275 of 398 log lines were non-INFO between 2026-04-05 01:05 and 2026-04-05 05:55 UTC (peak error ratio 1.0 vs baseline median 0.0). 5 error templates, 2 first seen in this span.",
+ "error_templates": [
+  "write failed: No space left on device",
+  "ciod: Error loading <*> invalid or missing program image, Exec format error",
+  "ciod: Error loading <*> invalid or missing program image, Permission denied",
+  "instruction address: <*>",
+  "ciod: Error reading message prefix after LOAD_MESSAGE on CioStream socket to <IP>: Link has been severed"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 275,
+  "lines": 398,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-020",
+ "scenario_event_ids": [
+  "evt_634",
+  "evt_1042"
+ ],
+ "cause_event_id": "evt_634",
+ "culprit_change_id": "chg_314",
+ "contributing_ids": [],
+ "cause_service": "node-svc",
+ "blast_radius": [
+  "node-svc",
+  "compute-svc",
+  "storage-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change shrank {resource} days earlier; the disk filled up.",
+  "micro": "{file}:{line} sets {key} {old} -> {new} on {resource}.",
+  "remediation": "Restore {key} = {old} on {resource} (terraform {version_from})."
+ },
+ "_decoy_window_h": 10.0,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_1025",
+  "evt_1026"
+ ],
+ "remediation_ids": [
+  "evt_1042"
+ ],
+ "expected_files": [
+  "infra/node-svc.tf"
+ ],
+ "expected_params": [
+  "disk_gb"
+ ],
+ "culprit": {
+  "change_id": "chg_314",
+  "event_id": "evt_634",
+  "file": "infra/node-svc.tf",
+  "line": 7,
+  "symbol": "aws_ebs_volume.node_svc_data",
+  "diff": "@@ -6,3 +6,3 @@ aws_ebs_volume.node_svc_data\n resource \"aws_ebs_volume\" \"node_svc_data\" {\n-  size = 750\n+  size = 150\n   tags = local.tags",
+  "param_key": "disk_gb"
+ },
+ "rca": {
+  "macro": "Terraform change shrank aws_ebs_volume.node_svc_data days earlier; the disk filled up.",
+  "micro": "infra/node-svc.tf:7 sets disk_gb 750 -> 150 on aws_ebs_volume.node_svc_data.",
+  "remediation": "Restore disk_gb = 750 on aws_ebs_volume.node_svc_data (terraform tf-r3)."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `write failed: No space left on device`."
+ ]
+}

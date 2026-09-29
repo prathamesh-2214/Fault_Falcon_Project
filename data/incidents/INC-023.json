@@ -1,0 +1,91 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-04-09T13:07:52.254062+00:00",
+ "incident_start": "2026-04-09T13:07:52.254062+00:00",
+ "source": "synthetic",
+ "scenario_type": "REDIS_SG_PORT",
+ "planned_cause": "session-cache",
+ "anomaly_id": "evt_1168",
+ "mitigated_at": "2026-04-09T15:51:31.973431+00:00",
+ "id": "INC-023",
+ "scenario_family": "planned",
+ "scenario_title": "Security group typo blocked the Redis port",
+ "category": "infra",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-04-09 13:07-15:47: api-gateway: 125 of 183 log lines were non-INFO between 2026-04-09 13:07 and 2026-04-09 15:47 UTC (peak error ratio 0.86 vs baseline median 0.0). 1 error templates, 0 first seen in this span. Peak p95 latency 0.576 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "POST <*> <*> <*> target=auth-svc"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.857,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 125,
+  "lines": 183,
+  "p95_latency": 0.576,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-023",
+ "scenario_event_ids": [
+  "evt_1164",
+  "evt_1177"
+ ],
+ "cause_event_id": "evt_1164",
+ "culprit_change_id": "chg_633",
+ "contributing_ids": [],
+ "cause_service": "session-cache",
+ "blast_radius": [
+  "session-cache",
+  "auth-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change to the {svc} security group opened {new} instead of {old}; auth-svc could not reach Redis and every token check failed.",
+  "micro": "{file}:{line} sets {key} {old} -> {new} on {resource}.",
+  "remediation": "Restore the ingress rule for port {old} on {resource}; add a connectivity check to the pipeline."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_1167",
+  "evt_1166"
+ ],
+ "remediation_ids": [
+  "evt_1177"
+ ],
+ "expected_files": [
+  "infra/session-cache.tf"
+ ],
+ "expected_params": [
+  "redis_sg_port"
+ ],
+ "culprit": {
+  "change_id": "chg_633",
+  "event_id": "evt_1164",
+  "file": "infra/session-cache.tf",
+  "line": 46,
+  "symbol": "aws_security_group.session_cache",
+  "diff": "@@ -44,4 +44,4 @@ aws_security_group.session_cache\n resource \"aws_security_group\" \"session_cache\" {\n   ingress {\n-    to_port = 6379\n+    to_port = 6380\n   }",
+  "param_key": "redis_sg_port"
+ },
+ "rca": {
+  "macro": "Terraform change to the session-cache security group opened 6380 instead of 6379; auth-svc could not reach Redis and every token check failed.",
+  "micro": "infra/session-cache.tf:46 sets redis_sg_port 6379 -> 6380 on aws_security_group.session_cache.",
+  "remediation": "Restore the ingress rule for port 6379 on aws_security_group.session_cache; add a connectivity check to the pipeline."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `POST <*> <*> <*> target=auth-svc`."
+ ]
+}

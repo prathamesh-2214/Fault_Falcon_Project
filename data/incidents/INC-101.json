@@ -1,0 +1,93 @@
+{
+ "service": "cloud-api",
+ "planned_start": "2026-08-14T18:43:05.249481+00:00",
+ "incident_start": "2026-08-14T18:43:05.249481+00:00",
+ "source": "synthetic",
+ "scenario_type": "S3_LIFECYCLE",
+ "planned_cause": "object-store",
+ "anomaly_id": "evt_4374",
+ "mitigated_at": "2026-08-14T21:56:02.308959+00:00",
+ "id": "INC-101",
+ "scenario_family": "planned",
+ "scenario_title": "S3 lifecycle rule expired old base images",
+ "category": "infra",
+ "title": "Missing resources on cloud-api",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "cloud-api: 4XX rate > 5 % for 10 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "notfound"
+ },
+ "impact": "Operations on older resources failed on cloud-api",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] cloud-api 2026-08-14 18:43-22:03: cloud-api: 251 of 331 log lines were non-INFO between 2026-08-14 18:43 and 2026-08-14 22:03 UTC (peak error ratio 0.95 vs baseline median 0.0). 3 error templates, 0 first seen in this span. Peak p95 latency 1.929 s vs baseline band up to 0.453 s.",
+ "error_templates": [
+  "Unknown base file: /var/lib/nova/instances/_base/<HEX>",
+  "<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>",
+  "Unexpected exception while calling image-svc: HTTPError: 404 Not Found"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.95,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 251,
+  "lines": 331,
+  "p95_latency": 1.929,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-101",
+ "scenario_event_ids": [
+  "evt_4325",
+  "evt_4392"
+ ],
+ "cause_event_id": "evt_4325",
+ "culprit_change_id": "chg_2377",
+ "contributing_ids": [],
+ "cause_service": "object-store",
+ "blast_radius": [
+  "object-store",
+  "image-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change shortened the images/ expiration {old} -> {new} days; S3 deleted older base images and servers booting from them failed.",
+  "micro": "{file}:{line} sets expiration days {old} -> {new} on {resource}.",
+  "remediation": "Restore expiration = {old} days; restore the images from the replica bucket / versioning."
+ },
+ "_decoy_window_h": 10.0,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_4371"
+ ],
+ "remediation_ids": [
+  "evt_4392"
+ ],
+ "expected_files": [
+  "infra/object-store.tf"
+ ],
+ "expected_params": [
+  "s3_expiration_days"
+ ],
+ "culprit": {
+  "change_id": "chg_2377",
+  "event_id": "evt_4325",
+  "file": "infra/object-store.tf",
+  "line": 56,
+  "symbol": "aws_s3_bucket_lifecycle_configuration.object_store",
+  "diff": "@@ -50,9 +50,9 @@ aws_s3_bucket_lifecycle_configuration.object_store\n resource \"aws_s3_bucket_lifecycle_configuration\" \"object_store\" {\n   rule {\n     id     = \"expire-old-images\"\n     status = \"Enabled\"\n     filter { prefix = \"images/\" }\n     expiration {\n-      days = 365\n+      days = 30\n     }\n   }",
+  "param_key": "s3_expiration_days"
+ },
+ "rca": {
+  "macro": "Terraform change shortened the images/ expiration 365 -> 30 days; S3 deleted older base images and servers booting from them failed.",
+  "micro": "infra/object-store.tf:56 sets expiration days 365 -> 30 on aws_s3_bucket_lifecycle_configuration.object_store.",
+  "remediation": "Restore expiration = 365 days; restore the images from the replica bucket / versioning."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `Unknown base file: /var/lib/nova/instances/_base/<HEX>`."
+ ]
+}

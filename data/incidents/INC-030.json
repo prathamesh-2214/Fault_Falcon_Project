@@ -1,0 +1,76 @@
+{
+ "service": "cloud-api",
+ "planned_start": "2026-04-21T08:30:21.962552+00:00",
+ "incident_start": "2026-04-21T08:30:21.962552+00:00",
+ "source": "synthetic",
+ "scenario_type": "AWS_S3_DEGRADED",
+ "planned_cause": "object-store",
+ "anomaly_id": "evt_1396",
+ "mitigated_at": "2026-04-21T12:52:42.037611+00:00",
+ "id": "INC-030",
+ "scenario_family": "planned",
+ "scenario_title": "Amazon S3 regional degradation",
+ "category": "external",
+ "title": "Elevated 5xx errors on cloud-api",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "cloud-api: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on cloud-api",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] cloud-api 2026-04-21 08:30-13:00: cloud-api: 426 of 530 log lines were non-INFO between 2026-04-21 08:30 and 2026-04-21 13:00 UTC (peak error ratio 0.95 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 1.961 s vs baseline band up to 0.453 s.",
+ "error_templates": [
+  "<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>",
+  "Unexpected exception while calling <*> HTTPError: 503 Server Error: Service Unavailable"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.952,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 426,
+  "lines": 530,
+  "p95_latency": 1.961,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-030",
+ "scenario_event_ids": [],
+ "cause_event_id": null,
+ "culprit_change_id": null,
+ "contributing_ids": [],
+ "cause_service": "object-store",
+ "blast_radius": [
+  "object-store",
+  "image-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "No change explains the anomaly: Amazon S3 in us-east-1 returned elevated 503 SlowDown errors (AWS Health event).",
+  "micro": "",
+  "remediation": "No rollback needed; waited for AWS to recover; added jittered retries and a regional fallback read."
+ },
+ "_decoy_window_h": null,
+ "_fix": "none",
+ "external_factor": "Amazon S3 in us-east-1 returned elevated 503 SlowDown errors (AWS Health event)",
+ "decoy_ids": [
+  "evt_1386",
+  "evt_1384"
+ ],
+ "remediation_ids": [],
+ "expected_files": [],
+ "expected_params": [],
+ "culprit": null,
+ "rca": {
+  "macro": "No change explains the anomaly: Amazon S3 in us-east-1 returned elevated 503 SlowDown errors (AWS Health event).",
+  "micro": "",
+  "remediation": "No rollback needed; waited for AWS to recover; added jittered retries and a regional fallback read."
+ },
+ "action_items": [
+  "Alert on the error signature `<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>`."
+ ]
+}

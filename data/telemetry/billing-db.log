@@ -1,0 +1,170 @@
+2026-06-02T19:33:11Z INFO  [synthetic] LOG:  duration: 23.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T19:33:20Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:33:48Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:34:02Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T19:34:07Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T19:35:11Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T19:35:27Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:35:44Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T19:37:37Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T19:37:56Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T19:38:24Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T19:38:27Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:39:32Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:40:11Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T19:41:11Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T19:41:14Z INFO  [synthetic] LOG:  duration: 61.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T19:41:50Z INFO  [synthetic] LOG:  checkpoint complete: wrote 26 buffers; write=31.1 s, sync=0.017 s
+2026-06-02T19:42:08Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T19:42:38Z INFO  [synthetic] LOG:  duration: 61.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T19:43:38Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T19:43:52Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:44:17Z WARN  [synthetic] LOG:  checkpoints are occurring too frequently (47 seconds apart)
+2026-06-02T19:44:45Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:44:46Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:45:41Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T19:46:47Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T19:47:05Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:47:44Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:48:14Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:48:41Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T19:48:51Z INFO  [synthetic] LOG:  duration: 91.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T19:51:35Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T19:51:51Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:53:06Z INFO  [synthetic] LOG:  duration: 94.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T19:53:20Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T19:53:20Z INFO  [synthetic] LOG:  duration: 23.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T19:54:33Z INFO  [synthetic] LOG:  duration: 13.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T19:54:42Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T19:54:51Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T19:55:24Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T19:56:27Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T19:57:37Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T19:57:52Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T19:57:52Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T19:59:08Z INFO  [synthetic] LOG:  duration: 26.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T19:59:44Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:00:08Z INFO  [synthetic] LOG:  duration: 82.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T20:00:17Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:00:46Z INFO  [synthetic] LOG:  duration: 63.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T20:03:17Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:03:26Z INFO  [synthetic] LOG:  checkpoint complete: wrote 11 buffers; write=89.1 s, sync=0.020 s
+2026-06-02T20:04:49Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:06:00Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:08:25Z INFO  [synthetic] LOG:  checkpoint complete: wrote 18 buffers; write=24.1 s, sync=0.07 s
+2026-06-02T20:08:41Z INFO  [synthetic] LOG:  checkpoint complete: wrote 10 buffers; write=45.1 s, sync=0.046 s
+2026-06-02T20:09:00Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:09:14Z INFO  [synthetic] LOG:  checkpoint complete: wrote 48 buffers; write=61.1 s, sync=0.056 s
+2026-06-02T20:09:30Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:10:29Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T20:11:01Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:12:00Z INFO  [synthetic] LOG:  duration: 61.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T20:13:21Z INFO  [synthetic] LOG:  checkpoint complete: wrote 2 buffers; write=28.1 s, sync=0.058 s
+2026-06-02T20:13:56Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T20:14:19Z INFO  [synthetic] LOG:  checkpoint complete: wrote 7 buffers; write=94.1 s, sync=0.017 s
+2026-06-02T20:14:27Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T20:14:45Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T20:15:52Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T20:16:03Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:16:41Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:18:46Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:19:30Z INFO  [synthetic] LOG:  checkpoint complete: wrote 15 buffers; write=54.1 s, sync=0.09 s
+2026-06-02T20:20:24Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T20:20:26Z INFO  [synthetic] LOG:  duration: 10.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T20:21:05Z INFO  [synthetic] LOG:  duration: 54.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T20:21:05Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T20:22:24Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T20:22:57Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T20:23:25Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T20:24:50Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T20:25:02Z INFO  [synthetic] LOG:  checkpoint complete: wrote 45 buffers; write=70.1 s, sync=0.051 s
+2026-06-02T20:26:45Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:27:21Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:28:14Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T20:28:24Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T20:29:03Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:29:53Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T20:30:31Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:30:38Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:31:10Z INFO  [synthetic] LOG:  checkpoint complete: wrote 56 buffers; write=88.1 s, sync=0.022 s
+2026-06-02T20:35:20Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T20:36:00Z INFO  [synthetic] LOG:  checkpoint complete: wrote 5 buffers; write=41.1 s, sync=0.059 s
+2026-06-02T20:38:17Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:38:30Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:39:53Z INFO  [synthetic] LOG:  checkpoint complete: wrote 54 buffers; write=13.1 s, sync=0.036 s
+2026-06-02T20:41:47Z INFO  [synthetic] LOG:  duration: 35.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T20:44:30Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:44:57Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:46:00Z INFO  [synthetic] LOG:  checkpoint complete: wrote 23 buffers; write=12.1 s, sync=0.018 s
+2026-06-02T20:47:39Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:48:18Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:49:38Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:50:09Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:51:30Z INFO  [synthetic] LOG:  checkpoint complete: wrote 26 buffers; write=46.1 s, sync=0.07 s
+2026-06-02T20:52:08Z INFO  [synthetic] LOG:  duration: 74.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T20:53:05Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T20:56:07Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T20:56:46Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T20:58:58Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T20:59:49Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T21:00:35Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T21:01:08Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T21:03:05Z INFO  [synthetic] LOG:  duration: 16.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T21:03:43Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T21:06:02Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:06:35Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T21:07:03Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:07:49Z INFO  [synthetic] LOG:  checkpoint complete: wrote 39 buffers; write=15.1 s, sync=0.044 s
+2026-06-02T21:10:15Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:11:09Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:11:44Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:14:50Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:15:28Z INFO  [synthetic] LOG:  duration: 21.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T21:15:51Z INFO  [synthetic] LOG:  duration: 50.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T21:16:19Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T21:18:56Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T21:19:17Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T21:19:32Z INFO  [synthetic] LOG:  duration: 20.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T21:19:54Z INFO  [synthetic] LOG:  checkpoint complete: wrote 56 buffers; write=64.1 s, sync=0.023 s
+2026-06-02T21:21:25Z INFO  [synthetic] LOG:  checkpoint complete: wrote 51 buffers; write=18.1 s, sync=0.018 s
+2026-06-02T21:23:35Z INFO  [synthetic] LOG:  checkpoint complete: wrote 41 buffers; write=9.1 s, sync=0.044 s
+2026-06-02T21:26:16Z INFO  [synthetic] LOG:  duration: 57.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T21:26:29Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T21:26:32Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T21:27:01Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T21:27:28Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:27:58Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:28:23Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T21:30:58Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T21:31:24Z WARN  [synthetic] LOG:  received fast shutdown request
+2026-06-02T21:32:49Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:32:49Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:33:28Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:33:35Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:34:32Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T21:35:01Z ERROR [synthetic] FATAL:  the database system is starting up
+2026-06-02T21:35:54Z INFO  [synthetic] LOG:  checkpoint complete: wrote 33 buffers; write=60.1 s, sync=0.030 s
+2026-06-02T21:37:27Z ERROR [synthetic] FATAL:  terminating connection due to administrator command
+2026-06-02T21:41:12Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T21:47:02Z INFO  [synthetic] LOG:  checkpoint complete: wrote 31 buffers; write=74.1 s, sync=0.032 s
+2026-06-02T21:49:43Z INFO  [synthetic] LOG:  duration: 14.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T21:49:49Z INFO  [synthetic] LOG:  duration: 3.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T21:51:57Z INFO  [synthetic] LOG:  checkpoint complete: wrote 31 buffers; write=5.1 s, sync=0.059 s
+2026-06-02T21:53:32Z INFO  [synthetic] LOG:  duration: 62.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T21:55:54Z INFO  [synthetic] LOG:  checkpoint complete: wrote 46 buffers; write=36.1 s, sync=0.024 s
+2026-06-02T21:58:43Z INFO  [synthetic] LOG:  checkpoint complete: wrote 16 buffers; write=54.1 s, sync=0.04 s
+2026-06-02T22:02:27Z WARN  [synthetic] LOG:  checkpoints are occurring too frequently (23 seconds apart)
+2026-06-02T22:03:07Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T22:07:02Z INFO  [synthetic] LOG:  duration: 74.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T22:07:13Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T22:11:00Z INFO  [synthetic] LOG:  duration: 91.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T22:12:58Z INFO  [synthetic] LOG:  checkpoint complete: wrote 9 buffers; write=70.1 s, sync=0.052 s
+2026-06-02T22:17:24Z INFO  [synthetic] LOG:  checkpoint complete: wrote 33 buffers; write=38.1 s, sync=0.060 s
+2026-06-02T22:19:34Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T22:20:24Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T22:21:49Z INFO  [synthetic] LOG:  duration: 37.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)
+2026-06-02T22:22:32Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T22:24:39Z INFO  [synthetic] LOG:  checkpoint complete: wrote 27 buffers; write=87.1 s, sync=0.051 s
+2026-06-02T22:26:05Z INFO  [synthetic] LOG:  automatic vacuum of table "billing.public.invoice_lines": index scans: 1
+2026-06-02T22:30:57Z INFO  [synthetic] LOG:  checkpoint complete: wrote 16 buffers; write=82.1 s, sync=0.04 s
+2026-06-02T22:31:44Z INFO  [synthetic] LOG:  duration: 66.2 ms  statement: INSERT INTO invoice_lines VALUES ($1, $2, $3)

@@ -1,0 +1,89 @@
+{
+ "service": "compute-svc",
+ "planned_start": "2026-08-21T07:58:47.278016+00:00",
+ "incident_start": "2026-08-21T07:58:47.278016+00:00",
+ "source": "synthetic",
+ "scenario_type": "ASG_CAPACITY",
+ "planned_cause": "compute-svc",
+ "anomaly_id": "evt_4553",
+ "mitigated_at": "2026-08-21T12:30:04.301014+00:00",
+ "id": "INC-105",
+ "scenario_family": "planned",
+ "scenario_title": "Auto Scaling group max size cut",
+ "category": "infra",
+ "title": "Latency and timeouts on compute-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "compute-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on compute-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] compute-svc 2026-08-21 07:58-10:28: compute-svc: 153 of 228 log lines were non-INFO between 2026-08-21 07:58 and 2026-08-21 10:28 UTC (peak error ratio 1.0 vs baseline median 0.0). 1 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "Container request pending for <*> s: insufficient cluster capacity"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 153,
+  "lines": 228,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-105",
+ "scenario_event_ids": [
+  "evt_4544",
+  "evt_4580"
+ ],
+ "cause_event_id": "evt_4544",
+ "culprit_change_id": "chg_2503",
+ "contributing_ids": [],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change cut the {svc} Auto Scaling group max_size {old} -> {new}; at the next batch peak the fleet could not scale out and jobs queued.",
+  "micro": "{file}:{line} sets max_size {old} -> {new} on {resource}.",
+  "remediation": "Restore max_size = {old} on {resource}."
+ },
+ "_decoy_window_h": 8.0,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_4551"
+ ],
+ "remediation_ids": [
+  "evt_4580"
+ ],
+ "expected_files": [
+  "infra/compute-svc.tf"
+ ],
+ "expected_params": [
+  "asg_max_size"
+ ],
+ "culprit": {
+  "change_id": "chg_2503",
+  "event_id": "evt_4544",
+  "file": "infra/compute-svc.tf",
+  "line": 85,
+  "symbol": "aws_autoscaling_group.compute_svc",
+  "diff": "@@ -84,3 +84,3 @@ aws_autoscaling_group.compute_svc\n resource \"aws_autoscaling_group\" \"compute_svc\" {\n-  max_size = 12\n+  max_size = 6\n   tags = local.tags",
+  "param_key": "asg_max_size"
+ },
+ "rca": {
+  "macro": "Terraform change cut the compute-svc Auto Scaling group max_size 12 -> 6; at the next batch peak the fleet could not scale out and jobs queued.",
+  "micro": "infra/compute-svc.tf:85 sets max_size 12 -> 6 on aws_autoscaling_group.compute_svc.",
+  "remediation": "Restore max_size = 12 on aws_autoscaling_group.compute_svc."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `Container request pending for <*> s: insufficient cluster capacity`."
+ ]
+}

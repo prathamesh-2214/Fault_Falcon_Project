@@ -1,0 +1,157 @@
+2026-05-07T12:49:50Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-9c150b","bytes":188736521,"cache":"miss","s3_ms":61}
+2026-05-07T12:49:52Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T12:50:39Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":55}
+2026-05-07T12:53:05Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T12:54:38Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T12:55:42Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":37}
+2026-05-07T13:02:49Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:03:00Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":26}
+2026-05-07T13:03:48Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:06:58Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":54}
+2026-05-07T13:07:12Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:07:41Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:09:44Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:11:27Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:11:45Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:12:08Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:13:08Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:13:43Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:15:13Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-8cef1a","bytes":143033495,"cache":"miss","s3_ms":33}
+2026-05-07T13:16:53Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:17:01Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:18:42Z WARN  [synthetic] {"level":"warn","msg":"slow s3 read","image":"img-34c52b","s3_ms":400}
+2026-05-07T13:19:25Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:19:33Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:19:55Z WARN  [synthetic] {"level":"warn","msg":"slow s3 read","image":"img-e2793d","s3_ms":5600}
+2026-05-07T13:21:30Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:23:09Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-dd567c","bytes":51651703,"cache":"hit"}
+2026-05-07T13:24:26Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:24:53Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:28:52Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-31a620","bytes":153452973,"cache":"hit"}
+2026-05-07T13:30:00Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":48}
+2026-05-07T13:30:10Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:33:00Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:35:03Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:35:42Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:40:08Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:41:07Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:42:14Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:43:47Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:45:53Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-bfb46c","bytes":18221548,"cache":"hit"}
+2026-05-07T13:47:02Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:47:11Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-aa4e98","bytes":551391914,"cache":"hit"}
+2026-05-07T13:49:38Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-3db0d2","bytes":218043340,"cache":"miss","s3_ms":67}
+2026-05-07T13:49:39Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:49:55Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:51:05Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:52:53Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:53:07Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:54:00Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:55:00Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:55:07Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:57:11Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T13:57:26Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T13:58:24Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:00:45Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":36}
+2026-05-07T14:00:48Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":38}
+2026-05-07T14:02:57Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:03:04Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:05:03Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:08:09Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:09:43Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:10:57Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:11:18Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-a3911f","bytes":425067951,"cache":"hit"}
+2026-05-07T14:12:09Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:13:23Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-3b4796","bytes":819551425,"cache":"miss","s3_ms":37}
+2026-05-07T14:14:15Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:14:20Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-8c9a6e","bytes":887175043,"cache":"miss","s3_ms":36}
+2026-05-07T14:14:28Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:16:50Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-29ffb8","bytes":66848460,"cache":"miss","s3_ms":64}
+2026-05-07T14:17:08Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:17:24Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:19:19Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-9a5483","bytes":399429829,"cache":"miss","s3_ms":44}
+2026-05-07T14:23:06Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:25:04Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:25:38Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-51917f","bytes":581211625,"cache":"miss","s3_ms":77}
+2026-05-07T14:26:56Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-6d29c9","bytes":639217669,"cache":"miss","s3_ms":85}
+2026-05-07T14:26:59Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:28:30Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:29:28Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-2725e1","bytes":756936507,"cache":"hit"}
+2026-05-07T14:29:40Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:30:52Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:31:32Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":30}
+2026-05-07T14:32:22Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:33:08Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":40}
+2026-05-07T14:33:38Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:35:09Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-684a4c","bytes":367400811,"cache":"hit"}
+2026-05-07T14:36:59Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:37:00Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:38:07Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:39:42Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-3f6529","bytes":225132624,"cache":"miss","s3_ms":49}
+2026-05-07T14:40:09Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":36}
+2026-05-07T14:41:28Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":22}
+2026-05-07T14:42:06Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:42:51Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:43:04Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":22}
+2026-05-07T14:43:20Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:44:41Z WARN  [synthetic] {"level":"warn","msg":"slow s3 read","image":"img-b24284","s3_ms":7700}
+2026-05-07T14:45:29Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:47:57Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":9}
+2026-05-07T14:48:37Z WARN  [synthetic] {"level":"warn","msg":"slow s3 read","image":"img-57a820","s3_ms":7300}
+2026-05-07T14:49:09Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:49:12Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:49:36Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-a67199","bytes":599362335,"cache":"hit"}
+2026-05-07T14:49:41Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-340edf","bytes":546361136,"cache":"hit"}
+2026-05-07T14:50:30Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:51:23Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:52:03Z WARN  [synthetic] {"level":"warn","msg":"slow s3 read","image":"img-6f5f21","s3_ms":3300}
+2026-05-07T14:52:15Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:52:53Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-ae33b5","bytes":86293764,"cache":"hit"}
+2026-05-07T14:52:57Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:53:50Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:53:55Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:54:57Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-d5e85a","bytes":185997919,"cache":"hit"}
+2026-05-07T14:57:06Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-b089ff","bytes":876753170,"cache":"hit"}
+2026-05-07T14:57:20Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T14:57:24Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T14:57:34Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-868a82","bytes":336962558,"cache":"miss","s3_ms":49}
+2026-05-07T14:58:34Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:00:33Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":24}
+2026-05-07T15:00:39Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":34}
+2026-05-07T15:01:21Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:02:01Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:03:07Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:03:23Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:06:52Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:07:15Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:07:53Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":21}
+2026-05-07T15:10:46Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:11:46Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:13:27Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:13:41Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:13:59Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:14:43Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-fe7b5b","bytes":61259446,"cache":"hit"}
+2026-05-07T15:15:34Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:16:56Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":12}
+2026-05-07T15:17:54Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-1058b3","bytes":486760234,"cache":"hit"}
+2026-05-07T15:18:36Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:19:20Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":44}
+2026-05-07T15:21:31Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:22:25Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:22:30Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:23:10Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:23:19Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:24:59Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:27:39Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-812243","bytes":185247392,"cache":"hit"}
+2026-05-07T15:27:39Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":27}
+2026-05-07T15:28:19Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:29:25Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:29:48Z WARN  [synthetic] ECS service started 1 task (replacing a stopped task)
+2026-05-07T15:30:55Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-1dff12","bytes":195314886,"cache":"hit"}
+2026-05-07T15:33:06Z ERROR [synthetic] ECS task stopped: OutOfMemoryError: Container killed due to memory usage
+2026-05-07T15:40:32Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-cedfd3","bytes":130102159,"cache":"hit"}
+2026-05-07T15:44:53Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-2e3ff4","bytes":646754185,"cache":"hit"}
+2026-05-07T15:45:40Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-02a923","bytes":269219093,"cache":"miss","s3_ms":74}
+2026-05-07T15:45:45Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":29}
+2026-05-07T15:48:18Z INFO  [synthetic] {"level":"info","msg":"manifest listed","images":45}
+2026-05-07T15:48:32Z INFO  [synthetic] {"level":"info","msg":"image served","image":"img-9579e6","bytes":492986752,"cache":"miss","s3_ms":68}

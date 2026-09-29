@@ -1,0 +1,97 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-03-30T17:10:09.283426+00:00",
+ "incident_start": "2026-03-30T17:10:09.283426+00:00",
+ "source": "synthetic",
+ "scenario_type": "BAD_DEPLOY",
+ "planned_cause": "api-gateway",
+ "anomaly_id": "evt_894",
+ "mitigated_at": "2026-03-30T21:20:32.258873+00:00",
+ "id": "INC-017",
+ "scenario_family": "simple",
+ "scenario_title": "Bad deploy",
+ "category": "code",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-03-30 17:10-21:20: api-gateway: 195 of 293 log lines were non-INFO between 2026-03-30 17:10 and 2026-03-30 21:20 UTC (peak error ratio 1.0 vs baseline median 0.0). 3 error templates, 1 first seen in this span. Peak p95 latency 0.748 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "unhandled error in request handler: <*> failures in 60 s",
+  "GET /v1/servers <*> <*> <*>",
+  "POST /v1/servers <*> <*> <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 195,
+  "lines": 293,
+  "p95_latency": 0.748,
+  "reasons": [
+   "error_ratio",
+   "new_error_template",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-017",
+ "scenario_event_ids": [
+  "evt_877",
+  "evt_879",
+  "evt_881",
+  "evt_885",
+  "evt_889",
+  "evt_891",
+  "evt_903"
+ ],
+ "cause_event_id": "evt_891",
+ "culprit_change_id": "chg_463",
+ "contributing_ids": [],
+ "cause_service": "api-gateway",
+ "blast_radius": [
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} introduced a regression.",
+  "micro": "{file}:{line} ({symbol}) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; revert {file}:{line}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_893",
+  "evt_892"
+ ],
+ "remediation_ids": [
+  "evt_903"
+ ],
+ "expected_files": [
+  "gateway/authorizer/handler.py",
+  "gateway/authorizer/jwks.py",
+  "gateway/transforms/request_mapper.py"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_463",
+  "event_id": "evt_891",
+  "file": "gateway/transforms/request_mapper.py",
+  "line": 196,
+  "symbol": "map_request",
+  "diff": "@@ -195,3 +195,3 @@ map_request\n         cached = self._cache.get(key)\n-        if not cached:\n+        if cached:\n             cached = self._fetch(key)",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v2.11.0 of api-gateway introduced a regression.",
+  "micro": "gateway/transforms/request_mapper.py:196 (map_request) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back api-gateway v2.11.0 -> v2.10.0; revert gateway/transforms/request_mapper.py:196."
+ },
+ "action_items": [
+  "Add a regression test covering map_request (gateway/transforms/request_mapper.py).",
+  "Alert on the error signature `unhandled error in request handler: <*> failures in 60 s`."
+ ]
+}

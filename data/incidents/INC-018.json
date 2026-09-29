@@ -1,0 +1,105 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-04-01T10:13:21.894520+00:00",
+ "incident_start": "2026-04-01T10:13:21.894520+00:00",
+ "source": "synthetic",
+ "scenario_type": "DB_MIGRATION",
+ "planned_cause": "cloud-api",
+ "anomaly_id": "evt_967",
+ "mitigated_at": "2026-04-01T13:49:55.390882+00:00",
+ "id": "INC-018",
+ "scenario_family": "complex",
+ "scenario_title": "Blocking DB migration on a shared RDS database",
+ "category": "data",
+ "title": "Latency and timeouts on api-gateway",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "api-gateway: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-04-01 10:13-13:53: api-gateway: 247 of 340 log lines were non-INFO between 2026-04-01 10:13 and 2026-04-01 13:53 UTC (peak error ratio 0.91 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 28.756 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.909,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 247,
+  "lines": 340,
+  "p95_latency": 28.756,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-018",
+ "scenario_event_ids": [
+  "evt_880",
+  "evt_952",
+  "evt_953",
+  "evt_956",
+  "evt_957",
+  "evt_959",
+  "evt_962",
+  "evt_963",
+  "evt_966",
+  "evt_974",
+  "evt_976"
+ ],
+ "cause_event_id": "evt_962",
+ "culprit_change_id": "chg_525",
+ "contributing_ids": [
+  "evt_880"
+ ],
+ "cause_service": "cloud-api",
+ "blast_radius": [
+  "meta-db",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} ran a blocking migration on the meta-db servers table (RDS); writes queued behind the table lock and callers timed out. The hotfix patch applied afterwards did not touch the DB.",
+  "micro": "{file}:{line} runs DDL that rewrites servers under an ACCESS EXCLUSIVE lock.",
+  "remediation": "Cancel the migration / roll back {svc} {version_to} -> {version_from}; re-run it online (CONCURRENTLY / nullable column, batched backfill); review meta-db sizing."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_966",
+  "evt_965",
+  "evt_964"
+ ],
+ "remediation_ids": [
+  "evt_974",
+  "evt_976"
+ ],
+ "expected_files": [
+  "cloud-api/db/migrations/V40__servers_feat133.sql",
+  "cloud-api/nova/api/auth.py",
+  "cloud-api/nova/api/servers.py"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_525",
+  "event_id": "evt_962",
+  "file": "cloud-api/db/migrations/V40__servers_feat133.sql",
+  "line": 2,
+  "symbol": "migration",
+  "diff": "@@ -1,2 +1,3 @@ migration\n -- FEAT-133 Server tags\n+CREATE INDEX ix_servers_tags ON servers USING gin (tags);\n COMMIT;",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v3.12.0 of cloud-api ran a blocking migration on the meta-db servers table (RDS); writes queued behind the table lock and callers timed out. The hotfix patch applied afterwards did not touch the DB.",
+  "micro": "cloud-api/db/migrations/V40__servers_feat133.sql:2 runs DDL that rewrites servers under an ACCESS EXCLUSIVE lock.",
+  "remediation": "Cancel the migration / roll back cloud-api v3.12.0 -> v3.11.0; re-run it online (CONCURRENTLY / nullable column, batched backfill); review meta-db sizing."
+ },
+ "action_items": [
+  "Add a regression test covering migration (cloud-api/db/migrations/V40__servers_feat133.sql).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

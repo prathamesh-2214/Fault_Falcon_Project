@@ -1,0 +1,93 @@
+{
+ "service": "compute-svc",
+ "planned_start": "2026-07-08T15:40:38.713046+00:00",
+ "incident_start": "2026-07-08T15:40:38.713046+00:00",
+ "source": "synthetic",
+ "scenario_type": "LATENT_DISK",
+ "planned_cause": "storage-svc",
+ "anomaly_id": "evt_3426",
+ "mitigated_at": "2026-07-08T18:13:19.005439+00:00",
+ "id": "INC-078",
+ "scenario_family": "simple",
+ "scenario_title": "Latent disk shrink",
+ "category": "infra",
+ "title": "Elevated 5xx errors on compute-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "compute-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on compute-svc",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] compute-svc 2026-07-08 15:40-18:20: compute-svc: 138 of 203 log lines were non-INFO between 2026-07-08 15:40 and 2026-07-08 18:20 UTC (peak error ratio 0.91 vs baseline median 0.0). 2 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "Call to <*> failed: HTTP 503 Service Unavailable",
+  "Address change detected. Old: <*> New: <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.909,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 138,
+  "lines": 203,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-078",
+ "scenario_event_ids": [
+  "evt_3099",
+  "evt_3434"
+ ],
+ "cause_event_id": "evt_3099",
+ "culprit_change_id": "chg_1682",
+ "contributing_ids": [],
+ "cause_service": "storage-svc",
+ "blast_radius": [
+  "storage-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change shrank {resource} days earlier; the disk filled up.",
+  "micro": "{file}:{line} sets {key} {old} -> {new} on {resource}.",
+  "remediation": "Restore {key} = {old} on {resource} (terraform {version_from})."
+ },
+ "_decoy_window_h": 10.0,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_3422",
+  "evt_3418",
+  "evt_3421"
+ ],
+ "remediation_ids": [
+  "evt_3434"
+ ],
+ "expected_files": [
+  "infra/storage-svc.tf"
+ ],
+ "expected_params": [
+  "disk_gb"
+ ],
+ "culprit": {
+  "change_id": "chg_1682",
+  "event_id": "evt_3099",
+  "file": "infra/storage-svc.tf",
+  "line": 55,
+  "symbol": "aws_ebs_volume.storage_svc_data",
+  "diff": "@@ -54,3 +54,3 @@ aws_ebs_volume.storage_svc_data\n resource \"aws_ebs_volume\" \"storage_svc_data\" {\n-  size = 750\n+  size = 150\n   tags = local.tags",
+  "param_key": "disk_gb"
+ },
+ "rca": {
+  "macro": "Terraform change shrank aws_ebs_volume.storage_svc_data days earlier; the disk filled up.",
+  "micro": "infra/storage-svc.tf:55 sets disk_gb 750 -> 150 on aws_ebs_volume.storage_svc_data.",
+  "remediation": "Restore disk_gb = 750 on aws_ebs_volume.storage_svc_data (terraform tf-r6)."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `Call to <*> failed: HTTP 503 Service Unavailable`."
+ ]
+}

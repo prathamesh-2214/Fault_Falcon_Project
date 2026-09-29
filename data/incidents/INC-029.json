@@ -1,0 +1,94 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-04-19T07:53:56.401164+00:00",
+ "incident_start": "2026-04-19T07:53:56.401164+00:00",
+ "source": "synthetic",
+ "scenario_type": "BAD_DEPLOY",
+ "planned_cause": "cloud-api",
+ "anomaly_id": "evt_1358",
+ "mitigated_at": "2026-04-19T11:14:39.663473+00:00",
+ "id": "INC-029",
+ "scenario_family": "simple",
+ "scenario_title": "Bad deploy",
+ "category": "code",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-04-19 07:53-11:13: api-gateway: 200 of 286 log lines were non-INFO between 2026-04-19 07:53 and 2026-04-19 11:13 UTC (peak error ratio 0.85 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 0.515 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.846,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 200,
+  "lines": 286,
+  "p95_latency": 0.515,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-029",
+ "scenario_event_ids": [
+  "evt_1348",
+  "evt_1349",
+  "evt_1350",
+  "evt_1351",
+  "evt_1352",
+  "evt_1353",
+  "evt_1364"
+ ],
+ "cause_event_id": "evt_1353",
+ "culprit_change_id": "chg_734",
+ "contributing_ids": [],
+ "cause_service": "cloud-api",
+ "blast_radius": [
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} introduced a regression.",
+  "micro": "{file}:{line} ({symbol}) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; revert {file}:{line}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_1355"
+ ],
+ "remediation_ids": [
+  "evt_1364"
+ ],
+ "expected_files": [
+  "cloud-api/nova/compute/client.py",
+  "cloud-api/nova/image/cache.py"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_734",
+  "event_id": "evt_1353",
+  "file": "cloud-api/nova/compute/client.py",
+  "line": 26,
+  "symbol": "ComputeClient.call",
+  "diff": "@@ -25,3 +25,3 @@ ComputeClient.call\n         cached = self._cache.get(key)\n-        if not cached:\n+        if cached:\n             cached = self._fetch(key)",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v3.17.0 of cloud-api introduced a regression.",
+  "micro": "cloud-api/nova/compute/client.py:26 (ComputeClient.call) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back cloud-api v3.17.0 -> v3.16.0; revert cloud-api/nova/compute/client.py:26."
+ },
+ "action_items": [
+  "Add a regression test covering ComputeClient.call (cloud-api/nova/compute/client.py).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

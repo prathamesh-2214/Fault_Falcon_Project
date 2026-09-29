@@ -1,0 +1,139 @@
+2026-05-26T18:27:35Z INFO  [synthetic] [INFO] REPORT Duration: 26.12 ms Billed Duration: 9 ms Memory Used: 88 MB
+2026-05-26T18:28:03Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/ee34f1e2 status=200 in 44 ms
+2026-05-26T18:29:38Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-7013 message_id=ses-82e44809
+2026-05-26T18:35:37Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/28ecd4d4 status=200 in 47 ms
+2026-05-26T18:36:21Z INFO  [synthetic] [INFO] REPORT Duration: 59.12 ms Billed Duration: 91 ms Memory Used: 88 MB
+2026-05-26T18:38:57Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/b9ad782d status=200 in 57 ms
+2026-05-26T18:47:40Z INFO  [synthetic] [INFO] REPORT Duration: 94.12 ms Billed Duration: 82 ms Memory Used: 88 MB
+2026-05-26T18:49:38Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-3938 message_id=ses-e5f56717
+2026-05-26T18:50:37Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/6d82000e status=200 in 39 ms
+2026-05-26T18:55:05Z INFO  [synthetic] [INFO] REPORT Duration: 27.12 ms Billed Duration: 89 ms Memory Used: 88 MB
+2026-05-26T19:00:46Z INFO  [synthetic] [INFO] REPORT Duration: 63.12 ms Billed Duration: 83 ms Memory Used: 88 MB
+2026-05-26T19:04:39Z INFO  [synthetic] [INFO] REPORT Duration: 95.12 ms Billed Duration: 39 ms Memory Used: 88 MB
+2026-05-26T19:05:45Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-4596 message_id=ses-e5b01996
+2026-05-26T19:05:53Z INFO  [synthetic] [INFO] REPORT Duration: 33.12 ms Billed Duration: 60 ms Memory Used: 88 MB
+2026-05-26T19:05:58Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-2243 message_id=ses-bfd3b2b5
+2026-05-26T19:08:52Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-6871 message_id=ses-296d4d4d
+2026-05-26T19:09:43Z WARN  [synthetic] [WARNING] webhook endpoint hooks.example.com/cf9b7578 answered 410 Gone, disabling
+2026-05-26T19:11:13Z INFO  [synthetic] [INFO] REPORT Duration: 92.12 ms Billed Duration: 19 ms Memory Used: 88 MB
+2026-05-26T19:11:21Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-7054 message_id=ses-f6364fbc
+2026-05-26T19:13:49Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-7227 message_id=ses-ac583181
+2026-05-26T19:16:41Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/1f708e56 status=200 in 34 ms
+2026-05-26T19:16:52Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/73d83f4f status=200 in 31 ms
+2026-05-26T19:19:57Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/8a186c0e status=200 in 3 ms
+2026-05-26T19:20:52Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-4133 message_id=ses-18567cc7
+2026-05-26T19:23:04Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/42c9977b status=200 in 9 ms
+2026-05-26T19:24:23Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-4153 message_id=ses-9c55e43c
+2026-05-26T19:25:04Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-8119 message_id=ses-69d92bfd
+2026-05-26T19:32:39Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/821b088b status=200 in 85 ms
+2026-05-26T19:34:08Z INFO  [synthetic] [INFO] REPORT Duration: 21.12 ms Billed Duration: 77 ms Memory Used: 88 MB
+2026-05-26T19:36:19Z INFO  [synthetic] [INFO] REPORT Duration: 66.12 ms Billed Duration: 27 ms Memory Used: 88 MB
+2026-05-26T19:36:51Z INFO  [synthetic] [INFO] REPORT Duration: 94.12 ms Billed Duration: 31 ms Memory Used: 88 MB
+2026-05-26T19:38:24Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-9230 message_id=ses-65a1e641
+2026-05-26T19:42:04Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-6859 message_id=ses-3135a5a4
+2026-05-26T19:44:04Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-7997 message_id=ses-ef9db729
+2026-05-26T19:46:46Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-6000 message_id=ses-6a4bd2dd
+2026-05-26T19:47:01Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-2493 message_id=ses-d4616256
+2026-05-26T19:49:32Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-7811 message_id=ses-a7c82a61
+2026-05-26T19:50:09Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T19:51:05Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T19:51:33Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T19:52:23Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-4700 message_id=ses-d15ac713
+2026-05-26T19:52:39Z INFO  [synthetic] [INFO] REPORT Duration: 7.12 ms Billed Duration: 67 ms Memory Used: 88 MB
+2026-05-26T19:55:27Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/4436e148 status=200 in 79 ms
+2026-05-26T19:55:32Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/2902895b status=200 in 26 ms
+2026-05-26T19:57:04Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T19:58:03Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T19:58:08Z WARN  [synthetic] [WARNING] webhook endpoint hooks.example.com/3b060596 answered 410 Gone, disabling
+2026-05-26T20:01:49Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:01:59Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:02:37Z INFO  [synthetic] [INFO] REPORT Duration: 44.12 ms Billed Duration: 77 ms Memory Used: 88 MB
+2026-05-26T20:04:28Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/17aa3edf status=200 in 37 ms
+2026-05-26T20:05:08Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:06:43Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:08:14Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:08:36Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:09:31Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:11:30Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-6834 message_id=ses-26413ee6
+2026-05-26T20:12:49Z INFO  [synthetic] [INFO] REPORT Duration: 85.12 ms Billed Duration: 31 ms Memory Used: 88 MB
+2026-05-26T20:14:17Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:16:10Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:16:47Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/384a4520 status=200 in 70 ms
+2026-05-26T20:17:35Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:17:51Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:18:49Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:19:59Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-8496 message_id=ses-08232ebc
+2026-05-26T20:20:26Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:21:38Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-4766 message_id=ses-bb1035c9
+2026-05-26T20:22:37Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:23:05Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:23:58Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:24:38Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:24:59Z INFO  [synthetic] [INFO] REPORT Duration: 65.12 ms Billed Duration: 46 ms Memory Used: 88 MB
+2026-05-26T20:25:11Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:26:45Z INFO  [synthetic] [INFO] REPORT Duration: 21.12 ms Billed Duration: 33 ms Memory Used: 88 MB
+2026-05-26T20:27:00Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:27:39Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/9f32fd30 status=200 in 43 ms
+2026-05-26T20:27:40Z INFO  [synthetic] [INFO] REPORT Duration: 20.12 ms Billed Duration: 42 ms Memory Used: 88 MB
+2026-05-26T20:28:07Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:28:08Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/ef529f39 status=200 in 20 ms
+2026-05-26T20:29:12Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:29:50Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-5231 message_id=ses-0414d6c0
+2026-05-26T20:31:31Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:31:55Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:32:17Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:32:34Z INFO  [synthetic] [INFO] REPORT Duration: 39.12 ms Billed Duration: 71 ms Memory Used: 88 MB
+2026-05-26T20:33:23Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:35:44Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:36:13Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:36:13Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:36:37Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-1370 message_id=ses-98d78234
+2026-05-26T20:37:34Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:37:42Z INFO  [synthetic] [INFO] REPORT Duration: 42.12 ms Billed Duration: 94 ms Memory Used: 88 MB
+2026-05-26T20:40:29Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-4272 message_id=ses-df5d1cb3
+2026-05-26T20:40:32Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/f2820fe7 status=200 in 65 ms
+2026-05-26T20:41:02Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:41:53Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-6134 message_id=ses-9e5e28b0
+2026-05-26T20:42:02Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:43:42Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:44:20Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:44:54Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:45:16Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-4207 message_id=ses-4eac88cb
+2026-05-26T20:46:50Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:49:05Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:51:24Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:51:33Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:51:35Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:52:33Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/97ed7325 status=200 in 36 ms
+2026-05-26T20:53:56Z INFO  [synthetic] [INFO] REPORT Duration: 32.12 ms Billed Duration: 3 ms Memory Used: 88 MB
+2026-05-26T20:55:10Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:55:26Z INFO  [synthetic] [INFO] REPORT Duration: 6.12 ms Billed Duration: 40 ms Memory Used: 88 MB
+2026-05-26T20:56:04Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/ef30da1c status=200 in 34 ms
+2026-05-26T20:57:07Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:58:19Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T20:58:47Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:00:31Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:01:47Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:04:11Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:05:25Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:08:52Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:08:55Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:10:11Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:11:04Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:11:14Z INFO  [synthetic] [INFO] REPORT Duration: 74.12 ms Billed Duration: 63 ms Memory Used: 88 MB
+2026-05-26T21:11:36Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/e4a9d5f2 status=200 in 78 ms
+2026-05-26T21:11:41Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:11:55Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:12:13Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:12:42Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:12:50Z INFO  [synthetic] [INFO] webhook delivered endpoint=hooks.example.com/134da87a status=200 in 59 ms
+2026-05-26T21:15:16Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:15:38Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:17:31Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:18:01Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:18:04Z INFO  [synthetic] [INFO] invoice e-mail sent account=acct-6079 message_id=ses-1de25130
+2026-05-26T21:18:38Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:19:42Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:19:49Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:21:43Z ERROR [synthetic] [ERROR] ses.send_email failed: Throttling: Maximum sending rate exceeded.
+2026-05-26T21:22:02Z INFO  [synthetic] [INFO] REPORT Duration: 69.12 ms Billed Duration: 32 ms Memory Used: 88 MB

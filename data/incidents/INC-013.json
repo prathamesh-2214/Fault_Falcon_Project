@@ -1,0 +1,94 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-03-24T11:49:40.306107+00:00",
+ "incident_start": "2026-03-24T11:49:40.306107+00:00",
+ "source": "synthetic",
+ "scenario_type": "TIMEOUT_UNIT",
+ "planned_cause": "billing-svc",
+ "anomaly_id": "evt_736",
+ "mitigated_at": "2026-03-24T14:51:15.312220+00:00",
+ "id": "INC-013",
+ "scenario_family": "complex",
+ "scenario_title": "Timeout unit conversion bug",
+ "category": "code",
+ "title": "Latency and timeouts on api-gateway",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "api-gateway: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-03-24 11:49-14:49: api-gateway: 199 of 276 log lines were non-INFO between 2026-03-24 11:49 and 2026-03-24 14:49 UTC (peak error ratio 0.92 vs baseline median 0.0). 1 error templates, 0 first seen in this span. Peak p95 latency 28.085 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=billing-svc"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.917,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 199,
+  "lines": 276,
+  "p95_latency": 28.085,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-013",
+ "scenario_event_ids": [
+  "evt_702",
+  "evt_703",
+  "evt_718",
+  "evt_720",
+  "evt_730",
+  "evt_732",
+  "evt_743"
+ ],
+ "cause_event_id": "evt_732",
+ "culprit_change_id": "chg_393",
+ "contributing_ids": [],
+ "cause_service": "billing-svc",
+ "blast_radius": [
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} shrinks its outbound timeout by a factor of 1000, so calls time out almost immediately.",
+  "micro": "{file}:{line} ({symbol}) converts http.timeout_ms with the wrong unit.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; fix the unit conversion at {file}:{line}; add a unit test for the timeout conversion."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_733"
+ ],
+ "remediation_ids": [
+  "evt_743"
+ ],
+ "expected_files": [
+  "billing/client/NotificationClient.java",
+  "billing/invoice/InvoiceService.java",
+  "billing/repo/InvoiceRepository.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_393",
+  "event_id": "evt_732",
+  "file": "billing/client/NotificationClient.java",
+  "line": 270,
+  "symbol": "NotificationClient.send",
+  "diff": "@@ -269,2 +269,2 @@ NotificationClient.send\n   // outbound call timeout\n-    return conf.getLong(\"http.timeout_ms\", 2000);\n+    return conf.getLong(\"http.timeout_ms\", 2000) / 1000;  // seconds",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v4.7.0 of billing-svc shrinks its outbound timeout by a factor of 1000, so calls time out almost immediately.",
+  "micro": "billing/client/NotificationClient.java:270 (NotificationClient.send) converts http.timeout_ms with the wrong unit.",
+  "remediation": "Roll back billing-svc v4.7.0 -> v4.6.0; fix the unit conversion at billing/client/NotificationClient.java:270; add a unit test for the timeout conversion."
+ },
+ "action_items": [
+  "Add a regression test covering NotificationClient.send (billing/client/NotificationClient.java).",
+  "Alert on the error signature `GET <*> <*> <*> target=billing-svc`."
+ ]
+}

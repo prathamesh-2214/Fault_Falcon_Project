@@ -1,0 +1,97 @@
+{
+ "service": "node-svc",
+ "planned_start": "2026-05-13T19:30:57.333432+00:00",
+ "incident_start": "2026-05-13T19:30:57.333432+00:00",
+ "source": "synthetic",
+ "scenario_type": "CONFIG_CHANGE",
+ "planned_cause": "node-svc",
+ "anomaly_id": "evt_1951",
+ "mitigated_at": "2026-05-14T00:11:01.861878+00:00",
+ "id": "INC-044",
+ "scenario_family": "simple",
+ "scenario_title": "Bad config value",
+ "category": "config",
+ "title": "Latency and timeouts on node-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "node-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on node-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] node-svc 2026-05-13 19:30-00:10: node-svc: 293 of 405 log lines were non-INFO between 2026-05-13 19:30 and 2026-05-14 00:10 UTC (peak error ratio 0.91 vs baseline median 0.0). 4 error templates, 2 first seen in this span.",
+ "error_templates": [
+  "outbound call failed after <*> attempts",
+  "rts panic! - stopping execution",
+  "ciod: Error loading <*> invalid or missing program image, Exec format error",
+  "data TLB error interrupt"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.909,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 293,
+  "lines": 405,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-044",
+ "scenario_event_ids": [
+  "evt_1946",
+  "evt_1958"
+ ],
+ "cause_event_id": "evt_1946",
+ "culprit_change_id": "chg_1098",
+ "contributing_ids": [],
+ "cause_service": "node-svc",
+ "blast_radius": [
+  "node-svc",
+  "compute-svc",
+  "storage-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change to {key} in {svc} broke calls under load.",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old} in {file}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_1947",
+  "evt_1949",
+  "evt_1948"
+ ],
+ "remediation_ids": [
+  "evt_1958"
+ ],
+ "expected_files": [
+  "config/node-svc.yaml"
+ ],
+ "expected_params": [
+  "retry.max"
+ ],
+ "culprit": {
+  "change_id": "chg_1098",
+  "event_id": "evt_1946",
+  "file": "config/node-svc.yaml",
+  "line": 22,
+  "symbol": "retry.max",
+  "diff": "@@ -21,3 +21,3 @@ retry.max\n retry:\n-  max_attempts: 3\n+  max_attempts: 15\n   # managed by the platform team",
+  "param_key": "retry.max"
+ },
+ "rca": {
+  "macro": "Config change to retry.max in node-svc broke calls under load.",
+  "micro": "config/node-svc.yaml:22 sets retry.max 3 -> 15.",
+  "remediation": "Revert retry.max to 3 in config/node-svc.yaml."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `outbound call failed after <*> attempts`."
+ ]
+}

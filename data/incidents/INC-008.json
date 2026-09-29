@@ -1,0 +1,93 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-03-16T08:38:45.136605+00:00",
+ "incident_start": "2026-03-16T08:38:45.136605+00:00",
+ "source": "synthetic",
+ "scenario_type": "LB_HEALTHCHECK",
+ "planned_cause": "api-gateway",
+ "anomaly_id": "evt_471",
+ "mitigated_at": "2026-03-16T11:57:22.638868+00:00",
+ "id": "INC-008",
+ "scenario_family": "planned",
+ "scenario_title": "Target-group health check too aggressive",
+ "category": "infra",
+ "title": "Connection failures on api-gateway",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "refused"
+ },
+ "impact": "Requests failed while connections were refused on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-03-16 08:38-11:58: api-gateway: 168 of 240 log lines were non-INFO between 2026-03-16 08:38 and 2026-03-16 11:58 UTC (peak error ratio 0.88 vs baseline median 0.0). 4 error templates, 2 first seen in this span. Peak p95 latency 0.605 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "received SIGTERM, draining connections (target deregistered)",
+  "health check took <*> s (target group timeout 2 s)",
+  "GET /v1/servers <*> <*> <*>",
+  "POST /v1/servers <*> <*> <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.875,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 168,
+  "lines": 240,
+  "p95_latency": 0.605,
+  "reasons": [
+   "error_ratio",
+   "new_error_template",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-008",
+ "scenario_event_ids": [
+  "evt_467",
+  "evt_477"
+ ],
+ "cause_event_id": "evt_467",
+ "culprit_change_id": "chg_228",
+ "contributing_ids": [],
+ "cause_service": "api-gateway",
+ "blast_radius": [
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change cut the {svc} target-group health-check timeout {old} -> {new} s; targets under load flapped unhealthy and the ALB returned 502.",
+  "micro": "{file}:{line} sets health_check timeout {old} -> {new} on {resource}.",
+  "remediation": "Restore the health-check timeout = {old} on {resource}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_470",
+  "evt_469"
+ ],
+ "remediation_ids": [
+  "evt_477"
+ ],
+ "expected_files": [
+  "infra/api-gateway.tf"
+ ],
+ "expected_params": [
+  "lb_healthcheck_timeout_s"
+ ],
+ "culprit": {
+  "change_id": "chg_228",
+  "event_id": "evt_467",
+  "file": "infra/api-gateway.tf",
+  "line": 101,
+  "symbol": "aws_lb_target_group.api_gateway",
+  "diff": "@@ -99,4 +99,4 @@ aws_lb_target_group.api_gateway\n resource \"aws_lb_target_group\" \"api_gateway\" {\n   health_check {\n-    timeout = 5\n+    timeout = 2\n   }",
+  "param_key": "lb_healthcheck_timeout_s"
+ },
+ "rca": {
+  "macro": "Terraform change cut the api-gateway target-group health-check timeout 5 -> 2 s; targets under load flapped unhealthy and the ALB returned 502.",
+  "micro": "infra/api-gateway.tf:101 sets health_check timeout 5 -> 2 on aws_lb_target_group.api_gateway.",
+  "remediation": "Restore the health-check timeout = 5 on aws_lb_target_group.api_gateway."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `received SIGTERM, draining connections (target deregistered)`."
+ ]
+}

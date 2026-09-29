@@ -1,0 +1,164 @@
+2026-06-22T07:42:46Z INFO  [synthetic] Processing the event EventType: CONTAINER_REMOTE_LAUNCH for container container_1445144423722_0020_01_000002 taskAttempt attempt_1445144423722_0020_m_000000_0
+2026-06-22T07:48:05Z INFO  [synthetic] JVM with ID: jvm_1445144423722_0020_m_000004 given task: attempt_1445144423722_0020_m_000002_0
+2026-06-22T07:50:16Z INFO  [synthetic] Retrying connect to server: msra-sa-41:8030. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)
+2026-06-22T07:51:53Z INFO  [synthetic] Resolved MSRA-SA-41.fareast.corp.microsoft.com to /default-rack
+2026-06-22T07:51:55Z INFO  [synthetic] task_1445144423722_0020_m_000001 Task Transitioned from NEW to SCHEDULED
+2026-06-22T07:52:57Z INFO  [synthetic] getResources() for application_1445144423722_0020: ask=4 release= 0 newContainers=0 finishedContainers=0 resourcelimit=<memory:10240, vCores:-17> knownNMs=4
+2026-06-22T07:53:39Z INFO  [synthetic] Retrying connect to server: msra-sa-41:8030. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)
+2026-06-22T07:57:50Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T07:58:23Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000004_0 is : 0.19242907
+2026-06-22T07:59:05Z INFO  [synthetic] Resolved MSRA-SA-41.fareast.corp.microsoft.com to /default-rack
+2026-06-22T08:00:13Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:04:08Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:04:15Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:06:15Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:06:29Z INFO  [synthetic] Assigned container container_1445144423722_0020_01_000002 to attempt_1445144423722_0020_m_000000_0
+2026-06-22T08:06:44Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000000_0 is : 0.3624012
+2026-06-22T08:06:48Z INFO  [synthetic] Reduce slow start threshold not met. completedMapsForReduceSlowstart 1
+2026-06-22T08:06:54Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:08:23Z INFO  [synthetic] Retrying connect to server: msra-sa-41:8030. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)
+2026-06-22T08:09:19Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:10:10Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:10:31Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:14:38Z INFO  [synthetic] IPC Server listener on 62270: starting
+2026-06-22T08:14:50Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:14:53Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:17:09Z INFO  [synthetic] Recalculating schedule, headroom=<memory:4096, vCores:-23>
+2026-06-22T08:18:03Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:19:15Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:19:42Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000006_0 is : 0.106964506
+2026-06-22T08:21:52Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:22:15Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:22:22Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:24:14Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:25:20Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:27:38Z INFO  [synthetic] Reduce slow start threshold not met. completedMapsForReduceSlowstart 1
+2026-06-22T08:28:07Z INFO  [synthetic] After Scheduling: PendingReds:0 ScheduledMaps:0 ScheduledReds:1 AssignedMaps:10 AssignedReds:0 CompletedMaps:1 CompletedReds:0 ContAlloc:11 ContRel:1 HostLocal:7 RackLocal:3
+2026-06-22T08:28:49Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:29:12Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:29:55Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:30:07Z INFO  [synthetic] Opening proxy : MSRA-SA-39.fareast.corp.microsoft.com:28345
+2026-06-22T08:31:42Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:31:44Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000001_0 is : 0.19211523
+2026-06-22T08:32:23Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:34:01Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:34:45Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:35:35Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:36:22Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:36:33Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:38:10Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:38:17Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:38:29Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:39:11Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:39:49Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:41:14Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:41:56Z INFO  [synthetic] task_1445144423722_0020_m_000007 Task Transitioned from NEW to SCHEDULED
+2026-06-22T08:42:09Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:42:26Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:43:12Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:44:50Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:45:11Z INFO  [synthetic] ATTEMPT_START task_1445144423722_0020_m_000007
+2026-06-22T08:46:20Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:47:46Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:47:48Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000003_0 is : 0.667
+2026-06-22T08:47:51Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000002_0 is : 0.27772525
+2026-06-22T08:48:40Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:49:41Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:50:17Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:50:22Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:51:28Z INFO  [synthetic] After Scheduling: PendingReds:0 ScheduledMaps:0 ScheduledReds:1 AssignedMaps:10 AssignedReds:0 CompletedMaps:1 CompletedReds:0 ContAlloc:11 ContRel:1 HostLocal:7 RackLocal:3
+2026-06-22T08:51:31Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:52:07Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:52:15Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:52:36Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:52:53Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000002_0 is : 0.38137424
+2026-06-22T08:53:06Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:53:27Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:54:00Z INFO  [synthetic] Recalculating schedule, headroom=<memory:0, vCores:-27>
+2026-06-22T08:54:21Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000003_0 is : 0.19209063
+2026-06-22T08:56:32Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T08:56:50Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:00:42Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:02:04Z INFO  [synthetic] Retrying connect to server: msra-sa-41:8030. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)
+2026-06-22T09:02:08Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:02:23Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:05:04Z INFO  [synthetic] Retrying connect to server: msra-sa-41:8030. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)
+2026-06-22T09:08:45Z INFO  [synthetic] Recalculating schedule, headroom=<memory:0, vCores:-27>
+2026-06-22T09:08:45Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:09:57Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000009_0 is : 0.5323719
+2026-06-22T09:09:57Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:10:07Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:11:11Z INFO  [synthetic] Recalculating schedule, headroom=<memory:0, vCores:-27>
+2026-06-22T09:13:42Z INFO  [synthetic] Recalculating schedule, headroom=<memory:0, vCores:-27>
+2026-06-22T09:13:57Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000007_0 is : 0.27825075
+2026-06-22T09:14:47Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000002_0 is : 0.13841225
+2026-06-22T09:16:44Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000007_0 is : 0.27825075
+2026-06-22T09:17:01Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:18:54Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:19:10Z INFO  [synthetic] Shuffle port returned by ContainerManager for attempt_1445144423722_0020_m_000005_0 : 13562
+2026-06-22T09:19:54Z INFO  [synthetic] attempt_1445144423722_0020_m_000002_0 TaskAttempt Transitioned from ASSIGNED to RUNNING
+2026-06-22T09:20:52Z INFO  [synthetic] Recalculating schedule, headroom=<memory:0, vCores:-27>
+2026-06-22T09:21:07Z INFO  [synthetic] attempt_1445144423722_0020_m_000007_0 TaskAttempt Transitioned from UNASSIGNED to ASSIGNED
+2026-06-22T09:22:22Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:23:19Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:27:20Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:27:40Z INFO  [synthetic] Recalculating schedule, headroom=<memory:0, vCores:-27>
+2026-06-22T09:28:07Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:29:00Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:33:15Z INFO  [synthetic] Retrying connect to server: msra-sa-41:8030. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)
+2026-06-22T09:34:19Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:34:40Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:34:42Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:34:43Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:37:19Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:37:51Z INFO  [synthetic] Retrying connect to server: msra-sa-41:8030. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)
+2026-06-22T09:37:53Z INFO  [synthetic] attempt_1445144423722_0020_m_000006_0 TaskAttempt Transitioned from UNASSIGNED to ASSIGNED
+2026-06-22T09:38:25Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000002_0 is : 0.3787692
+2026-06-22T09:39:11Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000008_0 is : 0.27811313
+2026-06-22T09:41:14Z INFO  [synthetic] adding path spec: /ws/*
+2026-06-22T09:41:47Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:42:18Z INFO  [synthetic] getResources() for application_1445144423722_0020: ask=0 release= 1 newContainers=0 finishedContainers=1 resourcelimit=<memory:1024, vCores:-26> knownNMs=4
+2026-06-22T09:44:43Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:44:53Z INFO  [synthetic] JVM with ID : jvm_1445144423722_0020_m_000006 asked for a task
+2026-06-22T09:45:06Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:45:46Z INFO  [synthetic] Auth successful for job_1445144423722_0020 (auth:SIMPLE)
+2026-06-22T09:48:59Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000004_0 is : 0.36388028
+2026-06-22T09:49:04Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000007_0 is : 0.25511068
+2026-06-22T09:49:34Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:50:40Z INFO  [synthetic] Retrying connect to server: msra-sa-41:8030. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)
+2026-06-22T09:51:14Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:53:49Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:54:32Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:54:48Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:57:36Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T09:57:56Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:00:06Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:01:33Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:02:35Z INFO  [synthetic] TaskAttempt: [attempt_1445144423722_0020_m_000007_0] using containerId: [container_1445144423722_0020_01_000009 on NM: [MSRA-SA-41.fareast.corp.microsoft.com:7109]
+2026-06-22T10:03:50Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:07:32Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:09:36Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:10:38Z INFO  [synthetic] Recalculating schedule, headroom=<memory:0, vCores:-27>
+2026-06-22T10:10:52Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:14:43Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:16:11Z INFO  [synthetic] Default file system [hdfs://msra-sa-41:9000]
+2026-06-22T10:16:32Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000002_0 is : 0.27772525
+2026-06-22T10:16:35Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:20:16Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:20:41Z INFO  [synthetic] Retrying connect to server: msra-sa-41:8030. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)
+2026-06-22T10:22:13Z INFO  [synthetic] Resolved MSRA-SA-41.fareast.corp.microsoft.com to /default-rack
+2026-06-22T10:23:19Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:23:57Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:24:36Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:25:20Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:25:45Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:26:04Z INFO  [synthetic] task_1445144423722_0020_m_000004 Task Transitioned from SCHEDULED to RUNNING
+2026-06-22T10:26:48Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:27:15Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:29:22Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:31:25Z INFO  [synthetic] attempt_1445144423722_0020_m_000008_0 TaskAttempt Transitioned from UNASSIGNED to ASSIGNED
+2026-06-22T10:32:19Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:36:59Z INFO  [synthetic] Progress of TaskAttempt attempt_1445144423722_0020_m_000005_0 is : 0.27813601
+2026-06-22T10:39:03Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:41:14Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable
+2026-06-22T10:41:31Z ERROR [synthetic] Call to coord-svc failed: HTTP 503 Service Unavailable

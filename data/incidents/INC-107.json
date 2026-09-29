@@ -1,0 +1,90 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-08-24T17:58:59.337433+00:00",
+ "incident_start": "2026-08-24T17:58:59.337433+00:00",
+ "source": "synthetic",
+ "scenario_type": "RDS_DOWNSIZE",
+ "planned_cause": "billing-db",
+ "anomaly_id": "evt_4623",
+ "mitigated_at": "2026-08-24T20:42:11.523474+00:00",
+ "id": "INC-107",
+ "scenario_family": "planned",
+ "scenario_title": "RDS instance class downsized",
+ "category": "infra",
+ "title": "Latency and timeouts on billing-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "billing-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-08-24 17:58-19:08: billing-svc: 74 of 108 log lines were non-INFO between 2026-08-24 17:58 and 2026-08-24 19:08 UTC (peak error ratio 0.86 vs baseline median 0.0). 1 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "c.f.b.repo.InvoiceRepository - call to billing-db failed: <*> <*> <*> <*> <*> <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.857,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 74,
+  "lines": 108,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-107",
+ "scenario_event_ids": [
+  "evt_4582",
+  "evt_4634"
+ ],
+ "cause_event_id": "evt_4582",
+ "culprit_change_id": "chg_2510",
+ "contributing_ids": [],
+ "cause_service": "billing-db",
+ "blast_radius": [
+  "billing-db",
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change downsized {resource} {old} -> {new}; at the next traffic peak CPU hit 100 % and queries timed out.",
+  "micro": "{file}:{line} sets {key} {old} -> {new} on {resource}.",
+  "remediation": "Restore {key} = {old} on {resource}; alarm on CPU and DBLoad before downsizing."
+ },
+ "_decoy_window_h": 10.0,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_4617",
+  "evt_4618"
+ ],
+ "remediation_ids": [
+  "evt_4634"
+ ],
+ "expected_files": [
+  "infra/billing-db.tf"
+ ],
+ "expected_params": [
+  "rds_instance_class"
+ ],
+ "culprit": {
+  "change_id": "chg_2510",
+  "event_id": "evt_4582",
+  "file": "infra/billing-db.tf",
+  "line": 106,
+  "symbol": "aws_db_instance.billing_db",
+  "diff": "@@ -105,3 +105,3 @@ aws_db_instance.billing_db\n resource \"aws_db_instance\" \"billing_db\" {\n-  instance_class = \"db.r5.large\"\n+  instance_class = \"db.t3.medium\"\n   tags = local.tags",
+  "param_key": "rds_instance_class"
+ },
+ "rca": {
+  "macro": "Terraform change downsized aws_db_instance.billing_db db.r5.large -> db.t3.medium; at the next traffic peak CPU hit 100 % and queries timed out.",
+  "micro": "infra/billing-db.tf:106 sets rds_instance_class db.r5.large -> db.t3.medium on aws_db_instance.billing_db.",
+  "remediation": "Restore rds_instance_class = db.r5.large on aws_db_instance.billing_db; alarm on CPU and DBLoad before downsizing."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `c.f.b.repo.InvoiceRepository - call to billing-db failed: <*> <*> <*> <*> <*> <*`."
+ ]
+}

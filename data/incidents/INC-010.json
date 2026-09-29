@@ -1,0 +1,101 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-03-19T16:39:20.503088+00:00",
+ "incident_start": "2026-03-19T16:39:20.503088+00:00",
+ "source": "synthetic",
+ "scenario_type": "CROSS_SERVICE",
+ "planned_cause": "billing-svc",
+ "anomaly_id": "evt_581",
+ "mitigated_at": "2026-03-19T20:15:24.258588+00:00",
+ "id": "INC-010",
+ "scenario_family": "complex",
+ "scenario_title": "Release-train cascade down the dependency chain",
+ "category": "code",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-03-19 16:39-20:19: api-gateway: 229 of 296 log lines were non-INFO between 2026-03-19 16:39 and 2026-03-19 20:19 UTC (peak error ratio 1.0 vs baseline median 0.0). 1 error templates, 0 first seen in this span. Peak p95 latency 0.518 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=billing-svc"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 229,
+  "lines": 296,
+  "p95_latency": 0.518,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-010",
+ "scenario_event_ids": [
+  "evt_559",
+  "evt_560",
+  "evt_563",
+  "evt_564",
+  "evt_572",
+  "evt_573",
+  "evt_561",
+  "evt_562",
+  "evt_565",
+  "evt_566",
+  "evt_575",
+  "evt_576",
+  "evt_630"
+ ],
+ "cause_event_id": "evt_573",
+ "culprit_change_id": "chg_305",
+ "contributing_ids": [],
+ "cause_service": "billing-svc",
+ "blast_radius": [
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Release train {cycle} shipped FEAT-132 (Usage dashboards API) across services; the {svc} part ({version_to}) broke, and the failure surfaced in {alert_svc} through the dependency chain. The later parts of the same feature were harmless.",
+  "micro": "{file}:{line} ({symbol}) fetches every invoice with all its lines for the usage API.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from} (the other services' parts of FEAT-132 can stay); fix {file}:{line}; add a cross-service load test to the train."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_576",
+  "evt_578",
+  "evt_574"
+ ],
+ "remediation_ids": [
+  "evt_630"
+ ],
+ "expected_files": [
+  "billing/invoice/InvoiceService.java",
+  "billing/repo/InvoiceRepository.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_305",
+  "event_id": "evt_573",
+  "file": "billing/repo/InvoiceRepository.java",
+  "line": 25,
+  "symbol": "InvoiceRepository.findOpenByAccount",
+  "diff": "@@ -24,3 +24,3 @@ InvoiceRepository.findOpenByAccount\n   // used by /v1/usage and the invoice job\n-  @Query(\"select i from Invoice i where i.accountId = :acct and i.state = OPEN\")\n+  @Query(\"select i from Invoice i join fetch i.lines where i.accountId = :acct\")\n   List<Invoice> find(Long acct);",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Release train RT-26.12 shipped FEAT-132 (Usage dashboards API) across services; the billing-svc part (v4.5.0) broke, and the failure surfaced in api-gateway through the dependency chain. The later parts of the same feature were harmless.",
+  "micro": "billing/repo/InvoiceRepository.java:25 (InvoiceRepository.findOpenByAccount) fetches every invoice with all its lines for the usage API.",
+  "remediation": "Roll back billing-svc v4.5.0 -> v4.4.1 (the other services' parts of FEAT-132 can stay); fix billing/repo/InvoiceRepository.java:25; add a cross-service load test to the train."
+ },
+ "action_items": [
+  "Add a regression test covering InvoiceRepository.findOpenByAccount (billing/repo/InvoiceRepository.java).",
+  "Alert on the error signature `GET <*> <*> <*> target=billing-svc`."
+ ]
+}

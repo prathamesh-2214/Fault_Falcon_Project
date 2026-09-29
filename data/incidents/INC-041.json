@@ -1,0 +1,92 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-05-09T03:59:20.514881+00:00",
+ "incident_start": "2026-05-09T03:59:20.514881+00:00",
+ "source": "synthetic",
+ "scenario_type": "SQS_REDRIVE",
+ "planned_cause": "usage-queue",
+ "anomaly_id": "evt_1830",
+ "mitigated_at": "2026-05-09T08:42:25.353145+00:00",
+ "id": "INC-041",
+ "scenario_family": "planned",
+ "scenario_title": "Redrive maxReceiveCount 1 sends retries to the DLQ",
+ "category": "infra",
+ "title": "Processing errors on billing-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "billing-svc: error-log rate > 20/min (CloudWatch Logs metric filter)",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "data"
+ },
+ "impact": "Background processing failed; customer-visible data was delayed or wrong on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-05-09 03:59-08:49: billing-svc: 328 of 429 log lines were non-INFO between 2026-05-09 03:59 and 2026-05-09 08:49 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 2 first seen in this span.",
+ "error_templates": [
+  "c.f.b.consumer.UsageEventConsumer - transient error on usage event <*> SocketTimeoutException, leaving it for redelivery",
+  "c.f.b.invoice.InvoiceService - invoice <*> total does not match usage records"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 328,
+  "lines": 429,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-041",
+ "scenario_event_ids": [
+  "evt_1826",
+  "evt_1839"
+ ],
+ "cause_event_id": "evt_1826",
+ "culprit_change_id": "chg_1032",
+ "contributing_ids": [],
+ "cause_service": "usage-queue",
+ "blast_radius": [
+  "usage-queue",
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change set maxReceiveCount {old} -> {new}; every transient failure sent usage events straight to the DLQ and invoices were missing usage.",
+  "micro": "{file}:{line} sets maxReceiveCount {old} -> {new} on {resource}.",
+  "remediation": "Restore maxReceiveCount = {old}; redrive the DLQ."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_1827",
+  "evt_1828"
+ ],
+ "remediation_ids": [
+  "evt_1839"
+ ],
+ "expected_files": [
+  "infra/usage-queue.tf"
+ ],
+ "expected_params": [
+  "sqs_max_receive_count"
+ ],
+ "culprit": {
+  "change_id": "chg_1032",
+  "event_id": "evt_1826",
+  "file": "infra/usage-queue.tf",
+  "line": 24,
+  "symbol": "aws_sqs_queue.usage_queue",
+  "diff": "@@ -21,5 +21,5 @@ aws_sqs_queue.usage_queue\n resource \"aws_sqs_queue\" \"usage_queue\" {\n   redrive_policy = jsonencode({\n     deadLetterTargetArn = aws_sqs_queue.usage_queue_dlq.arn\n-    maxReceiveCount     = 5\n+    maxReceiveCount     = 1\n   })",
+  "param_key": "sqs_max_receive_count"
+ },
+ "rca": {
+  "macro": "Terraform change set maxReceiveCount 5 -> 1; every transient failure sent usage events straight to the DLQ and invoices were missing usage.",
+  "micro": "infra/usage-queue.tf:24 sets maxReceiveCount 5 -> 1 on aws_sqs_queue.usage_queue.",
+  "remediation": "Restore maxReceiveCount = 5; redrive the DLQ."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `c.f.b.consumer.UsageEventConsumer - transient error on usage event <*> SocketTim`."
+ ]
+}

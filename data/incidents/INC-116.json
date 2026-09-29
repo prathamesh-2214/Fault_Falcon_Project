@@ -1,0 +1,95 @@
+{
+ "service": "storage-svc",
+ "incident_start": "2026-08-29T07:12:00+00:00",
+ "planned_start": "2026-08-29T07:12:00+00:00",
+ "anomaly_id": "evt_4942",
+ "source": "loghub",
+ "planned_cause": null,
+ "error_templates": [
+  "<*> exception while serving <*> to <*>"
+ ],
+ "scenario_type": "TIMEOUT_UNIT",
+ "mitigated_at": "2026-08-29T09:53:57.097565+00:00",
+ "id": "INC-116",
+ "scenario_family": "complex",
+ "scenario_title": "Timeout unit conversion bug",
+ "category": "code",
+ "title": "Latency and timeouts on storage-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "storage-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on storage-svc",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] storage-svc 2026-08-29 07:12-08:09: storage-svc: 8 of 10 log lines were non-INFO between 2026-08-29 07:12 and 2026-08-29 08:09 UTC (peak error ratio 1.0 vs baseline median 0.0). 1 error templates, 0 first seen in this span.",
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 8,
+  "lines": 10,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-116",
+ "scenario_event_ids": [
+  "evt_4865",
+  "evt_4867",
+  "evt_4915",
+  "evt_4921",
+  "evt_4937",
+  "evt_4939",
+  "evt_4957"
+ ],
+ "cause_event_id": "evt_4939",
+ "culprit_change_id": "chg_2697",
+ "contributing_ids": [],
+ "cause_service": "storage-svc",
+ "blast_radius": [
+  "storage-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} shrinks its outbound timeout by a factor of 1000, so calls time out almost immediately.",
+  "micro": "{file}:{line} ({symbol}) converts http.timeout_ms with the wrong unit.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; fix the unit conversion at {file}:{line}; add a unit test for the timeout conversion."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_4941"
+ ],
+ "remediation_ids": [
+  "evt_4957"
+ ],
+ "expected_files": [
+  "storage/datanode/DataXceiver.java",
+  "storage/datanode/PacketResponder.java",
+  "storage/namenode/BlockManager.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2697",
+  "event_id": "evt_4939",
+  "file": "storage/datanode/DataXceiver.java",
+  "line": 289,
+  "symbol": "DataXceiver.readBlock",
+  "diff": "@@ -288,2 +288,2 @@ DataXceiver.readBlock\n   // outbound call timeout\n-    return conf.getLong(\"http.timeout_ms\", 2000);\n+    return conf.getLong(\"http.timeout_ms\", 2000) / 1000;  // seconds",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v4.27.0 of storage-svc shrinks its outbound timeout by a factor of 1000, so calls time out almost immediately.",
+  "micro": "storage/datanode/DataXceiver.java:289 (DataXceiver.readBlock) converts http.timeout_ms with the wrong unit.",
+  "remediation": "Roll back storage-svc v4.27.0 -> v4.26.0; fix the unit conversion at storage/datanode/DataXceiver.java:289; add a unit test for the timeout conversion."
+ },
+ "action_items": [
+  "Add a regression test covering DataXceiver.readBlock (storage/datanode/DataXceiver.java).",
+  "Alert on the error signature `<*> exception while serving <*> to <*>`."
+ ]
+}

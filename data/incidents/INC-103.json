@@ -1,0 +1,96 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-08-18T07:43:10.028569+00:00",
+ "incident_start": "2026-08-18T07:43:10.028569+00:00",
+ "source": "synthetic",
+ "scenario_type": "SECRET_ROTATION",
+ "planned_cause": "billing-db",
+ "anomaly_id": "evt_4465",
+ "mitigated_at": "2026-08-18T11:20:23.249024+00:00",
+ "id": "INC-103",
+ "scenario_family": "planned",
+ "scenario_title": "Secrets Manager rotation with cached credentials",
+ "category": "infra",
+ "title": "Authentication failures on billing-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "billing-svc: authentication-failure rate > 5 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "auth"
+ },
+ "impact": "Users were logged out or rejected on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-08-18 07:43-11:23: billing-svc: 253 of 337 log lines were non-INFO between 2026-08-18 07:43 and 2026-08-18 11:23 UTC (peak error ratio 0.91 vs baseline median 0.0). 3 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "c.f.b.repo.InvoiceRepository - org.postgresql.util.PSQLException: FATAL: password authentication failed for user \"billing_app\"",
+  "c.f.b.repo.InvoiceRepository - call to billing-db failed: FATAL: password authentication failed for user \"billing_app\"",
+  "c.f.b.api.UsageController - account <*> requested usage for a closed period"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.909,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 253,
+  "lines": 337,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-103",
+ "scenario_event_ids": [
+  "evt_4397",
+  "evt_4457",
+  "evt_4484",
+  "evt_4491"
+ ],
+ "cause_event_id": "evt_4457",
+ "culprit_change_id": "chg_2428",
+ "contributing_ids": [
+  "evt_4397"
+ ],
+ "cause_service": "billing-db",
+ "blast_radius": [
+  "billing-db",
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change enabled automatic rotation of the billing-db credentials; rotation ran at once and billing-svc kept using its cached password (db.credentials_cache_s), so logins failed.",
+  "micro": "{file}:{line} sets {key} {old} -> {new} on {resource}.",
+  "remediation": "Restart billing-svc tasks to pick up the new secret; lower db.credentials_cache_s and refresh on authentication failure before re-enabling rotation."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_4459"
+ ],
+ "remediation_ids": [
+  "evt_4484",
+  "evt_4491"
+ ],
+ "expected_files": [
+  "infra/billing-db.tf"
+ ],
+ "expected_params": [
+  "secret_rotation_days"
+ ],
+ "culprit": {
+  "change_id": "chg_2428",
+  "event_id": "evt_4457",
+  "file": "infra/billing-db.tf",
+  "line": 21,
+  "symbol": "aws_secretsmanager_secret_rotation.billing_db",
+  "diff": "@@ -19,4 +19,4 @@ aws_secretsmanager_secret_rotation.billing_db\n resource \"aws_secretsmanager_secret_rotation\" \"billing_db\" {\n   rotation_rules {\n-    automatically_after_days = 0\n+    automatically_after_days = 30\n   }",
+  "param_key": "secret_rotation_days"
+ },
+ "rca": {
+  "macro": "Terraform change enabled automatic rotation of the billing-db credentials; rotation ran at once and billing-svc kept using its cached password (db.credentials_cache_s), so logins failed.",
+  "micro": "infra/billing-db.tf:21 sets secret_rotation_days 0 -> 30 on aws_secretsmanager_secret_rotation.billing_db.",
+  "remediation": "Restart billing-svc tasks to pick up the new secret; lower db.credentials_cache_s and refresh on authentication failure before re-enabling rotation."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `c.f.b.repo.InvoiceRepository - org.postgresql.util.PSQLException: FATAL: passwor`."
+ ]
+}

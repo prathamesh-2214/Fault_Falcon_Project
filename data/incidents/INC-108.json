@@ -1,0 +1,105 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-08-26T08:35:42.437099+00:00",
+ "incident_start": "2026-08-26T08:35:42.437099+00:00",
+ "source": "synthetic",
+ "scenario_type": "RETRY_STORM",
+ "planned_cause": "compute-svc",
+ "anomaly_id": "evt_4691",
+ "mitigated_at": "2026-08-26T12:08:53.410225+00:00",
+ "id": "INC-108",
+ "scenario_family": "complex",
+ "scenario_title": "Retry storm after backoff removal",
+ "category": "code",
+ "title": "Latency and timeouts on api-gateway",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "api-gateway: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on api-gateway",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-08-26 08:35-12:15: api-gateway: 189 of 278 log lines were non-INFO between 2026-08-26 08:35 and 2026-08-26 12:15 UTC (peak error ratio 0.89 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 28.024 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.889,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 189,
+  "lines": 278,
+  "p95_latency": 28.024,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-108",
+ "scenario_event_ids": [
+  "evt_4673",
+  "evt_4672",
+  "evt_4674",
+  "evt_4676",
+  "evt_4677",
+  "evt_4682",
+  "evt_4684",
+  "evt_4702",
+  "evt_4705"
+ ],
+ "cause_event_id": "evt_4684",
+ "culprit_change_id": "chg_2571",
+ "contributing_ids": [
+  "evt_4673"
+ ],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "compute-svc",
+  "cloud-api",
+  "api-gateway",
+  "storage-svc",
+  "coord-svc"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of compute-svc removed exponential backoff from ResourceManager calls; combined with retry.max raised earlier it created a retry storm.",
+  "micro": "{file}:{line} ({symbol}) replaces exponential backoff with a constant BASE_BACKOFF_MS.",
+  "remediation": "Roll back compute-svc {version_to} -> {version_from}; restore `backoffMs = Math.min(backoffMs * 2, MAX_BACKOFF_MS)` at {file}:{line}; revert retry.max to its previous value."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_4688",
+  "evt_4687",
+  "evt_4686"
+ ],
+ "remediation_ids": [
+  "evt_4702",
+  "evt_4705"
+ ],
+ "expected_files": [
+  "compute/mapreduce/ShuffleHandler.java",
+  "compute/rpc/RMClient.java",
+  "compute/scheduler/TaskRunner.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2571",
+  "event_id": "evt_4684",
+  "file": "compute/rpc/RMClient.java",
+  "line": 62,
+  "symbol": "RMClient.allocate",
+  "diff": "@@ -60,5 +60,5 @@ RMClient.allocate\n       } catch (IOException e) {\n         attempts++;\n-        backoffMs = Math.min(backoffMs * 2, MAX_BACKOFF_MS);\n+        backoffMs = BASE_BACKOFF_MS;  // simpler: constant retry interval\n         Thread.sleep(backoffMs);\n       }",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v2.37.0 of compute-svc removed exponential backoff from ResourceManager calls; combined with retry.max raised earlier it created a retry storm.",
+  "micro": "compute/rpc/RMClient.java:62 (RMClient.allocate) replaces exponential backoff with a constant BASE_BACKOFF_MS.",
+  "remediation": "Roll back compute-svc v2.37.0 -> v2.36.0; restore `backoffMs = Math.min(backoffMs * 2, MAX_BACKOFF_MS)` at compute/rpc/RMClient.java:62; revert retry.max to its previous value."
+ },
+ "action_items": [
+  "Add a regression test covering RMClient.allocate (compute/rpc/RMClient.java).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

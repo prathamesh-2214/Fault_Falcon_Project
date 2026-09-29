@@ -1,0 +1,110 @@
+{
+ "service": "cloud-api",
+ "incident_start": "2026-08-28T01:26:24+00:00",
+ "planned_start": "2026-08-28T01:26:24+00:00",
+ "anomaly_id": "evt_4769",
+ "source": "loghub",
+ "planned_cause": null,
+ "error_templates": [
+  "Unknown base file: /var/lib/nova/instances/_base/<HEX>"
+ ],
+ "scenario_type": "CROSS_SERVICE",
+ "mitigated_at": "2026-08-28T04:28:21.921634+00:00",
+ "id": "INC-109",
+ "scenario_family": "complex",
+ "scenario_title": "Release-train cascade down the dependency chain",
+ "category": "code",
+ "title": "Elevated 5xx errors on cloud-api",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "cloud-api: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on cloud-api",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] cloud-api 2026-08-28 01:26-01:55: cloud-api: 1 of 13 log lines were non-INFO between 2026-08-28 01:26 and 2026-08-28 01:55 UTC (peak error ratio 0.08 vs baseline median 0.0). 1 error templates, 1 first seen in this span. Peak p95 latency 0.26 s vs baseline band up to 0.416 s.",
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.077,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 1,
+  "lines": 13,
+  "p95_latency": 0.26,
+  "reasons": [
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-109",
+ "scenario_event_ids": [
+  "evt_4714",
+  "evt_4715",
+  "evt_4728",
+  "evt_4731",
+  "evt_4748",
+  "evt_4749",
+  "evt_4716",
+  "evt_4718",
+  "evt_4729",
+  "evt_4733",
+  "evt_4753",
+  "evt_4755",
+  "evt_4717",
+  "evt_4719",
+  "evt_4734",
+  "evt_4737",
+  "evt_4759",
+  "evt_4761",
+  "evt_4815"
+ ],
+ "cause_event_id": "evt_4749",
+ "culprit_change_id": "chg_2610",
+ "contributing_ids": [],
+ "cause_service": "storage-svc",
+ "blast_radius": [
+  "storage-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Release train {cycle} shipped FEAT-115 (Job-level audit trail) across services; the {svc} part ({version_to}) broke, and the failure surfaced in {alert_svc} through the dependency chain. The later parts of the same feature were harmless.",
+  "micro": "{file}:{line} ({symbol}) flushes the EBS volume on every record instead of every FLUSH_BATCH.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from} (the other services' parts of FEAT-115 can stay); fix {file}:{line}; add a cross-service load test to the train."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_4755",
+  "evt_4761",
+  "evt_4760",
+  "evt_4757",
+  "evt_4766"
+ ],
+ "remediation_ids": [
+  "evt_4815"
+ ],
+ "expected_files": [
+  "storage/datanode/BlockWriter.java",
+  "storage/namenode/BlockManager.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2610",
+  "event_id": "evt_4749",
+  "file": "storage/datanode/BlockWriter.java",
+  "line": 70,
+  "symbol": "BlockWriter.write",
+  "diff": "@@ -69,4 +69,4 @@ BlockWriter.write\n     pending++;\n-    if (pending >= FLUSH_BATCH) {\n+    if (pending >= 1) {  // audit trail: flush every record\n       flushToVolume();\n     }",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Release train RT-26.35 shipped FEAT-115 (Job-level audit trail) across services; the storage-svc part (v4.22.0) broke, and the failure surfaced in cloud-api through the dependency chain. The later parts of the same feature were harmless.",
+  "micro": "storage/datanode/BlockWriter.java:70 (BlockWriter.write) flushes the EBS volume on every record instead of every FLUSH_BATCH.",
+  "remediation": "Roll back storage-svc v4.22.0 -> v4.21.0 (the other services' parts of FEAT-115 can stay); fix storage/datanode/BlockWriter.java:70; add a cross-service load test to the train."
+ },
+ "action_items": [
+  "Add a regression test covering BlockWriter.write (storage/datanode/BlockWriter.java).",
+  "Alert on the error signature `Unknown base file: /var/lib/nova/instances/_base/<HEX>`."
+ ]
+}

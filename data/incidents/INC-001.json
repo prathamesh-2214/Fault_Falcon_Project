@@ -1,0 +1,99 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-03-04T15:44:44.697754+00:00",
+ "incident_start": "2026-03-04T15:44:44.697754+00:00",
+ "source": "synthetic",
+ "scenario_type": "CONTRACT_BREAK",
+ "planned_cause": "cloud-api",
+ "anomaly_id": "evt_96",
+ "mitigated_at": "2026-03-04T20:25:15.250570+00:00",
+ "id": "INC-001",
+ "scenario_family": "planned",
+ "scenario_title": "Producer shipped a new event schema before the consumer",
+ "category": "code",
+ "title": "Processing errors on billing-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "billing-svc: error-log rate > 20/min (CloudWatch Logs metric filter)",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "data"
+ },
+ "impact": "Background processing failed; customer-visible data was delayed or wrong on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-03-04 15:44-20:04: billing-svc: 181 of 280 log lines were non-INFO between 2026-03-04 15:44 and 2026-03-04 20:04 UTC (peak error ratio 0.91 vs baseline median 0.0). 3 error templates, 2 first seen in this span.",
+ "error_templates": [
+  "c.f.b.consumer.UsageEventConsumer - message <*> returned to queue (receive <*>",
+  "c.f.b.consumer.UsageEventConsumer - failed to parse usage event: UnrecognizedPropertyException: Unrecognized field \"flavor\" (class UsageEvent)",
+  "c.f.b.api.UsageController - account <*> requested usage for a closed period"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.909,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 181,
+  "lines": 280,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-001",
+ "scenario_event_ids": [
+  "evt_71",
+  "evt_72",
+  "evt_79",
+  "evt_80",
+  "evt_90",
+  "evt_91",
+  "evt_116"
+ ],
+ "cause_event_id": "evt_91",
+ "culprit_change_id": "chg_71",
+ "contributing_ids": [],
+ "cause_service": "cloud-api",
+ "blast_radius": [
+  "cloud-api",
+  "usage-queue",
+  "billing-svc",
+  "notification-svc"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of cloud-api started publishing the v2 usage-event schema (FEAT-124) before billing-svc could read it; billing-svc rejected every event and the usage queue backed up into the DLQ.",
+  "micro": "{file}:{line} ({symbol}) replaces the instance_type field with a nested flavor object.",
+  "remediation": "Roll back cloud-api {version_to} -> {version_from}; redrive the DLQ after billing-svc accepts both schemas; deploy consumers before producers."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_92",
+  "evt_94",
+  "evt_93"
+ ],
+ "remediation_ids": [
+  "evt_116"
+ ],
+ "expected_files": [
+  "cloud-api/nova/api/servers.py",
+  "cloud-api/nova/usage/publisher.py"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_71",
+  "event_id": "evt_91",
+  "file": "cloud-api/nova/usage/publisher.py",
+  "line": 348,
+  "symbol": "UsagePublisher.publish",
+  "diff": "@@ -346,5 +346,5 @@ UsagePublisher.publish\n         event = {\n             \"account_id\": server.tenant,\n-            \"instance_type\": server.flavor.name,\n+            \"flavor\": {\"name\": server.flavor.name, \"vcpus\": server.flavor.vcpus},\n             \"hours\": hours,\n         }",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v3.2.0 of cloud-api started publishing the v2 usage-event schema (FEAT-124) before billing-svc could read it; billing-svc rejected every event and the usage queue backed up into the DLQ.",
+  "micro": "cloud-api/nova/usage/publisher.py:348 (UsagePublisher.publish) replaces the instance_type field with a nested flavor object.",
+  "remediation": "Roll back cloud-api v3.2.0 -> v3.1.0; redrive the DLQ after billing-svc accepts both schemas; deploy consumers before producers."
+ },
+ "action_items": [
+  "Add a regression test covering UsagePublisher.publish (cloud-api/nova/usage/publisher.py).",
+  "Alert on the error signature `c.f.b.consumer.UsageEventConsumer - message <*> returned to queue (receive <*>`."
+ ]
+}

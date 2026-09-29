@@ -1,0 +1,94 @@
+{
+ "service": "storage-svc",
+ "planned_start": "2026-07-13T11:46:29.061580+00:00",
+ "incident_start": "2026-07-13T11:46:29.061580+00:00",
+ "source": "synthetic",
+ "scenario_type": "CONFIG_CHANGE",
+ "planned_cause": "storage-svc",
+ "anomaly_id": "evt_3505",
+ "mitigated_at": "2026-07-13T16:34:04.580244+00:00",
+ "id": "INC-081",
+ "scenario_family": "simple",
+ "scenario_title": "Bad config value",
+ "category": "config",
+ "title": "Latency and timeouts on storage-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "storage-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on storage-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] storage-svc 2026-07-13 11:46-16:36: storage-svc: 276 of 380 log lines were non-INFO between 2026-07-13 11:46 and 2026-07-13 16:36 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 1 first seen in this span.",
+ "error_templates": [
+  "outbound call failed after <*> attempts",
+  "<*> exception while serving <*> to <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 276,
+  "lines": 380,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-081",
+ "scenario_event_ids": [
+  "evt_3495",
+  "evt_3514"
+ ],
+ "cause_event_id": "evt_3495",
+ "culprit_change_id": "chg_1918",
+ "contributing_ids": [],
+ "cause_service": "storage-svc",
+ "blast_radius": [
+  "storage-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change to {key} in {svc} broke calls under load.",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old} in {file}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_3502",
+  "evt_3497",
+  "evt_3501"
+ ],
+ "remediation_ids": [
+  "evt_3514"
+ ],
+ "expected_files": [
+  "config/storage-svc.yaml"
+ ],
+ "expected_params": [
+  "retry.max"
+ ],
+ "culprit": {
+  "change_id": "chg_1918",
+  "event_id": "evt_3495",
+  "file": "config/storage-svc.yaml",
+  "line": 105,
+  "symbol": "retry.max",
+  "diff": "@@ -104,3 +104,3 @@ retry.max\n retry:\n-  max_attempts: 3\n+  max_attempts: 15\n   # managed by the platform team",
+  "param_key": "retry.max"
+ },
+ "rca": {
+  "macro": "Config change to retry.max in storage-svc broke calls under load.",
+  "micro": "config/storage-svc.yaml:105 sets retry.max 3 -> 15.",
+  "remediation": "Revert retry.max to 3 in config/storage-svc.yaml."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `outbound call failed after <*> attempts`."
+ ]
+}

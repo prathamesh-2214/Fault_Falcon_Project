@@ -1,0 +1,98 @@
+{
+ "service": "coord-svc",
+ "incident_start": "2026-08-30T11:02:24+00:00",
+ "planned_start": "2026-08-30T11:02:24+00:00",
+ "anomaly_id": "evt_5026",
+ "source": "loghub",
+ "planned_cause": null,
+ "error_templates": [
+  "Exception causing close of session 0x0 due to java.io.IOException: ZooKeeperServer not running",
+  "caught end of stream exception",
+  "First is 0x0"
+ ],
+ "scenario_type": "ELECTION_PORT",
+ "mitigated_at": "2026-08-30T15:47:50.755129+00:00",
+ "id": "INC-119",
+ "scenario_family": "complex",
+ "scenario_title": "Security group closed the election port",
+ "category": "infra",
+ "title": "Connection failures on coord-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "coord-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "refused"
+ },
+ "impact": "Requests failed while connections were refused on coord-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] coord-svc 2026-08-30 11:02-11:31: coord-svc: 6 of 36 log lines were non-INFO between 2026-08-30 11:02 and 2026-08-30 11:31 UTC (peak error ratio 0.17 vs baseline median 0.28). 3 error templates, 2 first seen in this span.",
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.167,
+  "baseline_median_error_ratio": 0.278,
+  "error_lines": 6,
+  "lines": 36,
+  "p95_latency": null,
+  "reasons": [
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-119",
+ "scenario_event_ids": [
+  "evt_4934",
+  "evt_5018",
+  "evt_5049",
+  "evt_5056"
+ ],
+ "cause_event_id": "evt_5018",
+ "culprit_change_id": "chg_2730",
+ "contributing_ids": [
+  "evt_4934"
+ ],
+ "cause_service": "coord-svc",
+ "blast_radius": [
+  "coord-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change to aws_security_group for coord-svc closed the leader-election port, so quorum peers could not open election channels.",
+  "micro": "{file}:{line} changes the election ingress rule {key} {old} -> {new}.",
+  "remediation": "Restore the ingress rule for port {old} on {resource} (terraform apply of {version_from}); add a connectivity check for 2181/2888/3888 to the pipeline."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_5024",
+  "evt_5022"
+ ],
+ "remediation_ids": [
+  "evt_5049",
+  "evt_5056"
+ ],
+ "expected_files": [
+  "infra/coord-svc.tf"
+ ],
+ "expected_params": [
+  "sg_election_port"
+ ],
+ "culprit": {
+  "change_id": "chg_2730",
+  "event_id": "evt_5018",
+  "file": "infra/coord-svc.tf",
+  "line": 13,
+  "symbol": "aws_security_group.coord_svc",
+  "diff": "@@ -11,4 +11,4 @@ aws_security_group.coord_svc\n resource \"aws_security_group\" \"coord_svc\" {\n   ingress {\n-    to_port = 3888\n+    to_port = 2888\n   }",
+  "param_key": "sg_election_port"
+ },
+ "rca": {
+  "macro": "Terraform change to aws_security_group for coord-svc closed the leader-election port, so quorum peers could not open election channels.",
+  "micro": "infra/coord-svc.tf:13 changes the election ingress rule sg_election_port 3888 -> 2888.",
+  "remediation": "Restore the ingress rule for port 3888 on aws_security_group.coord_svc (terraform apply of tf-r13); add a connectivity check for 2181/2888/3888 to the pipeline."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `Exception causing close of session 0x0 due to java.io.IOException: ZooKeeperServ`."
+ ]
+}

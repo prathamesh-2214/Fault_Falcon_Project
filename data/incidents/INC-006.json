@@ -1,0 +1,97 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-03-12T17:57:06.215596+00:00",
+ "incident_start": "2026-03-12T17:57:06.215596+00:00",
+ "source": "synthetic",
+ "scenario_type": "TIMEOUT_UNIT",
+ "planned_cause": "cloud-api",
+ "anomaly_id": "evt_402",
+ "mitigated_at": "2026-03-12T21:50:03.469757+00:00",
+ "id": "INC-006",
+ "scenario_family": "complex",
+ "scenario_title": "Timeout unit conversion bug",
+ "category": "code",
+ "title": "Latency and timeouts on api-gateway",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "api-gateway: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-03-12 17:57-21:57: api-gateway: 280 of 393 log lines were non-INFO between 2026-03-12 17:57 and 2026-03-12 21:57 UTC (peak error ratio 0.96 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 28.192 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.957,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 280,
+  "lines": 393,
+  "p95_latency": 28.192,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-006",
+ "scenario_event_ids": [
+  "evt_386",
+  "evt_387",
+  "evt_392",
+  "evt_393",
+  "evt_394",
+  "evt_396",
+  "evt_407"
+ ],
+ "cause_event_id": "evt_396",
+ "culprit_change_id": "chg_198",
+ "contributing_ids": [],
+ "cause_service": "cloud-api",
+ "blast_radius": [
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} shrinks its outbound timeout by a factor of 1000, so calls time out almost immediately.",
+  "micro": "{file}:{line} ({symbol}) converts http.timeout_ms with the wrong unit.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; fix the unit conversion at {file}:{line}; add a unit test for the timeout conversion."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_399",
+  "evt_397",
+  "evt_398"
+ ],
+ "remediation_ids": [
+  "evt_407"
+ ],
+ "expected_files": [
+  "cloud-api/nova/compute/client.py",
+  "cloud-api/nova/image/cache.py",
+  "cloud-api/nova/usage/publisher.py"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_198",
+  "event_id": "evt_396",
+  "file": "cloud-api/nova/compute/client.py",
+  "line": 87,
+  "symbol": "ComputeClient.call",
+  "diff": "@@ -86,2 +86,2 @@ ComputeClient.call\n   // outbound call timeout\n-        timeout = CONF.http.timeout_ms / 1000.0\n+        timeout = CONF.http.timeout_ms / 1000.0 / 1000.0  # seconds",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v3.5.0 of cloud-api shrinks its outbound timeout by a factor of 1000, so calls time out almost immediately.",
+  "micro": "cloud-api/nova/compute/client.py:87 (ComputeClient.call) converts http.timeout_ms with the wrong unit.",
+  "remediation": "Roll back cloud-api v3.5.0 -> v3.4.1; fix the unit conversion at cloud-api/nova/compute/client.py:87; add a unit test for the timeout conversion."
+ },
+ "action_items": [
+  "Add a regression test covering ComputeClient.call (cloud-api/nova/compute/client.py).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

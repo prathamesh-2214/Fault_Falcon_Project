@@ -1,0 +1,237 @@
+2026-06-09T05:53:57Z WARN  [synthetic] request waited 1500 ms for the global lock
+2026-06-09T05:54:07Z WARN  [synthetic] request waited 5400 ms for the global lock
+2026-06-09T05:54:30Z WARN  [synthetic] request waited 3900 ms for the global lock
+2026-06-09T05:54:32Z WARN  [synthetic] request waited 1900 ms for the global lock
+2026-06-09T05:54:41Z INFO  [synthetic] Notification time out: 60000
+2026-06-09T05:55:34Z WARN  [synthetic] request waited 4500 ms for the global lock
+2026-06-09T05:56:53Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T05:57:29Z INFO  [synthetic] Closed socket connection for client /10.10.34.13:54485 which had sessionid 0x14edfaa86f60021
+2026-06-09T05:57:46Z WARN  [synthetic] request waited 5400 ms for the global lock
+2026-06-09T05:59:32Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:01:04Z WARN  [synthetic] request waited 6500 ms for the global lock
+2026-06-09T06:01:09Z WARN  [synthetic] request waited 600 ms for the global lock
+2026-06-09T06:01:25Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:02:43Z INFO  [synthetic] Received connection request /10.10.34.11:59688
+2026-06-09T06:02:47Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:04:03Z WARN  [synthetic] request waited 4700 ms for the global lock
+2026-06-09T06:05:45Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:07:49Z INFO  [synthetic] Processed session termination for sessionid: 0x14f3fdae8ba0001
+2026-06-09T06:08:17Z WARN  [synthetic] request waited 3000 ms for the global lock
+2026-06-09T06:08:32Z INFO  [synthetic] Accepted socket connection from /10.10.34.11:40061
+2026-06-09T06:08:47Z WARN  [synthetic] request waited 4100 ms for the global lock
+2026-06-09T06:09:28Z WARN  [synthetic] request waited 6400 ms for the global lock
+2026-06-09T06:10:19Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:10:38Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:11:08Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:12:29Z INFO  [synthetic] Accepted socket connection from /10.10.34.13:52310
+2026-06-09T06:12:32Z INFO  [synthetic] Received connection request /10.10.34.13:44732
+2026-06-09T06:12:58Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:13:03Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:13:39Z WARN  [synthetic] request waited 4500 ms for the global lock
+2026-06-09T06:15:04Z WARN  [synthetic] request waited 4300 ms for the global lock
+2026-06-09T06:16:01Z WARN  [synthetic] request waited 2100 ms for the global lock
+2026-06-09T06:16:26Z WARN  [synthetic] request waited 7700 ms for the global lock
+2026-06-09T06:16:59Z WARN  [synthetic] request waited 4100 ms for the global lock
+2026-06-09T06:17:01Z INFO  [synthetic] Established session 0x24ed93119420091 with negotiated timeout 10000 for client /10.10.34.40:47629
+2026-06-09T06:18:50Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:18:57Z INFO  [synthetic] Received connection request /10.10.34.11:49949
+2026-06-09T06:19:26Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:20:18Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:20:27Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:21:11Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:21:50Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:22:19Z WARN  [synthetic] request waited 9400 ms for the global lock
+2026-06-09T06:22:32Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:24:05Z INFO  [synthetic] Established session 0x24ed931194200a7 with negotiated timeout 10000 for client /10.10.34.36:45209
+2026-06-09T06:25:24Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:26:29Z INFO  [synthetic] Received connection request /10.10.34.11:49023
+2026-06-09T06:26:58Z WARN  [synthetic] request waited 3100 ms for the global lock
+2026-06-09T06:28:30Z INFO  [synthetic] Received connection request /10.10.34.12:48141
+2026-06-09T06:28:47Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:28:51Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:28:59Z INFO  [synthetic] Notification: 3 (n.leader), 0x0 (n.zxid), 0x1 (n.round), LOOKING (n.state), 3 (n.sid), 0x0 (n.peerEPoch), LOOKING (my state)
+2026-06-09T06:31:05Z WARN  [synthetic] request waited 8100 ms for the global lock
+2026-06-09T06:31:10Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:31:20Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:33:12Z WARN  [synthetic] request waited 3500 ms for the global lock
+2026-06-09T06:33:29Z WARN  [synthetic] request waited 5800 ms for the global lock
+2026-06-09T06:33:32Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:33:42Z INFO  [synthetic] Accepted socket connection from /10.10.34.13:54649
+2026-06-09T06:34:50Z INFO  [synthetic] Client attempting to establish new session at /10.10.34.11:54632
+2026-06-09T06:34:55Z INFO  [synthetic] Received connection request /10.10.34.12:47373
+2026-06-09T06:35:57Z WARN  [synthetic] request waited 3300 ms for the global lock
+2026-06-09T06:37:17Z WARN  [synthetic] Interrupted while waiting for message on queue
+2026-06-09T06:38:20Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:38:32Z WARN  [synthetic] request waited 6200 ms for the global lock
+2026-06-09T06:39:38Z INFO  [synthetic] Received connection request /10.10.34.13:45053
+2026-06-09T06:43:02Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:43:04Z WARN  [synthetic] request waited 1600 ms for the global lock
+2026-06-09T06:43:23Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:43:31Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:43:57Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:44:31Z INFO  [synthetic] Received connection request /10.10.34.11:48254
+2026-06-09T06:44:47Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:46:46Z WARN  [synthetic] request waited 9200 ms for the global lock
+2026-06-09T06:47:21Z INFO  [synthetic] Expiring session 0x14ed93111f20020, timeout of 10000ms exceeded
+2026-06-09T06:47:55Z WARN  [synthetic] Send worker leaving thread
+2026-06-09T06:48:10Z INFO  [synthetic] Notification: 1 (n.leader), 0xb0000007b (n.zxid), 0x2 (n.round), LOOKING (n.state), 1 (n.sid), 0xb (n.peerEPoch), LEADING (my state)
+2026-06-09T06:48:24Z WARN  [synthetic] request waited 4000 ms for the global lock
+2026-06-09T06:48:42Z WARN  [synthetic] request waited 2200 ms for the global lock
+2026-06-09T06:49:13Z INFO  [synthetic] Received connection request /10.10.34.12:47623
+2026-06-09T06:49:23Z WARN  [synthetic] request waited 8800 ms for the global lock
+2026-06-09T06:50:45Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:50:55Z INFO  [synthetic] Received connection request /10.10.34.11:60068
+2026-06-09T06:52:54Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:53:24Z WARN  [synthetic] request waited 6200 ms for the global lock
+2026-06-09T06:53:36Z WARN  [synthetic] request waited 6100 ms for the global lock
+2026-06-09T06:55:52Z WARN  [synthetic] request waited 5000 ms for the global lock
+2026-06-09T06:56:49Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:56:52Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T06:56:56Z WARN  [synthetic] request waited 8700 ms for the global lock
+2026-06-09T06:57:29Z INFO  [synthetic] Expiring session 0x34edfaa9c22000d, timeout of 10000ms exceeded
+2026-06-09T06:57:53Z WARN  [synthetic] request waited 8400 ms for the global lock
+2026-06-09T06:59:06Z WARN  [synthetic] request waited 7700 ms for the global lock
+2026-06-09T06:59:50Z WARN  [synthetic] request waited 3200 ms for the global lock
+2026-06-09T07:00:21Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:00:51Z WARN  [synthetic] request waited 2000 ms for the global lock
+2026-06-09T07:00:57Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:01:30Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:01:39Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:01:44Z WARN  [synthetic] request waited 6400 ms for the global lock
+2026-06-09T07:03:06Z WARN  [synthetic] request waited 7700 ms for the global lock
+2026-06-09T07:03:39Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:03:57Z WARN  [synthetic] request waited 1300 ms for the global lock
+2026-06-09T07:04:06Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:04:26Z INFO  [synthetic] Received connection request /10.10.34.12:49940
+2026-06-09T07:04:46Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:05:02Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:05:27Z WARN  [synthetic] Interrupting SendWorker
+2026-06-09T07:05:28Z INFO  [synthetic] Client attempting to establish new session at /10.10.34.13:54387
+2026-06-09T07:05:52Z WARN  [synthetic] request waited 6400 ms for the global lock
+2026-06-09T07:06:33Z WARN  [synthetic] request waited 200 ms for the global lock
+2026-06-09T07:08:42Z INFO  [synthetic] Client attempting to establish new session at /10.10.34.11:53468
+2026-06-09T07:08:42Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:10:12Z WARN  [synthetic] request waited 4100 ms for the global lock
+2026-06-09T07:10:13Z WARN  [synthetic] request waited 8700 ms for the global lock
+2026-06-09T07:10:38Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:13:25Z WARN  [synthetic] request waited 700 ms for the global lock
+2026-06-09T07:13:37Z INFO  [synthetic] Notification time out: 60000
+2026-06-09T07:13:37Z INFO  [synthetic] Expiring session 0x24edfaa87170010, timeout of 10000ms exceeded
+2026-06-09T07:14:37Z WARN  [synthetic] request waited 4600 ms for the global lock
+2026-06-09T07:14:53Z INFO  [synthetic] Closed socket connection for client /10.10.34.13:42060 which had sessionid 0x34edfaa9c22002d
+2026-06-09T07:14:57Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:15:01Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:18:20Z INFO  [synthetic] Received connection request /10.10.34.13:33255
+2026-06-09T07:18:22Z WARN  [synthetic] request waited 1400 ms for the global lock
+2026-06-09T07:18:29Z WARN  [synthetic] request waited 6300 ms for the global lock
+2026-06-09T07:18:34Z WARN  [synthetic] request waited 6200 ms for the global lock
+2026-06-09T07:18:37Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:18:55Z WARN  [synthetic] request waited 2300 ms for the global lock
+2026-06-09T07:19:30Z WARN  [synthetic] request waited 7300 ms for the global lock
+2026-06-09T07:20:14Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:20:27Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:21:11Z INFO  [synthetic] Client attempting to establish new session at /10.10.34.11:51393
+2026-06-09T07:21:54Z INFO  [synthetic] Received connection request /10.10.34.12:48047
+2026-06-09T07:23:32Z WARN  [synthetic] request waited 7500 ms for the global lock
+2026-06-09T07:25:19Z INFO  [synthetic] Expiring session 0x34ed9ac1c1e0065, timeout of 20000ms exceeded
+2026-06-09T07:25:30Z WARN  [synthetic] request waited 9100 ms for the global lock
+2026-06-09T07:26:06Z INFO  [synthetic] Received connection request /10.10.34.12:47635
+2026-06-09T07:27:59Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:28:55Z WARN  [synthetic] request waited 2900 ms for the global lock
+2026-06-09T07:29:31Z WARN  [synthetic] request waited 3300 ms for the global lock
+2026-06-09T07:30:25Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:30:38Z INFO  [synthetic] Received connection request /10.10.34.12:49940
+2026-06-09T07:30:43Z WARN  [synthetic] request waited 5000 ms for the global lock
+2026-06-09T07:31:21Z INFO  [synthetic] Closed socket connection for client /10.10.34.13:37335 which had sessionid 0x24ed93119420065
+2026-06-09T07:31:28Z INFO  [synthetic] Received connection request /10.10.34.11:49396
+2026-06-09T07:32:59Z WARN  [synthetic] request waited 7500 ms for the global lock
+2026-06-09T07:35:22Z INFO  [synthetic] Received connection request /10.10.34.13:58452
+2026-06-09T07:35:45Z WARN  [synthetic] request waited 2800 ms for the global lock
+2026-06-09T07:35:49Z WARN  [synthetic] request waited 6500 ms for the global lock
+2026-06-09T07:36:10Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:36:25Z INFO  [synthetic] Closed socket connection for client /10.10.34.13:37335 which had sessionid 0x24ed93119420065
+2026-06-09T07:36:49Z INFO  [synthetic] Notification time out: 60000
+2026-06-09T07:37:28Z WARN  [synthetic] request waited 2300 ms for the global lock
+2026-06-09T07:39:21Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:39:39Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:40:17Z WARN  [synthetic] request waited 6100 ms for the global lock
+2026-06-09T07:40:20Z WARN  [synthetic] request waited 4300 ms for the global lock
+2026-06-09T07:41:25Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:41:54Z WARN  [synthetic] request waited 2400 ms for the global lock
+2026-06-09T07:42:46Z WARN  [synthetic] request waited 700 ms for the global lock
+2026-06-09T07:43:19Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:43:44Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:44:33Z WARN  [synthetic] request waited 6200 ms for the global lock
+2026-06-09T07:45:15Z INFO  [synthetic] Processed session termination for sessionid: 0x14ed93111f20000
+2026-06-09T07:45:17Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:45:47Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:45:50Z INFO  [synthetic] Received connection request /10.10.34.11:49095
+2026-06-09T07:46:06Z INFO  [synthetic] Established session 0x34ed9ac1c1e00d1 with negotiated timeout 10000 for client /10.10.34.11:49255
+2026-06-09T07:46:53Z INFO  [synthetic] Processed session termination for sessionid: 0x34ede65503f0039
+2026-06-09T07:47:10Z INFO  [synthetic] Received connection request /10.10.34.13:59037
+2026-06-09T07:47:39Z INFO  [synthetic] Notification time out: 60000
+2026-06-09T07:48:08Z INFO  [synthetic] Notification time out: 60000
+2026-06-09T07:48:39Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:49:15Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:49:34Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:50:05Z WARN  [synthetic] request waited 3300 ms for the global lock
+2026-06-09T07:51:53Z WARN  [synthetic] request waited 1000 ms for the global lock
+2026-06-09T07:52:12Z WARN  [synthetic] request waited 2700 ms for the global lock
+2026-06-09T07:53:22Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:53:37Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:53:38Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:54:33Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:54:39Z WARN  [synthetic] request waited 2200 ms for the global lock
+2026-06-09T07:55:24Z INFO  [synthetic] Established session 0x24ed93119420091 with negotiated timeout 10000 for client /10.10.34.40:47629
+2026-06-09T07:55:35Z WARN  [synthetic] request waited 7800 ms for the global lock
+2026-06-09T07:56:13Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:58:10Z INFO  [synthetic] Received connection request /10.10.34.12:48457
+2026-06-09T07:58:40Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T07:59:09Z WARN  [synthetic] request waited 4000 ms for the global lock
+2026-06-09T08:01:05Z INFO  [synthetic] Received connection request /10.10.34.12:47300
+2026-06-09T08:01:06Z INFO  [synthetic] Expiring session 0x24f4a631df90002, timeout of 10000ms exceeded
+2026-06-09T08:01:14Z INFO  [synthetic] Notification time out: 60000
+2026-06-09T08:01:58Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:02:16Z WARN  [synthetic] request waited 5400 ms for the global lock
+2026-06-09T08:03:14Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:04:19Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:05:51Z INFO  [synthetic] FOLLOWING
+2026-06-09T08:08:49Z INFO  [synthetic] minSessionTimeout set to -1
+2026-06-09T08:09:09Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:10:10Z INFO  [synthetic] Expiring session 0x14edfaa86f6002a, timeout of 10000ms exceeded
+2026-06-09T08:10:17Z WARN  [synthetic] request waited 4600 ms for the global lock
+2026-06-09T08:11:22Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:11:46Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:12:07Z INFO  [synthetic] Received connection request /10.10.34.12:57965
+2026-06-09T08:13:24Z INFO  [synthetic] Received connection request /10.10.34.13:44879
+2026-06-09T08:13:31Z WARN  [synthetic] request waited 5000 ms for the global lock
+2026-06-09T08:13:33Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:16:39Z WARN  [synthetic] request waited 7300 ms for the global lock
+2026-06-09T08:17:09Z INFO  [synthetic] FOLLOWING
+2026-06-09T08:18:01Z INFO  [synthetic] Received connection request /10.10.34.13:45644
+2026-06-09T08:18:37Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:19:11Z INFO  [synthetic] Notification time out: 60000
+2026-06-09T08:19:33Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:19:38Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:21:26Z WARN  [synthetic] request waited 7500 ms for the global lock
+2026-06-09T08:21:57Z WARN  [synthetic] request waited 4400 ms for the global lock
+2026-06-09T08:21:58Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:22:41Z INFO  [synthetic] Received connection request /10.10.34.11:46329
+2026-06-09T08:23:10Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:24:36Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:25:50Z WARN  [synthetic] request waited 500 ms for the global lock
+2026-06-09T08:27:28Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:27:32Z WARN  [synthetic] request waited 8000 ms for the global lock
+2026-06-09T08:27:43Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:27:51Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:28:23Z WARN  [synthetic] request waited 1800 ms for the global lock
+2026-06-09T08:29:04Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:29:12Z WARN  [synthetic] request waited 8600 ms for the global lock
+2026-06-09T08:30:49Z WARN  [synthetic] request waited 5900 ms for the global lock
+2026-06-09T08:31:07Z ERROR [synthetic] request timed out after 30000 ms (lock contention)
+2026-06-09T08:36:05Z INFO  [synthetic] Expiring session 0x24ed931194200ad, timeout of 10000ms exceeded
+2026-06-09T08:36:07Z INFO  [synthetic] Processed session termination for sessionid: 0x24edfaa8717002d
+2026-06-09T08:41:37Z INFO  [synthetic] Received connection request /10.10.34.11:59703
+2026-06-09T08:43:51Z INFO  [synthetic] Received connection request /10.10.34.12:47954
+2026-06-09T08:47:44Z INFO  [synthetic] FOLLOWING
+2026-06-09T08:48:39Z INFO  [synthetic] Received connection request /10.10.34.12:49218

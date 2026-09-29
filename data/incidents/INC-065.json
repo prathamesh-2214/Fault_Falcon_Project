@@ -1,0 +1,93 @@
+{
+ "service": "auth-svc",
+ "planned_start": "2026-06-17T10:29:50.436323+00:00",
+ "incident_start": "2026-06-17T10:29:50.436323+00:00",
+ "source": "synthetic",
+ "scenario_type": "CACHE_TTL",
+ "planned_cause": "auth-svc",
+ "anomaly_id": "evt_2815",
+ "mitigated_at": "2026-06-17T13:13:11.490994+00:00",
+ "id": "INC-065",
+ "scenario_family": "planned",
+ "scenario_title": "Session TTL typo, cache miss storm on the DB",
+ "category": "config",
+ "title": "Latency and timeouts on auth-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "auth-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on auth-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] auth-svc 2026-06-17 10:29-13:19: auth-svc: 125 of 192 log lines were non-INFO between 2026-06-17 10:29 and 2026-06-17 13:19 UTC (peak error ratio 1.0 vs baseline median 0.0). 3 error templates, 2 first seen in this span.",
+ "error_templates": [
+  "{\"level\":\"warn\",\"msg\":\"session cache <*>",
+  "{\"level\":\"error\",\"msg\":\"account lookup failed\",\"err\":\"timeout: context deadline exceeded\"}",
+  "{\"level\":\"warn\",\"msg\":\"login failed: bad <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 125,
+  "lines": 192,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-065",
+ "scenario_event_ids": [
+  "evt_2810",
+  "evt_2824"
+ ],
+ "cause_event_id": "evt_2810",
+ "culprit_change_id": "chg_1560",
+ "contributing_ids": [],
+ "cause_service": "auth-svc",
+ "blast_radius": [
+  "auth-svc",
+  "api-gateway",
+  "meta-db"
+ ],
+ "_templates": {
+  "macro": "Config change set {key} to {new} instead of {old}; almost every token check missed the Redis cache and hit meta-db, which saturated.",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old} in {file}; add bounds validation for TTLs."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_2812",
+  "evt_2813"
+ ],
+ "remediation_ids": [
+  "evt_2824"
+ ],
+ "expected_files": [
+  "config/auth-svc.yaml"
+ ],
+ "expected_params": [
+  "cache.session_ttl_s"
+ ],
+ "culprit": {
+  "change_id": "chg_1560",
+  "event_id": "evt_2810",
+  "file": "config/auth-svc.yaml",
+  "line": 81,
+  "symbol": "cache.session_ttl_s",
+  "diff": "@@ -80,3 +80,3 @@ cache.session_ttl_s\n cache:\n-  session_ttl_s: 3600\n+  session_ttl_s: 36\n   # managed by the platform team",
+  "param_key": "cache.session_ttl_s"
+ },
+ "rca": {
+  "macro": "Config change set cache.session_ttl_s to 36 instead of 3600; almost every token check missed the Redis cache and hit meta-db, which saturated.",
+  "micro": "config/auth-svc.yaml:81 sets cache.session_ttl_s 3600 -> 36.",
+  "remediation": "Revert cache.session_ttl_s to 3600 in config/auth-svc.yaml; add bounds validation for TTLs."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `{\"level\":\"warn\",\"msg\":\"session cache <*>`."
+ ]
+}

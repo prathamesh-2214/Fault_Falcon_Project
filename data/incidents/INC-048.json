@@ -1,0 +1,96 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-05-20T14:06:59.395862+00:00",
+ "incident_start": "2026-05-20T14:06:59.395862+00:00",
+ "source": "synthetic",
+ "scenario_type": "NULL_DEREF",
+ "planned_cause": "compute-svc",
+ "anomaly_id": "evt_2118",
+ "mitigated_at": "2026-05-20T18:56:53.505364+00:00",
+ "id": "INC-048",
+ "scenario_family": "planned",
+ "scenario_title": "Null dereference after a removed guard",
+ "category": "code",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-05-20 14:06-18:56: api-gateway: 324 of 449 log lines were non-INFO between 2026-05-20 14:06 and 2026-05-20 18:56 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 0.529 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 324,
+  "lines": 449,
+  "p95_latency": 0.529,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-048",
+ "scenario_event_ids": [
+  "evt_2102",
+  "evt_2103",
+  "evt_2109",
+  "evt_2110",
+  "evt_2111",
+  "evt_2113",
+  "evt_2139"
+ ],
+ "cause_event_id": "evt_2113",
+ "culprit_change_id": "chg_1183",
+ "contributing_ids": [],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} removed a null/nil guard; requests for records without the optional field now crash the handler.",
+  "micro": "{file}:{line} ({symbol}) drops the null check before dereferencing the field.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; restore the guard at {file}:{line}; add a test with the optional field missing."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_2115",
+  "evt_2114"
+ ],
+ "remediation_ids": [
+  "evt_2139"
+ ],
+ "expected_files": [
+  "compute/dfs/LeaseRenewer.java",
+  "compute/rpc/RMClient.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_1183",
+  "event_id": "evt_2113",
+  "file": "compute/rpc/RMClient.java",
+  "line": 71,
+  "symbol": "RMClient.allocate",
+  "diff": "@@ -70,5 +70,2 @@ RMClient.allocate\n   public Result handle(Event event) {\n-    if (event.getAccount() == null) {\n-      return Result.skipped();\n-    }\n     Account acct = event.getAccount().resolve();",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v2.17.0 of compute-svc removed a null/nil guard; requests for records without the optional field now crash the handler.",
+  "micro": "compute/rpc/RMClient.java:71 (RMClient.allocate) drops the null check before dereferencing the field.",
+  "remediation": "Roll back compute-svc v2.17.0 -> v2.16.1; restore the guard at compute/rpc/RMClient.java:71; add a test with the optional field missing."
+ },
+ "action_items": [
+  "Add a regression test covering RMClient.allocate (compute/rpc/RMClient.java).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

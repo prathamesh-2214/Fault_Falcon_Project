@@ -1,0 +1,96 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-07-14T19:37:20.647924+00:00",
+ "incident_start": "2026-07-14T19:37:20.647924+00:00",
+ "source": "synthetic",
+ "scenario_type": "SKIPPED_TEST",
+ "planned_cause": "cloud-api",
+ "anomaly_id": "evt_3566",
+ "mitigated_at": "2026-07-14T23:53:05.899160+00:00",
+ "id": "INC-082",
+ "scenario_family": "special",
+ "scenario_title": "Regression behind a skipped load suite",
+ "category": "code",
+ "title": "Latency and timeouts on api-gateway",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "api-gateway: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-07-14 19:37-23:57: api-gateway: 246 of 349 log lines were non-INFO between 2026-07-14 19:37 and 2026-07-14 23:57 UTC (peak error ratio 0.91 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 28.592 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.909,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 246,
+  "lines": 349,
+  "p95_latency": 28.592,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-082",
+ "scenario_event_ids": [
+  "evt_3536",
+  "evt_3537",
+  "evt_3541",
+  "evt_3542",
+  "evt_3556",
+  "evt_3557",
+  "evt_3581"
+ ],
+ "cause_event_id": "evt_3557",
+ "culprit_change_id": "chg_1958",
+ "contributing_ids": [],
+ "cause_service": "cloud-api",
+ "blast_radius": [
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} introduced a regression that only the skipped ppd load suite would have caught.",
+  "micro": "{file}:{line} ({symbol}) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; revert {file}:{line}. Make the ppd load suite mandatory."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_3562",
+  "evt_3563"
+ ],
+ "remediation_ids": [
+  "evt_3581"
+ ],
+ "expected_files": [
+  "cloud-api/nova/image/cache.py",
+  "cloud-api/nova/usage/publisher.py"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_1958",
+  "event_id": "evt_3557",
+  "file": "cloud-api/nova/image/cache.py",
+  "line": 52,
+  "symbol": "ImageCacheManager.verify_base_images",
+  "diff": "@@ -51,2 +51,2 @@ ImageCacheManager.verify_base_images\n # servers per page\n-PAGE_SIZE = 500\n+PAGE_SIZE = 5",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v3.35.0 of cloud-api introduced a regression that only the skipped ppd load suite would have caught.",
+  "micro": "cloud-api/nova/image/cache.py:52 (ImageCacheManager.verify_base_images) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back cloud-api v3.35.0 -> v3.34.0; revert cloud-api/nova/image/cache.py:52. Make the ppd load suite mandatory."
+ },
+ "action_items": [
+  "Make the ppd load test suite mandatory before prod.",
+  "Add a regression test covering ImageCacheManager.verify_base_images (cloud-api/nova/image/cache.py).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

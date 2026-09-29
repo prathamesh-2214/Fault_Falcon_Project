@@ -1,0 +1,192 @@
+2026-05-09T05:52:20Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=520 > 0
+2026-05-09T05:53:31Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=560 > 0
+2026-05-09T05:56:38Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T05:57:16Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=330 > 0
+2026-05-09T06:00:19Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:01:31Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=120 > 0
+2026-05-09T06:01:39Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=53 ApproximateNumberOfMessagesVisible=38 ApproximateAgeOfOldestMessage=82s
+2026-05-09T06:01:56Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=37 ApproximateNumberOfMessagesVisible=7 ApproximateAgeOfOldestMessage=69s
+2026-05-09T06:02:54Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=520 > 0
+2026-05-09T06:03:21Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=320 > 0
+2026-05-09T06:03:22Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=480 > 0
+2026-05-09T06:03:35Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=570 > 0
+2026-05-09T06:03:55Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=45 ApproximateNumberOfMessagesVisible=30 ApproximateAgeOfOldestMessage=8s
+2026-05-09T06:04:11Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=50 > 0
+2026-05-09T06:05:37Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=340 > 0
+2026-05-09T06:06:27Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=420 > 0
+2026-05-09T06:06:36Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=140 > 0
+2026-05-09T06:08:17Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=550 > 0
+2026-05-09T06:08:38Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=530 > 0
+2026-05-09T06:09:22Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=530 > 0
+2026-05-09T06:10:29Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=530 > 0
+2026-05-09T06:11:04Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=2 ApproximateNumberOfMessagesVisible=56 ApproximateAgeOfOldestMessage=45s
+2026-05-09T06:11:21Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:13:44Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=280 > 0
+2026-05-09T06:14:19Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:14:28Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=21 ApproximateNumberOfMessagesVisible=21 ApproximateAgeOfOldestMessage=68s
+2026-05-09T06:14:31Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=540 > 0
+2026-05-09T06:14:56Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:16:13Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:18:28Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=510 > 0
+2026-05-09T06:18:30Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=50 > 0
+2026-05-09T06:19:53Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=340 > 0
+2026-05-09T06:20:17Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=200 > 0
+2026-05-09T06:22:53Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=45 ApproximateNumberOfMessagesVisible=9 ApproximateAgeOfOldestMessage=2s
+2026-05-09T06:23:12Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=90 > 0
+2026-05-09T06:23:14Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=350 > 0
+2026-05-09T06:27:00Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=330 > 0
+2026-05-09T06:27:00Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:27:35Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=34 ApproximateNumberOfMessagesVisible=46 ApproximateAgeOfOldestMessage=33s
+2026-05-09T06:27:56Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:30:21Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=440 > 0
+2026-05-09T06:33:04Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=440 > 0
+2026-05-09T06:33:46Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:33:54Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=100 > 0
+2026-05-09T06:34:04Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:34:08Z WARN  [synthetic] metric usage-queue ApproximateAgeOfOldestMessage=110s
+2026-05-09T06:35:07Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=90 > 0
+2026-05-09T06:36:55Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=470 > 0
+2026-05-09T06:37:49Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:38:51Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=38 ApproximateNumberOfMessagesVisible=33 ApproximateAgeOfOldestMessage=76s
+2026-05-09T06:40:04Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=8 ApproximateNumberOfMessagesVisible=53 ApproximateAgeOfOldestMessage=24s
+2026-05-09T06:40:30Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=530 > 0
+2026-05-09T06:41:49Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:41:52Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=41 ApproximateNumberOfMessagesVisible=23 ApproximateAgeOfOldestMessage=72s
+2026-05-09T06:43:36Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=40 > 0
+2026-05-09T06:44:05Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=490 > 0
+2026-05-09T06:46:37Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=200 > 0
+2026-05-09T06:46:39Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:47:21Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=230 > 0
+2026-05-09T06:47:46Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=240 > 0
+2026-05-09T06:48:53Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=320 > 0
+2026-05-09T06:49:21Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=370 > 0
+2026-05-09T06:49:58Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=42 ApproximateNumberOfMessagesVisible=48 ApproximateAgeOfOldestMessage=45s
+2026-05-09T06:50:01Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:50:12Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=40 > 0
+2026-05-09T06:50:22Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=180 > 0
+2026-05-09T06:51:05Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T06:52:10Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=500 > 0
+2026-05-09T06:54:21Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=2 ApproximateNumberOfMessagesVisible=12 ApproximateAgeOfOldestMessage=6s
+2026-05-09T06:54:27Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=160 > 0
+2026-05-09T06:55:52Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=38 ApproximateNumberOfMessagesVisible=39 ApproximateAgeOfOldestMessage=58s
+2026-05-09T06:55:52Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=330 > 0
+2026-05-09T06:55:55Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=600 > 0
+2026-05-09T06:57:30Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=600 > 0
+2026-05-09T06:57:51Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=310 > 0
+2026-05-09T06:58:25Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=590 > 0
+2026-05-09T06:58:52Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=14 ApproximateNumberOfMessagesVisible=10 ApproximateAgeOfOldestMessage=50s
+2026-05-09T06:59:56Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=7 ApproximateNumberOfMessagesVisible=54 ApproximateAgeOfOldestMessage=66s
+2026-05-09T07:01:43Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T07:02:22Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=30 > 0
+2026-05-09T07:02:34Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T07:03:08Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=20 > 0
+2026-05-09T07:04:17Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=40 > 0
+2026-05-09T07:06:00Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=47 ApproximateNumberOfMessagesVisible=21 ApproximateAgeOfOldestMessage=19s
+2026-05-09T07:06:19Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=330 > 0
+2026-05-09T07:06:38Z WARN  [synthetic] metric usage-queue ApproximateAgeOfOldestMessage=60s
+2026-05-09T07:06:47Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=280 > 0
+2026-05-09T07:07:07Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T07:08:15Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=510 > 0
+2026-05-09T07:08:25Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=11 ApproximateNumberOfMessagesVisible=32 ApproximateAgeOfOldestMessage=34s
+2026-05-09T07:11:18Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=580 > 0
+2026-05-09T07:12:16Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=370 > 0
+2026-05-09T07:12:19Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T07:13:01Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=170 > 0
+2026-05-09T07:13:20Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=580 > 0
+2026-05-09T07:14:37Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=4 ApproximateNumberOfMessagesVisible=57 ApproximateAgeOfOldestMessage=24s
+2026-05-09T07:14:42Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=390 > 0
+2026-05-09T07:16:12Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=260 > 0
+2026-05-09T07:17:17Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=320 > 0
+2026-05-09T07:22:09Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=40 > 0
+2026-05-09T07:22:31Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=9 ApproximateNumberOfMessagesVisible=30 ApproximateAgeOfOldestMessage=66s
+2026-05-09T07:23:49Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=590 > 0
+2026-05-09T07:24:22Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T07:24:44Z WARN  [synthetic] metric usage-queue ApproximateAgeOfOldestMessage=530s
+2026-05-09T07:27:39Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=210 > 0
+2026-05-09T07:27:43Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=90 > 0
+2026-05-09T07:30:16Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=330 > 0
+2026-05-09T07:31:22Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T07:32:38Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=4 ApproximateNumberOfMessagesVisible=50 ApproximateAgeOfOldestMessage=68s
+2026-05-09T07:32:52Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=280 > 0
+2026-05-09T07:34:03Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=16 ApproximateNumberOfMessagesVisible=21 ApproximateAgeOfOldestMessage=91s
+2026-05-09T07:34:27Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=260 > 0
+2026-05-09T07:35:54Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=570 > 0
+2026-05-09T07:36:55Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=32 ApproximateNumberOfMessagesVisible=26 ApproximateAgeOfOldestMessage=31s
+2026-05-09T07:37:58Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=42 ApproximateNumberOfMessagesVisible=34 ApproximateAgeOfOldestMessage=23s
+2026-05-09T07:39:02Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=42 ApproximateNumberOfMessagesVisible=38 ApproximateAgeOfOldestMessage=37s
+2026-05-09T07:39:52Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=120 > 0
+2026-05-09T07:39:54Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=360 > 0
+2026-05-09T07:40:06Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=41 ApproximateNumberOfMessagesVisible=56 ApproximateAgeOfOldestMessage=58s
+2026-05-09T07:41:10Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=140 > 0
+2026-05-09T07:41:30Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T07:42:44Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=440 > 0
+2026-05-09T07:44:14Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=50 > 0
+2026-05-09T07:45:34Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=360 > 0
+2026-05-09T07:47:05Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=270 > 0
+2026-05-09T07:48:39Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=460 > 0
+2026-05-09T07:49:21Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=190 > 0
+2026-05-09T07:50:26Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=590 > 0
+2026-05-09T07:50:29Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T07:51:28Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=110 > 0
+2026-05-09T07:52:52Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=560 > 0
+2026-05-09T07:54:11Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=270 > 0
+2026-05-09T07:54:52Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T07:55:40Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=430 > 0
+2026-05-09T07:57:50Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=330 > 0
+2026-05-09T07:58:11Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=530 > 0
+2026-05-09T07:59:38Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T07:59:48Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=47 ApproximateNumberOfMessagesVisible=8 ApproximateAgeOfOldestMessage=91s
+2026-05-09T08:01:01Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=270 > 0
+2026-05-09T08:01:18Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=32 ApproximateNumberOfMessagesVisible=38 ApproximateAgeOfOldestMessage=20s
+2026-05-09T08:02:27Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T08:03:59Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=480 > 0
+2026-05-09T08:04:20Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=220 > 0
+2026-05-09T08:04:31Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=230 > 0
+2026-05-09T08:05:46Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T08:07:26Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=400 > 0
+2026-05-09T08:07:40Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T08:08:16Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=100 > 0
+2026-05-09T08:08:30Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=3 ApproximateNumberOfMessagesVisible=22 ApproximateAgeOfOldestMessage=82s
+2026-05-09T08:09:08Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T08:11:00Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=400 > 0
+2026-05-09T08:11:24Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=250 > 0
+2026-05-09T08:12:09Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T08:14:29Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=300 > 0
+2026-05-09T08:14:55Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=430 > 0
+2026-05-09T08:16:45Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=140 > 0
+2026-05-09T08:17:24Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=17 ApproximateNumberOfMessagesVisible=51 ApproximateAgeOfOldestMessage=49s
+2026-05-09T08:17:41Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=250 > 0
+2026-05-09T08:18:05Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=26 ApproximateNumberOfMessagesVisible=17 ApproximateAgeOfOldestMessage=37s
+2026-05-09T08:19:47Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T08:20:14Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=320 > 0
+2026-05-09T08:20:38Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=290 > 0
+2026-05-09T08:20:51Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=52 ApproximateNumberOfMessagesVisible=15 ApproximateAgeOfOldestMessage=87s
+2026-05-09T08:21:07Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=530 > 0
+2026-05-09T08:21:52Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=100 > 0
+2026-05-09T08:22:13Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=8 ApproximateNumberOfMessagesVisible=36 ApproximateAgeOfOldestMessage=28s
+2026-05-09T08:23:09Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=380 > 0
+2026-05-09T08:23:52Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T08:24:24Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=360 > 0
+2026-05-09T08:25:29Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=30 > 0
+2026-05-09T08:25:56Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=320 > 0
+2026-05-09T08:28:20Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T08:31:29Z WARN  [synthetic] metric usage-queue ApproximateAgeOfOldestMessage=190s
+2026-05-09T08:32:18Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=300 > 0
+2026-05-09T08:32:26Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T08:33:25Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=100 > 0
+2026-05-09T08:33:50Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=420 > 0
+2026-05-09T08:33:52Z INFO  [synthetic] metric usage-queue-dlq ApproximateNumberOfMessagesVisible=0
+2026-05-09T08:34:24Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=310 > 0
+2026-05-09T08:35:31Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=550 > 0
+2026-05-09T08:35:59Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=330 > 0
+2026-05-09T08:38:22Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=38 ApproximateNumberOfMessagesVisible=45 ApproximateAgeOfOldestMessage=75s
+2026-05-09T08:38:57Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=4 ApproximateNumberOfMessagesVisible=2 ApproximateAgeOfOldestMessage=6s
+2026-05-09T08:39:15Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=90 > 0
+2026-05-09T08:40:19Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=20 > 0
+2026-05-09T08:40:47Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=420 > 0
+2026-05-09T08:40:49Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=260 > 0
+2026-05-09T08:41:20Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=28 ApproximateNumberOfMessagesVisible=20 ApproximateAgeOfOldestMessage=17s
+2026-05-09T08:41:24Z ERROR [synthetic] ALARM usage-queue-dlq ApproximateNumberOfMessagesVisible=80 > 0
+2026-05-09T08:43:30Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=41 ApproximateNumberOfMessagesVisible=49 ApproximateAgeOfOldestMessage=5s
+2026-05-09T08:44:55Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=36 ApproximateNumberOfMessagesVisible=37 ApproximateAgeOfOldestMessage=74s
+2026-05-09T08:48:42Z INFO  [synthetic] metric usage-queue NumberOfMessagesSent=34 ApproximateNumberOfMessagesVisible=4 ApproximateAgeOfOldestMessage=37s

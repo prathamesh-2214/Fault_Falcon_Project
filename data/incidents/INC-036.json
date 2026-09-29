@@ -1,0 +1,92 @@
+{
+ "service": "notification-svc",
+ "planned_start": "2026-04-30T19:26:53.171481+00:00",
+ "incident_start": "2026-04-30T19:26:53.171481+00:00",
+ "source": "synthetic",
+ "scenario_type": "WEBHOOK_RETRY",
+ "planned_cause": "notification-svc",
+ "anomaly_id": "evt_1648",
+ "mitigated_at": "2026-05-01T00:13:40.324608+00:00",
+ "id": "INC-036",
+ "scenario_family": "planned",
+ "scenario_title": "Webhook retries without jitter exhausted Lambda concurrency",
+ "category": "config",
+ "title": "Throttling (429) on notification-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "notification-svc: 429 rate > 1 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "throttle"
+ },
+ "impact": "Customers were throttled on notification-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] notification-svc 2026-04-30 19:26-00:16: notification-svc: 206 of 340 log lines were non-INFO between 2026-04-30 19:26 and 2026-05-01 00:16 UTC (peak error ratio 0.89 vs baseline median 0.0). 3 error templates, 2 first seen in this span.",
+ "error_templates": [
+  "[WARNING] webhook delivery failed endpoint=hooks.acme.example.com <*> status=502",
+  "[ERROR] Lambda throttled: Rate Exceeded (reserved concurrency exhausted)",
+  "[WARNING] webhook endpoint <*> answered 410 Gone, disabling"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.889,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 206,
+  "lines": 340,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-036",
+ "scenario_event_ids": [
+  "evt_1645",
+  "evt_1661"
+ ],
+ "cause_event_id": "evt_1645",
+ "culprit_change_id": "chg_927",
+ "contributing_ids": [],
+ "cause_service": "notification-svc",
+ "blast_radius": [
+  "notification-svc",
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change raised {key} {old} -> {new}; one failing customer endpoint multiplied invocations until notification-svc hit its Lambda concurrency limit and invoice e-mails were throttled.",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old}; add exponential backoff with jitter and a per-endpoint circuit breaker."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_1646"
+ ],
+ "remediation_ids": [
+  "evt_1661"
+ ],
+ "expected_files": [
+  "config/notification-svc.yaml"
+ ],
+ "expected_params": [
+  "webhook.max_retries"
+ ],
+ "culprit": {
+  "change_id": "chg_927",
+  "event_id": "evt_1645",
+  "file": "config/notification-svc.yaml",
+  "line": 33,
+  "symbol": "webhook.max_retries",
+  "diff": "@@ -32,3 +32,3 @@ webhook.max_retries\n webhook:\n-  max_retries: 3\n+  max_retries: 24\n   # managed by the platform team",
+  "param_key": "webhook.max_retries"
+ },
+ "rca": {
+  "macro": "Config change raised webhook.max_retries 3 -> 24; one failing customer endpoint multiplied invocations until notification-svc hit its Lambda concurrency limit and invoice e-mails were throttled.",
+  "micro": "config/notification-svc.yaml:33 sets webhook.max_retries 3 -> 24.",
+  "remediation": "Revert webhook.max_retries to 3; add exponential backoff with jitter and a per-endpoint circuit breaker."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `[WARNING] webhook delivery failed endpoint=hooks.acme.example.com <*> status=502`."
+ ]
+}

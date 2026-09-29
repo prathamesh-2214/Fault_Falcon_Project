@@ -1,0 +1,98 @@
+{
+ "service": "cloud-api",
+ "incident_start": "2026-08-29T23:02:24+00:00",
+ "planned_start": "2026-08-29T23:02:24+00:00",
+ "anomaly_id": "evt_4990",
+ "source": "loghub",
+ "planned_cause": null,
+ "error_templates": [
+  "While synchronizing instance power states, found 1 instances in the database and 0 instances on the hypervisor."
+ ],
+ "scenario_type": "IMAGE_CACHE_SYNC",
+ "mitigated_at": "2026-08-30T02:28:05.267154+00:00",
+ "id": "INC-118",
+ "scenario_family": "complex",
+ "scenario_title": "Synchronous image verification in the request path",
+ "category": "code",
+ "title": "Latency and timeouts on cloud-api",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "cloud-api: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on cloud-api",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] cloud-api 2026-08-29 23:02-23:31: cloud-api: 1 of 18 log lines were non-INFO between 2026-08-29 23:02 and 2026-08-29 23:31 UTC (peak error ratio 0.06 vs baseline median 0.0). 1 error templates, 1 first seen in this span. Peak p95 latency 0.387 s vs baseline band up to 0.416 s.",
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.056,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 1,
+  "lines": 18,
+  "p95_latency": 0.387,
+  "reasons": [
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-118",
+ "scenario_event_ids": [
+  "evt_4852",
+  "evt_4975",
+  "evt_4976",
+  "evt_4979",
+  "evt_4980",
+  "evt_4986",
+  "evt_4988",
+  "evt_4997",
+  "evt_5007"
+ ],
+ "cause_event_id": "evt_4988",
+ "culprit_change_id": "chg_2718",
+ "contributing_ids": [
+  "evt_4852"
+ ],
+ "cause_service": "cloud-api",
+ "blast_radius": [
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of cloud-api made base-image verification synchronous in the request path; the shorter ALB health-check timeout then marked slow targets unhealthy.",
+  "micro": "{file}:{line} ({symbol}) calls _verify_sync inline instead of submitting it to the executor.",
+  "remediation": "Roll back cloud-api {version_to} -> {version_from}; restore the async executor call at {file}:{line}; revert the aws_lb_target_group health_check timeout."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_4989"
+ ],
+ "remediation_ids": [
+  "evt_4997",
+  "evt_5007"
+ ],
+ "expected_files": [
+  "cloud-api/nova/compute/client.py",
+  "cloud-api/nova/image/cache.py",
+  "cloud-api/nova/usage/publisher.py"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2718",
+  "event_id": "evt_4988",
+  "file": "cloud-api/nova/image/cache.py",
+  "line": 119,
+  "symbol": "ImageCacheManager.verify_base_images",
+  "diff": "@@ -117,4 +117,4 @@ ImageCacheManager.verify_base_images\n     def verify_base_images(self, context, images):\n         \"\"\"Check cached base files against the image service.\"\"\"\n-        self._executor.submit(self._verify_async, context, images)\n+        self._verify_sync(context, images)  # avoid stale cache entries\n         return len(images)",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v3.51.0 of cloud-api made base-image verification synchronous in the request path; the shorter ALB health-check timeout then marked slow targets unhealthy.",
+  "micro": "cloud-api/nova/image/cache.py:119 (ImageCacheManager.verify_base_images) calls _verify_sync inline instead of submitting it to the executor.",
+  "remediation": "Roll back cloud-api v3.51.0 -> v3.50.0; restore the async executor call at cloud-api/nova/image/cache.py:119; revert the aws_lb_target_group health_check timeout."
+ },
+ "action_items": [
+  "Add a regression test covering ImageCacheManager.verify_base_images (cloud-api/nova/image/cache.py).",
+  "Alert on the error signature `While synchronizing instance power states, found 1 instances in the database and`."
+ ]
+}

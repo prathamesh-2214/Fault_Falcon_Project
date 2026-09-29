@@ -1,0 +1,91 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-05-23T14:46:58.287663+00:00",
+ "incident_start": "2026-05-23T14:46:58.287663+00:00",
+ "source": "synthetic",
+ "scenario_type": "ALB_IDLE_TIMEOUT",
+ "planned_cause": "api-gateway",
+ "anomaly_id": "evt_2203",
+ "mitigated_at": "2026-05-23T18:20:55.888486+00:00",
+ "id": "INC-050",
+ "scenario_family": "planned",
+ "scenario_title": "ALB idle timeout shorter than long requests",
+ "category": "infra",
+ "title": "Latency and timeouts on api-gateway",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "api-gateway: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-05-23 14:46-18:26: api-gateway: 169 of 257 log lines were non-INFO between 2026-05-23 14:46 and 2026-05-23 18:26 UTC (peak error ratio 0.89 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 28.172 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET /v1/servers <*> <*> <*>",
+  "POST /v1/servers <*> <*> <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.889,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 169,
+  "lines": 257,
+  "p95_latency": 28.172,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-050",
+ "scenario_event_ids": [
+  "evt_2198",
+  "evt_2209"
+ ],
+ "cause_event_id": "evt_2198",
+ "culprit_change_id": "chg_1203",
+ "contributing_ids": [],
+ "cause_service": "api-gateway",
+ "blast_radius": [
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change set the ALB idle_timeout {old} -> {new} s; long-running requests (report exports) were cut with 504 and clients retried.",
+  "micro": "{file}:{line} sets idle_timeout {old} -> {new} on {resource}.",
+  "remediation": "Restore idle_timeout = {old} on {resource}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_2201",
+  "evt_2200",
+  "evt_2202"
+ ],
+ "remediation_ids": [
+  "evt_2209"
+ ],
+ "expected_files": [
+  "infra/api-gateway.tf"
+ ],
+ "expected_params": [
+  "alb_idle_timeout_s"
+ ],
+ "culprit": {
+  "change_id": "chg_1203",
+  "event_id": "evt_2198",
+  "file": "infra/api-gateway.tf",
+  "line": 32,
+  "symbol": "aws_lb.api_gateway",
+  "diff": "@@ -31,3 +31,3 @@ aws_lb.api_gateway\n resource \"aws_lb\" \"api_gateway\" {\n-  idle_timeout = 60\n+  idle_timeout = 10\n   tags = local.tags",
+  "param_key": "alb_idle_timeout_s"
+ },
+ "rca": {
+  "macro": "Terraform change set the ALB idle_timeout 60 -> 10 s; long-running requests (report exports) were cut with 504 and clients retried.",
+  "micro": "infra/api-gateway.tf:32 sets idle_timeout 60 -> 10 on aws_lb.api_gateway.",
+  "remediation": "Restore idle_timeout = 60 on aws_lb.api_gateway."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `GET /v1/servers <*> <*> <*>`."
+ ]
+}

@@ -1,0 +1,95 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-06-30T09:34:04.674748+00:00",
+ "incident_start": "2026-06-30T09:34:04.674748+00:00",
+ "source": "synthetic",
+ "scenario_type": "DB_POOL",
+ "planned_cause": "billing-svc",
+ "anomaly_id": "evt_3187",
+ "mitigated_at": "2026-06-30T13:45:09.060471+00:00",
+ "id": "INC-073",
+ "scenario_family": "complex",
+ "scenario_title": "DB pool cut on a downsized RDS",
+ "category": "config",
+ "title": "Latency and timeouts on billing-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "billing-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-06-30 09:34-13:44: billing-svc: 268 of 369 log lines were non-INFO between 2026-06-30 09:34 and 2026-06-30 13:44 UTC (peak error ratio 0.88 vs baseline median 0.0). 2 error templates, 1 first seen in this span.",
+ "error_templates": [
+  "connection pool exhausted: timed out after 30000 ms waiting for a connection",
+  "c.f.b.api.UsageController - account <*> requested usage for a closed period"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.882,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 268,
+  "lines": 369,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-073",
+ "scenario_event_ids": [
+  "evt_3077",
+  "evt_3179",
+  "evt_3201",
+  "evt_3209"
+ ],
+ "cause_event_id": "evt_3179",
+ "culprit_change_id": "chg_1728",
+ "contributing_ids": [
+  "evt_3077"
+ ],
+ "cause_service": "billing-svc",
+ "blast_radius": [
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change shrank the {svc} database connection pool; requests queued for connections and timed out (the billing-db downsize days earlier left no headroom).",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old} in {file}; right-size aws_db_instance.billing_db before lowering pools again."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_3183"
+ ],
+ "remediation_ids": [
+  "evt_3201",
+  "evt_3209"
+ ],
+ "expected_files": [
+  "config/billing-svc.yaml"
+ ],
+ "expected_params": [
+  "db.pool.max_size"
+ ],
+ "culprit": {
+  "change_id": "chg_1728",
+  "event_id": "evt_3179",
+  "file": "config/billing-svc.yaml",
+  "line": 29,
+  "symbol": "db.pool.max_size",
+  "diff": "@@ -28,3 +28,3 @@ db.pool.max_size\n db:\n-  pool_max_size: 80\n+  pool_max_size: 8\n   # managed by the platform team",
+  "param_key": "db.pool.max_size"
+ },
+ "rca": {
+  "macro": "Config change shrank the billing-svc database connection pool; requests queued for connections and timed out (the billing-db downsize days earlier left no headroom).",
+  "micro": "config/billing-svc.yaml:29 sets db.pool.max_size 80 -> 8.",
+  "remediation": "Revert db.pool.max_size to 80 in config/billing-svc.yaml; right-size aws_db_instance.billing_db before lowering pools again."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `connection pool exhausted: timed out after 30000 ms waiting for a connection`."
+ ]
+}

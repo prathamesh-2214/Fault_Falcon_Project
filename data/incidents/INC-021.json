@@ -1,0 +1,92 @@
+{
+ "service": "compute-svc",
+ "planned_start": "2026-04-06T15:03:03.796678+00:00",
+ "incident_start": "2026-04-06T15:03:03.796678+00:00",
+ "source": "synthetic",
+ "scenario_type": "MEMORY_INFRA",
+ "planned_cause": "compute-svc",
+ "anomaly_id": "evt_1062",
+ "mitigated_at": "2026-04-06T17:36:23.464737+00:00",
+ "id": "INC-021",
+ "scenario_family": "simple",
+ "scenario_title": "Instance downsize",
+ "category": "infra",
+ "title": "Elevated 5xx errors on compute-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "compute-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on compute-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] compute-svc 2026-04-06 15:03-17:43: compute-svc: 111 of 171 log lines were non-INFO between 2026-04-06 15:03 and 2026-04-06 17:43 UTC (peak error ratio 0.85 vs baseline median 0.0). 2 error templates, 1 first seen in this span.",
+ "error_templates": [
+  "out of memory: killed process <*>",
+  "ERROR IN CONTACTING RM."
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.846,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 111,
+  "lines": 171,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-021",
+ "scenario_event_ids": [
+  "evt_977",
+  "evt_1075"
+ ],
+ "cause_event_id": "evt_977",
+ "culprit_change_id": "chg_534",
+ "contributing_ids": [],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Launch-template change moved {svc} to a smaller instance type.",
+  "micro": "{file}:{line} sets {key} {old} -> {new} on {resource}.",
+  "remediation": "Restore {key} = {old} on {resource} (terraform {version_from})."
+ },
+ "_decoy_window_h": 10.0,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_1057",
+  "evt_1053"
+ ],
+ "remediation_ids": [
+  "evt_1075"
+ ],
+ "expected_files": [
+  "infra/compute-svc.tf"
+ ],
+ "expected_params": [
+  "instance_type"
+ ],
+ "culprit": {
+  "change_id": "chg_534",
+  "event_id": "evt_977",
+  "file": "infra/compute-svc.tf",
+  "line": 10,
+  "symbol": "aws_launch_template.compute_svc",
+  "diff": "@@ -9,3 +9,3 @@ aws_launch_template.compute_svc\n resource \"aws_launch_template\" \"compute_svc\" {\n-  instance_type = \"m5.2xlarge\"\n+  instance_type = \"m5.large\"\n   tags = local.tags",
+  "param_key": "instance_type"
+ },
+ "rca": {
+  "macro": "Launch-template change moved compute-svc to a smaller instance type.",
+  "micro": "infra/compute-svc.tf:10 sets instance_type m5.2xlarge -> m5.large on aws_launch_template.compute_svc.",
+  "remediation": "Restore instance_type = m5.2xlarge on aws_launch_template.compute_svc (terraform tf-r1)."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `out of memory: killed process <*>`."
+ ]
+}

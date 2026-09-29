@@ -1,0 +1,94 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-08-05T10:19:18.462698+00:00",
+ "incident_start": "2026-08-05T10:19:18.462698+00:00",
+ "source": "synthetic",
+ "scenario_type": "N_PLUS_ONE",
+ "planned_cause": "billing-svc",
+ "anomaly_id": "evt_4127",
+ "mitigated_at": "2026-08-05T15:18:37.196622+00:00",
+ "id": "INC-095",
+ "scenario_family": "planned",
+ "scenario_title": "N+1 queries saturate the database",
+ "category": "code",
+ "title": "Latency and timeouts on billing-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "billing-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-08-05 10:19-15:19: billing-svc: 321 of 427 log lines were non-INFO between 2026-08-05 10:19 and 2026-08-05 15:19 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "slow request: <*> ms, <*> SQL queries",
+  "c.f.b.api.UsageController - account <*> requested usage for a closed period"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 321,
+  "lines": 427,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-095",
+ "scenario_event_ids": [
+  "evt_4109",
+  "evt_4110",
+  "evt_4113",
+  "evt_4114",
+  "evt_4122",
+  "evt_4123",
+  "evt_4143"
+ ],
+ "cause_event_id": "evt_4123",
+ "culprit_change_id": "chg_2282",
+ "contributing_ids": [],
+ "cause_service": "billing-svc",
+ "blast_radius": [
+  "billing-db",
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} replaced a join with one query per row (N+1); billing-db CPU saturated under peak traffic and requests timed out.",
+  "micro": "{file}:{line} ({symbol}) queries the database inside the loop.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; restore the eager join at {file}:{line}; add a query-count assertion to the integration tests."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_4124"
+ ],
+ "remediation_ids": [
+  "evt_4143"
+ ],
+ "expected_files": [
+  "billing/invoice/InvoiceService.java",
+  "billing/repo/InvoiceRepository.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2282",
+  "event_id": "evt_4123",
+  "file": "billing/invoice/InvoiceService.java",
+  "line": 194,
+  "symbol": "InvoiceService.generate",
+  "diff": "@@ -193,3 +193,4 @@ InvoiceService.generate\n   public Invoice generate(Long accountId) {\n-    List<InvoiceLine> lines = repo.findLinesWithPrices(accountId);\n+    List<InvoiceLine> lines = repo.findLines(accountId);\n+    lines.forEach(l -> l.setPrice(prices.findById(l.getSku())));  // one query per line\n     return render(lines);",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v4.41.0 of billing-svc replaced a join with one query per row (N+1); billing-db CPU saturated under peak traffic and requests timed out.",
+  "micro": "billing/invoice/InvoiceService.java:194 (InvoiceService.generate) queries the database inside the loop.",
+  "remediation": "Roll back billing-svc v4.41.0 -> v4.40.0; restore the eager join at billing/invoice/InvoiceService.java:194; add a query-count assertion to the integration tests."
+ },
+ "action_items": [
+  "Add a regression test covering InvoiceService.generate (billing/invoice/InvoiceService.java).",
+  "Alert on the error signature `slow request: <*> ms, <*> SQL queries`."
+ ]
+}

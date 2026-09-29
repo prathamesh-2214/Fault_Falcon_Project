@@ -1,0 +1,91 @@
+{
+ "service": "compute-svc",
+ "planned_start": "2026-05-05T18:34:03.578173+00:00",
+ "incident_start": "2026-05-05T18:34:03.578173+00:00",
+ "source": "synthetic",
+ "scenario_type": "MEMORY_HEAP",
+ "planned_cause": "compute-svc",
+ "anomaly_id": "evt_1758",
+ "mitigated_at": "2026-05-05T22:25:41.996678+00:00",
+ "id": "INC-039",
+ "scenario_family": "simple",
+ "scenario_title": "Heap cut",
+ "category": "config",
+ "title": "Elevated 5xx errors on compute-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "compute-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on compute-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] compute-svc 2026-05-05 18:34-22:24: compute-svc: 204 of 295 log lines were non-INFO between 2026-05-05 18:34 and 2026-05-05 22:24 UTC (peak error ratio 0.87 vs baseline median 0.0). 2 error templates, 1 first seen in this span.",
+ "error_templates": [
+  "java.lang.OutOfMemoryError: Java heap space",
+  "Address change detected. Old: <*> New: <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.867,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 204,
+  "lines": 295,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-039",
+ "scenario_event_ids": [
+  "evt_1741",
+  "evt_1773"
+ ],
+ "cause_event_id": "evt_1741",
+ "culprit_change_id": "chg_968",
+ "contributing_ids": [],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change cut the {svc} JVM heap.",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old} in {file}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_1750"
+ ],
+ "remediation_ids": [
+  "evt_1773"
+ ],
+ "expected_files": [
+  "config/compute-svc.yaml"
+ ],
+ "expected_params": [
+  "jvm.heap_mb"
+ ],
+ "culprit": {
+  "change_id": "chg_968",
+  "event_id": "evt_1741",
+  "file": "config/compute-svc.yaml",
+  "line": 112,
+  "symbol": "jvm.heap_mb",
+  "diff": "@@ -111,3 +111,3 @@ jvm.heap_mb\n jvm:\n-  heap_mb: 6144\n+  heap_mb: 1536\n   # managed by the platform team",
+  "param_key": "jvm.heap_mb"
+ },
+ "rca": {
+  "macro": "Config change cut the compute-svc JVM heap.",
+  "micro": "config/compute-svc.yaml:112 sets jvm.heap_mb 6144 -> 1536.",
+  "remediation": "Revert jvm.heap_mb to 6144 in config/compute-svc.yaml."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `java.lang.OutOfMemoryError: Java heap space`."
+ ]
+}

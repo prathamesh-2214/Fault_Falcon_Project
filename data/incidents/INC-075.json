@@ -1,0 +1,94 @@
+{
+ "service": "cloud-api",
+ "planned_start": "2026-07-03T10:50:22.092023+00:00",
+ "incident_start": "2026-07-03T10:50:22.092023+00:00",
+ "source": "synthetic",
+ "scenario_type": "ASG_CAPACITY",
+ "planned_cause": "node-svc",
+ "anomaly_id": "evt_3274",
+ "mitigated_at": "2026-07-03T15:23:37.395162+00:00",
+ "id": "INC-075",
+ "scenario_family": "planned",
+ "scenario_title": "Auto Scaling group max size cut",
+ "category": "infra",
+ "title": "Latency and timeouts on cloud-api",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "cloud-api: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on cloud-api",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] cloud-api 2026-07-03 10:50-15:30: cloud-api: 458 of 580 log lines were non-INFO between 2026-07-03 10:50 and 2026-07-03 15:30 UTC (peak error ratio 0.91 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 29.638 s vs baseline band up to 0.453 s.",
+ "error_templates": [
+  "<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>",
+  "Unexpected exception while calling compute-svc: ReadTimeout: Read timed out. (read timeout=2.0)"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.909,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 458,
+  "lines": 580,
+  "p95_latency": 29.638,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-075",
+ "scenario_event_ids": [
+  "evt_3264",
+  "evt_3295"
+ ],
+ "cause_event_id": "evt_3264",
+ "culprit_change_id": "chg_1803",
+ "contributing_ids": [],
+ "cause_service": "node-svc",
+ "blast_radius": [
+  "node-svc",
+  "compute-svc",
+  "storage-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change cut the {svc} Auto Scaling group max_size {old} -> {new}; at the next batch peak the fleet could not scale out and jobs queued.",
+  "micro": "{file}:{line} sets max_size {old} -> {new} on {resource}.",
+  "remediation": "Restore max_size = {old} on {resource}."
+ },
+ "_decoy_window_h": 8.0,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_3270",
+  "evt_3268"
+ ],
+ "remediation_ids": [
+  "evt_3295"
+ ],
+ "expected_files": [
+  "infra/node-svc.tf"
+ ],
+ "expected_params": [
+  "asg_max_size"
+ ],
+ "culprit": {
+  "change_id": "chg_1803",
+  "event_id": "evt_3264",
+  "file": "infra/node-svc.tf",
+  "line": 113,
+  "symbol": "aws_autoscaling_group.node_svc",
+  "diff": "@@ -112,3 +112,3 @@ aws_autoscaling_group.node_svc\n resource \"aws_autoscaling_group\" \"node_svc\" {\n-  max_size = 12\n+  max_size = 6\n   tags = local.tags",
+  "param_key": "asg_max_size"
+ },
+ "rca": {
+  "macro": "Terraform change cut the node-svc Auto Scaling group max_size 12 -> 6; at the next batch peak the fleet could not scale out and jobs queued.",
+  "micro": "infra/node-svc.tf:113 sets max_size 12 -> 6 on aws_autoscaling_group.node_svc.",
+  "remediation": "Restore max_size = 12 on aws_autoscaling_group.node_svc."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>`."
+ ]
+}

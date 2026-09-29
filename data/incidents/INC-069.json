@@ -1,0 +1,99 @@
+{
+ "service": "cloud-api",
+ "planned_start": "2026-06-23T18:16:00.317919+00:00",
+ "incident_start": "2026-06-23T18:16:00.317919+00:00",
+ "source": "synthetic",
+ "scenario_type": "ELECTION_PORT",
+ "planned_cause": "coord-svc",
+ "anomaly_id": "evt_3008",
+ "mitigated_at": "2026-06-23T21:36:38.383737+00:00",
+ "id": "INC-069",
+ "scenario_family": "complex",
+ "scenario_title": "Security group closed the election port",
+ "category": "infra",
+ "title": "Connection failures on cloud-api",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "cloud-api: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "refused"
+ },
+ "impact": "Requests failed while connections were refused on cloud-api",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] cloud-api 2026-06-23 18:16-21:36: cloud-api: 298 of 363 log lines were non-INFO between 2026-06-23 18:16 and 2026-06-23 21:36 UTC (peak error ratio 0.96 vs baseline median 0.0). 3 error templates, 1 first seen in this span. Peak p95 latency 1.955 s vs baseline band up to 0.453 s.",
+ "error_templates": [
+  "<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>",
+  "Unexpected exception while calling compute-svc: ConnectionError: [Errno 111] Connection refused",
+  "Unknown base file: /var/lib/nova/instances/_base/<HEX>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.96,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 298,
+  "lines": 363,
+  "p95_latency": 1.955,
+  "reasons": [
+   "error_ratio",
+   "new_error_template",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-069",
+ "scenario_event_ids": [
+  "evt_2908",
+  "evt_3004",
+  "evt_3034",
+  "evt_3037"
+ ],
+ "cause_event_id": "evt_3004",
+ "culprit_change_id": "chg_1652",
+ "contributing_ids": [
+  "evt_2908"
+ ],
+ "cause_service": "coord-svc",
+ "blast_radius": [
+  "coord-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change to aws_security_group for coord-svc closed the leader-election port, so quorum peers could not open election channels.",
+  "micro": "{file}:{line} changes the election ingress rule {key} {old} -> {new}.",
+  "remediation": "Restore the ingress rule for port {old} on {resource} (terraform apply of {version_from}); add a connectivity check for 2181/2888/3888 to the pipeline."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_3006"
+ ],
+ "remediation_ids": [
+  "evt_3034",
+  "evt_3037"
+ ],
+ "expected_files": [
+  "infra/coord-svc.tf"
+ ],
+ "expected_params": [
+  "sg_election_port"
+ ],
+ "culprit": {
+  "change_id": "chg_1652",
+  "event_id": "evt_3004",
+  "file": "infra/coord-svc.tf",
+  "line": 13,
+  "symbol": "aws_security_group.coord_svc",
+  "diff": "@@ -11,4 +11,4 @@ aws_security_group.coord_svc\n resource \"aws_security_group\" \"coord_svc\" {\n   ingress {\n-    to_port = 3888\n+    to_port = 2888\n   }",
+  "param_key": "sg_election_port"
+ },
+ "rca": {
+  "macro": "Terraform change to aws_security_group for coord-svc closed the leader-election port, so quorum peers could not open election channels.",
+  "micro": "infra/coord-svc.tf:13 changes the election ingress rule sg_election_port 3888 -> 2888.",
+  "remediation": "Restore the ingress rule for port 3888 on aws_security_group.coord_svc (terraform apply of tf-r6); add a connectivity check for 2181/2888/3888 to the pipeline."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>`."
+ ]
+}

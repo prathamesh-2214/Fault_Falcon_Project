@@ -1,0 +1,94 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-04-24T12:57:22.743318+00:00",
+ "incident_start": "2026-04-24T12:57:22.743318+00:00",
+ "source": "synthetic",
+ "scenario_type": "DEPENDENCY_UPGRADE",
+ "planned_cause": "billing-svc",
+ "anomaly_id": "evt_1495",
+ "mitigated_at": "2026-04-24T17:08:52.588057+00:00",
+ "id": "INC-032",
+ "scenario_family": "planned",
+ "scenario_title": "Library upgrade changed runtime behaviour",
+ "category": "code",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-04-24 12:57-15:27: api-gateway: 108 of 161 log lines were non-INFO between 2026-04-24 12:57 and 2026-04-24 15:27 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 0.307 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "authorizer: ImmatureSignatureError: The token is not yet valid (iat)",
+  "GET <*> <*> <*> target=billing-svc"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 108,
+  "lines": 161,
+  "p95_latency": 0.307,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-032",
+ "scenario_event_ids": [
+  "evt_1484",
+  "evt_1485",
+  "evt_1487",
+  "evt_1488",
+  "evt_1491",
+  "evt_1493",
+  "evt_1531"
+ ],
+ "cause_event_id": "evt_1493",
+ "culprit_change_id": "chg_843",
+ "contributing_ids": [],
+ "cause_service": "billing-svc",
+ "blast_radius": [
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} was a routine dependency bump; HikariCP 5.1 validates connections with a new keepalive that the RDS proxy closes.",
+  "micro": "{file}:{line} upgrades the library: HikariCP 5.1 validates connections with a new keepalive that the RDS proxy closes.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; pin the previous version in {file} until the upgrade is tested against the real dependency."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_1494"
+ ],
+ "remediation_ids": [
+  "evt_1531"
+ ],
+ "expected_files": [
+  "billing/pom.xml",
+  "billing/repo/InvoiceRepository.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_843",
+  "event_id": "evt_1493",
+  "file": "billing/pom.xml",
+  "line": 116,
+  "symbol": "pom.xml",
+  "diff": "@@ -115,2 +115,2 @@ pom.xml\n       <artifactId>HikariCP</artifactId>\n-      <version>5.0.1</version>\n+      <version>5.1.0</version>",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v4.15.0 of billing-svc was a routine dependency bump; HikariCP 5.1 validates connections with a new keepalive that the RDS proxy closes.",
+  "micro": "billing/pom.xml:116 upgrades the library: HikariCP 5.1 validates connections with a new keepalive that the RDS proxy closes.",
+  "remediation": "Roll back billing-svc v4.15.0 -> v4.14.0; pin the previous version in billing/pom.xml until the upgrade is tested against the real dependency."
+ },
+ "action_items": [
+  "Add a regression test covering pom.xml (billing/pom.xml).",
+  "Alert on the error signature `authorizer: ImmatureSignatureError: The token is not yet valid (iat)`."
+ ]
+}

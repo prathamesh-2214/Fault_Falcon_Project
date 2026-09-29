@@ -1,0 +1,101 @@
+{
+ "service": "node-svc",
+ "incident_start": "2026-08-28T20:09:36+00:00",
+ "planned_start": "2026-08-28T20:09:36+00:00",
+ "anomaly_id": "evt_4889",
+ "source": "loghub",
+ "planned_cause": null,
+ "error_templates": [
+  "idoproxydb hit ASSERT condition: ASSERT expression=0 Source file=idotransportmgr.cpp Source line=1043 Function=int IdoTransportMgr::SendPacket(IdoUdpMgr*, BglCtlPavTrace*)",
+  "Can not get assembly information for node card",
+  "Node card status: no ALERTs are active. Clock Mode is Low. Clock Select is Midplane. Phy JTAG Reset is asserted. ASIC JTAG Reset is asserted. Temperature Mask is not active. No temperature error. Temperature Limit Error Latch is clear. PGOOD IS NOT ASSERTED. PGOOD ERROR LATCH IS ACTIVE. MPGOOD IS NOT OK. MPGOOD ERROR LATCH IS ACTIVE. The 2.5 volt rail is OK. The 1.5 volt rail is OK.",
+  "Node card is not fully functional",
+  "NodeCard is not fully functional"
+ ],
+ "scenario_type": "TIMEOUT_UNIT",
+ "mitigated_at": "2026-08-28T22:57:27.480421+00:00",
+ "id": "INC-114",
+ "scenario_family": "complex",
+ "scenario_title": "Timeout unit conversion bug",
+ "category": "code",
+ "title": "Latency and timeouts on node-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "node-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on node-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] node-svc 2026-08-28 20:09-21:36: node-svc: 17 of 25 log lines were non-INFO between 2026-08-28 20:09 and 2026-08-28 21:36 UTC (peak error ratio 1.0 vs baseline median 0.0). 7 error templates, 5 first seen in this span.",
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 17,
+  "lines": 25,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-114",
+ "scenario_event_ids": [
+  "evt_4835",
+  "evt_4836",
+  "evt_4869",
+  "evt_4871",
+  "evt_4885",
+  "evt_4887",
+  "evt_4913"
+ ],
+ "cause_event_id": "evt_4887",
+ "culprit_change_id": "chg_2672",
+ "contributing_ids": [],
+ "cause_service": "node-svc",
+ "blast_radius": [
+  "node-svc",
+  "compute-svc",
+  "storage-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} shrinks its outbound timeout by a factor of 1000, so calls time out almost immediately.",
+  "micro": "{file}:{line} ({symbol}) converts http.timeout_ms with the wrong unit.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; fix the unit conversion at {file}:{line}; add a unit test for the timeout conversion."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_4888"
+ ],
+ "remediation_ids": [
+  "evt_4913"
+ ],
+ "expected_files": [
+  "node/ciod/ciod_loader.c",
+  "node/io/lustre_mount.c",
+  "node/mem/tlb_miss.c"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2672",
+  "event_id": "evt_4887",
+  "file": "node/io/lustre_mount.c",
+  "line": 320,
+  "symbol": "lustre_mount",
+  "diff": "@@ -319,2 +319,2 @@ lustre_mount\n   // outbound call timeout\n-    timeout_ms = cfg->timeout_ms;\n+    timeout_ms = cfg->timeout_ms / 1000; /* seconds */",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v5.23.0 of node-svc shrinks its outbound timeout by a factor of 1000, so calls time out almost immediately.",
+  "micro": "node/io/lustre_mount.c:320 (lustre_mount) converts http.timeout_ms with the wrong unit.",
+  "remediation": "Roll back node-svc v5.23.0 -> v5.20.0; fix the unit conversion at node/io/lustre_mount.c:320; add a unit test for the timeout conversion."
+ },
+ "action_items": [
+  "Add a regression test covering lustre_mount (node/io/lustre_mount.c).",
+  "Alert on the error signature `idoproxydb hit ASSERT condition: ASSERT expression=0 Source file=idotransportmgr`."
+ ]
+}

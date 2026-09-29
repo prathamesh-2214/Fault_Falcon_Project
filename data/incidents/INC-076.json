@@ -1,0 +1,107 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-07-05T06:21:47.616442+00:00",
+ "incident_start": "2026-07-05T06:21:47.616442+00:00",
+ "source": "synthetic",
+ "scenario_type": "DB_MIGRATION",
+ "planned_cause": "compute-svc",
+ "anomaly_id": "evt_3319",
+ "mitigated_at": "2026-07-05T11:20:22.529578+00:00",
+ "id": "INC-076",
+ "scenario_family": "complex",
+ "scenario_title": "Blocking DB migration on a shared RDS database",
+ "category": "data",
+ "title": "Latency and timeouts on api-gateway",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "api-gateway: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-07-05 06:21-06:41: api-gateway: 16 of 27 log lines were non-INFO between 2026-07-05 06:21 and 2026-07-05 06:41 UTC (peak error ratio 0.62 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 26.766 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.615,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 16,
+  "lines": 27,
+  "p95_latency": 26.766,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-076",
+ "scenario_event_ids": [
+  "evt_3262",
+  "evt_3299",
+  "evt_3301",
+  "evt_3305",
+  "evt_3306",
+  "evt_3311",
+  "evt_3313",
+  "evt_3314",
+  "evt_3318",
+  "evt_3350",
+  "evt_3351"
+ ],
+ "cause_event_id": "evt_3313",
+ "culprit_change_id": "chg_1823",
+ "contributing_ids": [
+  "evt_3262"
+ ],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "meta-db",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} ran a blocking migration on the meta-db jobs table (RDS); writes queued behind the table lock and callers timed out. The hotfix patch applied afterwards did not touch the DB.",
+  "micro": "{file}:{line} runs DDL that rewrites jobs under an ACCESS EXCLUSIVE lock.",
+  "remediation": "Cancel the migration / roll back {svc} {version_to} -> {version_from}; re-run it online (CONCURRENTLY / nullable column, batched backfill); review meta-db sizing."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_3318",
+  "evt_3316",
+  "evt_3317",
+  "evt_3315"
+ ],
+ "remediation_ids": [
+  "evt_3350",
+  "evt_3351"
+ ],
+ "expected_files": [
+  "compute/db/migrations/V49__jobs_feat104.sql",
+  "compute/rpc/RMClient.java",
+  "compute/scheduler/TaskRunner.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_1823",
+  "event_id": "evt_3313",
+  "file": "compute/db/migrations/V49__jobs_feat104.sql",
+  "line": 2,
+  "symbol": "migration",
+  "diff": "@@ -1,2 +1,3 @@ migration\n -- FEAT-104 Bulk job submission API\n+ALTER TABLE jobs ADD COLUMN audit_id BIGINT NOT NULL DEFAULT 0;\n COMMIT;",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v2.25.0 of compute-svc ran a blocking migration on the meta-db jobs table (RDS); writes queued behind the table lock and callers timed out. The hotfix patch applied afterwards did not touch the DB.",
+  "micro": "compute/db/migrations/V49__jobs_feat104.sql:2 runs DDL that rewrites jobs under an ACCESS EXCLUSIVE lock.",
+  "remediation": "Cancel the migration / roll back compute-svc v2.25.0 -> v2.23.0; re-run it online (CONCURRENTLY / nullable column, batched backfill); review meta-db sizing."
+ },
+ "action_items": [
+  "Add a regression test covering migration (compute/db/migrations/V49__jobs_feat104.sql).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

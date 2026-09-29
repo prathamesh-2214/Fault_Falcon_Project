@@ -1,0 +1,102 @@
+{
+ "service": "cloud-api",
+ "planned_start": "2026-04-03T10:25:13.563278+00:00",
+ "incident_start": "2026-04-03T10:25:13.563278+00:00",
+ "source": "synthetic",
+ "scenario_type": "FLAG_DORMANT",
+ "planned_cause": "compute-svc",
+ "anomaly_id": "evt_999",
+ "mitigated_at": "2026-04-03T14:01:04.967946+00:00",
+ "id": "INC-019",
+ "scenario_family": "complex",
+ "scenario_title": "Feature flag enabled a dormant code path",
+ "category": "config",
+ "title": "Elevated 5xx errors on cloud-api",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "cloud-api: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on cloud-api",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] cloud-api 2026-04-03 10:25-14:05: cloud-api: 500 of 595 log lines were non-INFO between 2026-04-03 10:25 and 2026-04-03 14:05 UTC (peak error ratio 0.97 vs baseline median 0.0). 2 error templates, 1 first seen in this span. Peak p95 latency 1.968 s vs baseline band up to 0.453 s.",
+ "error_templates": [
+  "<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>",
+  "Unexpected exception while calling <*> HTTPError: 503 Server Error: Service Unavailable"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.968,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 500,
+  "lines": 595,
+  "p95_latency": 1.968,
+  "reasons": [
+   "error_ratio",
+   "new_error_template",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-019",
+ "scenario_event_ids": [
+  "evt_898",
+  "evt_899",
+  "evt_900",
+  "evt_901",
+  "evt_907",
+  "evt_908",
+  "evt_993",
+  "evt_1016"
+ ],
+ "cause_event_id": "evt_993",
+ "culprit_change_id": "chg_474",
+ "contributing_ids": [
+  "evt_908"
+ ],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change turned {key} on, activating a code path shipped days earlier.",
+  "micro": "{file}:{line} ({symbol}), deployed in {culprit_event}, runs only when the flag is on and skips the safety check of the old path.",
+  "remediation": "Turn feature.new_scheduler off again in config/compute-svc.yaml; fix the flag-guarded branch at {file}:{line} before re-enabling."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_996",
+  "evt_994"
+ ],
+ "remediation_ids": [
+  "evt_1016"
+ ],
+ "expected_files": [
+  "config/compute-svc.yaml"
+ ],
+ "expected_params": [
+  "feature.new_scheduler"
+ ],
+ "culprit": {
+  "change_id": "chg_474",
+  "event_id": "evt_908",
+  "file": "compute/scheduler/TaskRunner.java",
+  "line": 39,
+  "symbol": "TaskRunner.assignSlots",
+  "diff": "@@ -38,2 +38,5 @@ TaskRunner.assignSlots\n     int slots = Math.min(requested, node.freeSlots());\n+    if (flags.isOn(\"new_scheduler\")) {\n+      slots = requested;  // trust the request\n+    }\n     node.reserve(slots);",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Config change turned feature.new_scheduler on, activating a code path shipped days earlier.",
+  "micro": "compute/scheduler/TaskRunner.java:39 (TaskRunner.assignSlots), deployed in evt_908, runs only when the flag is on and skips the safety check of the old path.",
+  "remediation": "Turn feature.new_scheduler off again in config/compute-svc.yaml; fix the flag-guarded branch at compute/scheduler/TaskRunner.java:39 before re-enabling."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Add a regression test covering TaskRunner.assignSlots (compute/scheduler/TaskRunner.java).",
+  "Alert on the error signature `<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>`."
+ ]
+}

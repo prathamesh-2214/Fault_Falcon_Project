@@ -1,0 +1,96 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-03-09T14:20:54.627622+00:00",
+ "incident_start": "2026-03-09T14:20:54.627622+00:00",
+ "source": "synthetic",
+ "scenario_type": "MISSING_INDEX",
+ "planned_cause": "cloud-api",
+ "anomaly_id": "evt_249",
+ "mitigated_at": "2026-03-09T18:40:07.905095+00:00",
+ "id": "INC-004",
+ "scenario_family": "planned",
+ "scenario_title": "Dropped index, sequential scans at peak",
+ "category": "data",
+ "title": "Latency and timeouts on api-gateway",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "api-gateway: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-03-09 14:20-18:40: api-gateway: 264 of 367 log lines were non-INFO between 2026-03-09 14:20 and 2026-03-09 18:40 UTC (peak error ratio 0.92 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 28.121 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.923,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 264,
+  "lines": 367,
+  "p95_latency": 28.121,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-004",
+ "scenario_event_ids": [
+  "evt_227",
+  "evt_229",
+  "evt_236",
+  "evt_237",
+  "evt_240",
+  "evt_242",
+  "evt_264"
+ ],
+ "cause_event_id": "evt_242",
+ "culprit_change_id": "chg_116",
+ "contributing_ids": [],
+ "cause_service": "cloud-api",
+ "blast_radius": [
+  "meta-db",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} dropped index ix_servers_tenant on meta-db.servers (it looked unused on the replica); the hot query fell back to sequential scans and timed out at peak.",
+  "micro": "{file}:{line} drops ix_servers_tenant.",
+  "remediation": "Recreate ix_servers_tenant CONCURRENTLY on meta-db; roll back {svc} if needed; check index usage on the primary before dropping."
+ },
+ "_decoy_window_h": 6.0,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_246",
+  "evt_244"
+ ],
+ "remediation_ids": [
+  "evt_264"
+ ],
+ "expected_files": [
+  "cloud-api/db/migrations/V84__cleanup_indexes.sql",
+  "cloud-api/nova/api/auth.py"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_116",
+  "event_id": "evt_242",
+  "file": "cloud-api/db/migrations/V84__cleanup_indexes.sql",
+  "line": 2,
+  "symbol": "migration",
+  "diff": "@@ -1,2 +1,3 @@ migration\n -- index cleanup (storage cost)\n+DROP INDEX IF EXISTS ix_servers_tenant;  -- unused according to pg_stat_user_indexes (replica only)\n COMMIT;",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v3.3.0 of cloud-api dropped index ix_servers_tenant on meta-db.servers (it looked unused on the replica); the hot query fell back to sequential scans and timed out at peak.",
+  "micro": "cloud-api/db/migrations/V84__cleanup_indexes.sql:2 drops ix_servers_tenant.",
+  "remediation": "Recreate ix_servers_tenant CONCURRENTLY on meta-db; roll back cloud-api if needed; check index usage on the primary before dropping."
+ },
+ "action_items": [
+  "Add a regression test covering migration (cloud-api/db/migrations/V84__cleanup_indexes.sql).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

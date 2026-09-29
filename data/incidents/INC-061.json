@@ -1,0 +1,96 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-06-10T19:05:24.130242+00:00",
+ "incident_start": "2026-06-10T19:05:24.130242+00:00",
+ "source": "synthetic",
+ "scenario_type": "DB_POOL",
+ "planned_cause": "cloud-api",
+ "anomaly_id": "evt_2660",
+ "mitigated_at": "2026-06-10T23:06:53.662441+00:00",
+ "id": "INC-061",
+ "scenario_family": "complex",
+ "scenario_title": "DB pool cut on a downsized RDS",
+ "category": "config",
+ "title": "Latency and timeouts on api-gateway",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "api-gateway: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-06-10 19:05-23:15: api-gateway: 163 of 267 log lines were non-INFO between 2026-06-10 19:05 and 2026-06-10 23:15 UTC (peak error ratio 0.82 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 27.878 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.818,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 163,
+  "lines": 267,
+  "p95_latency": 27.878,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-061",
+ "scenario_event_ids": [
+  "evt_2549",
+  "evt_2655",
+  "evt_2675",
+  "evt_2676"
+ ],
+ "cause_event_id": "evt_2655",
+ "culprit_change_id": "chg_1466",
+ "contributing_ids": [
+  "evt_2549"
+ ],
+ "cause_service": "cloud-api",
+ "blast_radius": [
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change shrank the {svc} database connection pool; requests queued for connections and timed out (the meta-db downsize days earlier left no headroom).",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old} in {file}; right-size aws_db_instance.meta_db before lowering pools again."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_2656",
+  "evt_2657"
+ ],
+ "remediation_ids": [
+  "evt_2675",
+  "evt_2676"
+ ],
+ "expected_files": [
+  "config/cloud-api.yaml"
+ ],
+ "expected_params": [
+  "db.pool.max_size"
+ ],
+ "culprit": {
+  "change_id": "chg_1466",
+  "event_id": "evt_2655",
+  "file": "config/cloud-api.yaml",
+  "line": 52,
+  "symbol": "db.pool.max_size",
+  "diff": "@@ -51,3 +51,3 @@ db.pool.max_size\n db:\n-  pool_max_size: 60\n+  pool_max_size: 6\n   # managed by the platform team",
+  "param_key": "db.pool.max_size"
+ },
+ "rca": {
+  "macro": "Config change shrank the cloud-api database connection pool; requests queued for connections and timed out (the meta-db downsize days earlier left no headroom).",
+  "micro": "config/cloud-api.yaml:52 sets db.pool.max_size 60 -> 6.",
+  "remediation": "Revert db.pool.max_size to 60 in config/cloud-api.yaml; right-size aws_db_instance.meta_db before lowering pools again."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

@@ -1,0 +1,92 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-06-18T18:12:16.445331+00:00",
+ "incident_start": "2026-06-18T18:22:16.445331+00:00",
+ "source": "synthetic",
+ "scenario_type": "LAMBDA_CONCURRENCY",
+ "planned_cause": "notification-svc",
+ "anomaly_id": "evt_2846",
+ "mitigated_at": "2026-06-18T22:11:44.487144+00:00",
+ "id": "INC-066",
+ "scenario_family": "planned",
+ "scenario_title": "Lambda reserved concurrency cut",
+ "category": "infra",
+ "title": "Throttling (429) on billing-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "billing-svc: 429 rate > 1 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "throttle"
+ },
+ "impact": "Customers were throttled on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-06-18 18:22-22:12: billing-svc: 203 of 283 log lines were non-INFO between 2026-06-18 18:22 and 2026-06-18 22:12 UTC (peak error ratio 0.93 vs baseline median 0.0). 2 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "c.f.b.client.NotificationClient - call to notification-svc failed: HTTP 429 Too Many Requests",
+  "c.f.b.api.UsageController - account <*> requested usage for a closed period"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.933,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 203,
+  "lines": 283,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-066",
+ "scenario_event_ids": [
+  "evt_2837",
+  "evt_2860"
+ ],
+ "cause_event_id": "evt_2837",
+ "culprit_change_id": "chg_1570",
+ "contributing_ids": [],
+ "cause_service": "notification-svc",
+ "blast_radius": [
+  "notification-svc",
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change cut reserved concurrency of {svc} {old} -> {new}; invocations were throttled (Rate Exceeded) and billing-svc's calls failed.",
+  "micro": "{file}:{line} sets reserved_concurrent_executions {old} -> {new} on {resource}.",
+  "remediation": "Restore reserved concurrency = {old} on {resource}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_2840",
+  "evt_2839",
+  "evt_2841"
+ ],
+ "remediation_ids": [
+  "evt_2860"
+ ],
+ "expected_files": [
+  "infra/notification-svc.tf"
+ ],
+ "expected_params": [
+  "lambda_concurrency"
+ ],
+ "culprit": {
+  "change_id": "chg_1570",
+  "event_id": "evt_2837",
+  "file": "infra/notification-svc.tf",
+  "line": 61,
+  "symbol": "aws_lambda_function.notification_svc",
+  "diff": "@@ -60,3 +60,3 @@ aws_lambda_function.notification_svc\n resource \"aws_lambda_function\" \"notification_svc\" {\n-  reserved_concurrent_executions = 50\n+  reserved_concurrent_executions = 5\n   tags = local.tags",
+  "param_key": "lambda_concurrency"
+ },
+ "rca": {
+  "macro": "Terraform change cut reserved concurrency of notification-svc 50 -> 5; invocations were throttled (Rate Exceeded) and billing-svc's calls failed.",
+  "micro": "infra/notification-svc.tf:61 sets reserved_concurrent_executions 50 -> 5 on aws_lambda_function.notification_svc.",
+  "remediation": "Restore reserved concurrency = 50 on aws_lambda_function.notification_svc."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `c.f.b.client.NotificationClient - call to notification-svc failed: HTTP 429 Too `."
+ ]
+}

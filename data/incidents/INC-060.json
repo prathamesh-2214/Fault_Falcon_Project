@@ -1,0 +1,103 @@
+{
+ "service": "coord-svc",
+ "planned_start": "2026-06-09T05:33:10.003194+00:00",
+ "incident_start": "2026-06-09T05:33:10.003194+00:00",
+ "source": "synthetic",
+ "scenario_type": "HOTFIX_REGRESSION",
+ "planned_cause": "coord-svc",
+ "anomaly_id": "evt_2612",
+ "mitigated_at": "2026-06-09T08:31:31.045718+00:00",
+ "id": "INC-060",
+ "scenario_family": "planned",
+ "scenario_title": "Hotfix patch serialised requests with a global lock",
+ "category": "code",
+ "title": "Latency and timeouts on coord-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "coord-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on coord-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] coord-svc 2026-06-09 05:33-08:33: coord-svc: 195 of 261 log lines were non-INFO between 2026-06-09 05:33 and 2026-06-09 08:33 UTC (peak error ratio 1.0 vs baseline median 0.0). 5 error templates, 2 first seen in this span.",
+ "error_templates": [
+  "request timed out after 30000 ms (lock contention)",
+  "request waited <*> ms for the global lock",
+  "Send worker leaving thread",
+  "Interrupting SendWorker",
+  "Interrupted while waiting for message on queue"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 195,
+  "lines": 261,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-060",
+ "scenario_event_ids": [
+  "evt_2545",
+  "evt_2546",
+  "evt_2547",
+  "evt_2548",
+  "evt_2550",
+  "evt_2551",
+  "evt_2601",
+  "evt_2605",
+  "evt_2630"
+ ],
+ "cause_event_id": "evt_2605",
+ "culprit_change_id": "chg_1423",
+ "contributing_ids": [
+  "evt_2551"
+ ],
+ "cause_service": "coord-svc",
+ "blast_radius": [
+  "coord-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Hotfix patch {version_to} of {svc} fixed a race by adding a global lock; every request then waited on that lock and latency exploded under load.",
+  "micro": "{file}:{line} ({symbol}) wraps the whole request in one global lock.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; fix the race with a per-key lock at {file}:{line}; load-test hotfixes before prod."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_2607",
+  "evt_2610"
+ ],
+ "remediation_ids": [
+  "evt_2630"
+ ],
+ "expected_files": [
+  "coord/server/NIOServerCnxn.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_1423",
+  "event_id": "evt_2605",
+  "file": "coord/server/NIOServerCnxn.java",
+  "line": 91,
+  "symbol": "NIOServerCnxn.doIO",
+  "diff": "@@ -91,2 +91,2 @@ NIOServerCnxn.doIO\n-  public Result handle(Request r) {\n+  public synchronized Result handle(Request r) {  // HOTFIX race\n     return process(r);",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Hotfix patch v1.10.1 of coord-svc fixed a race by adding a global lock; every request then waited on that lock and latency exploded under load.",
+  "micro": "coord/server/NIOServerCnxn.java:91 (NIOServerCnxn.doIO) wraps the whole request in one global lock.",
+  "remediation": "Roll back coord-svc v1.10.1 -> v1.10.0; fix the race with a per-key lock at coord/server/NIOServerCnxn.java:91; load-test hotfixes before prod."
+ },
+ "action_items": [
+  "Add a regression test covering NIOServerCnxn.doIO (coord/server/NIOServerCnxn.java).",
+  "Alert on the error signature `request timed out after 30000 ms (lock contention)`."
+ ]
+}

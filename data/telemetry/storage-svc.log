@@ -1,0 +1,244 @@
+2026-06-15T20:19:19Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:20:47Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:21:55Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:22:41Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:24:32Z INFO  [synthetic] BLOCK* NameSystem.delete: blk_8247499802516177421 is added to invalidSet of 10.250.7.96:50010
+2026-06-15T20:24:43Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:24:55Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:26:26Z INFO  [synthetic] BLOCK* NameSystem.delete: blk_5176179471361959897 is added to invalidSet of 10.250.9.207:50010
+2026-06-15T20:26:29Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:26:52Z INFO  [synthetic] Received block blk_4294115716822011564 of size 67108864 from /10.251.43.210
+2026-06-15T20:26:57Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:28:11Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:28:49Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:30:00Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:30:06Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:30:33Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:31:22Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:31:47Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:32:31Z INFO  [synthetic] Deleting block blk_3862032846413436284 file /mnt/hadoop/dfs/data/current/subdir28/blk_3862032846413436284
+2026-06-15T20:32:45Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:32:55Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:33:19Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:33:33Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:34:02Z INFO  [synthetic] PacketResponder 0 for block blk_-6837050820114491742 terminating
+2026-06-15T20:34:20Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:34:48Z INFO  [synthetic] PacketResponder 0 for block blk_-4430291708660291878 terminating
+2026-06-15T20:34:52Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:35:35Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:36:10Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:37:10Z INFO  [synthetic] PacketResponder 2 for block blk_-4578850505370039622 terminating
+2026-06-15T20:38:11Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:38:41Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:40:18Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:40:33Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:41:33Z INFO  [synthetic] Received block blk_-5970165518655489569 of size 67108864 from /10.250.14.196
+2026-06-15T20:41:44Z INFO  [synthetic] PacketResponder 1 for block blk_2151150262081352617 terminating
+2026-06-15T20:41:47Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:42:59Z INFO  [synthetic] BLOCK* NameSystem.delete: blk_-3671953658029337449 is added to invalidSet of 10.250.14.143:50010
+2026-06-15T20:43:23Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:43:29Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:43:36Z INFO  [synthetic] PacketResponder 0 for block blk_2282833575688432184 terminating
+2026-06-15T20:43:49Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:43:58Z WARN  [synthetic] 10.251.70.211:50010:Got exception while serving blk_424255210146453297 to /10.251.203.179:
+2026-06-15T20:44:10Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:44:49Z INFO  [synthetic] BLOCK* NameSystem.delete: blk_1302893891174665780 is added to invalidSet of 10.251.214.225:50010
+2026-06-15T20:45:26Z INFO  [synthetic] BLOCK* NameSystem.addStoredBlock: blockMap updated: 10.251.91.32:50010 is added to blk_5272761429354463572 size 67108864
+2026-06-15T20:45:41Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:45:54Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:46:52Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:47:13Z INFO  [synthetic] PacketResponder 1 for block blk_8971893898579544235 terminating
+2026-06-15T20:48:20Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:48:50Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:48:53Z INFO  [synthetic] Received block blk_-2856928563366064757 of size 67108864 from /10.251.42.9
+2026-06-15T20:51:15Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:53:31Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:53:39Z INFO  [synthetic] BLOCK* NameSystem.allocateBlock: /user/root/randtxt5/_temporary/_task_200811101024_0012_m_001192_0/part-01192. blk_7720864196601815614
+2026-06-15T20:53:55Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:56:32Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:56:51Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T20:59:58Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:00:06Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:00:12Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:00:21Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:00:26Z INFO  [synthetic] BLOCK* NameSystem.allocateBlock: /user/root/rand/_temporary/_task_200811101024_0001_m_001587_0/part-01587. blk_6374836031306809839
+2026-06-15T21:00:34Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:01:43Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:02:03Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:03:52Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:05:20Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:05:40Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:05:51Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:06:22Z INFO  [synthetic] BLOCK* NameSystem.allocateBlock: /user/root/rand6/_temporary/_task_200811101024_0013_m_000451_0/part-00451. blk_-8744988583359134013
+2026-06-15T21:06:34Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:09:50Z INFO  [synthetic] 10.250.10.213:50010 Served block blk_-1125621902344947014 to /10.250.10.213
+2026-06-15T21:11:04Z INFO  [synthetic] Received block blk_-8847552694913526632 of size 67108864 from /10.251.201.204
+2026-06-15T21:11:06Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:11:58Z INFO  [synthetic] Received block blk_4989329877491629543 of size 67108864 from /10.250.15.67
+2026-06-15T21:12:04Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:13:49Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:13:58Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:15:43Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:16:13Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:17:31Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:19:17Z INFO  [synthetic] BLOCK* NameSystem.addStoredBlock: blockMap updated: 10.250.7.230:50010 is added to blk_8663640697928077697 size 67108864
+2026-06-15T21:19:49Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:22:28Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:23:30Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:24:16Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:25:08Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:25:42Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:26:41Z INFO  [synthetic] BLOCK* NameSystem.addStoredBlock: blockMap updated: 10.251.203.246:50010 is added to blk_-6909400912794057067 size 67108864
+2026-06-15T21:27:34Z INFO  [synthetic] 10.251.199.225:50010 Served block blk_8457344665564381337 to /10.251.199.225
+2026-06-15T21:30:55Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:31:14Z INFO  [synthetic] Verification succeeded for blk_-8347949825960763812
+2026-06-15T21:31:17Z INFO  [synthetic] Received block blk_-4775386099844009890 of size 67108864 from /10.251.107.19
+2026-06-15T21:31:25Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:31:48Z INFO  [synthetic] BLOCK* NameSystem.allocateBlock: /user/root/randtxt4/_temporary/_task_200811101024_0010_m_000222_0/part-00222. blk_3764836840384130740
+2026-06-15T21:32:50Z WARN  [synthetic] 10.251.195.33:50010:Got exception while serving blk_6702054389824523327 to /10.251.195.33:
+2026-06-15T21:34:12Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:34:15Z INFO  [synthetic] BLOCK* NameSystem.delete: blk_-5382946262718129284 is added to invalidSet of 10.250.5.161:50010
+2026-06-15T21:34:35Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:35:23Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:35:25Z INFO  [synthetic] Received block blk_4098532420907418423 of size 67108864 from /10.251.43.147
+2026-06-15T21:35:34Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:36:56Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:38:11Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:38:47Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:38:47Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:39:24Z INFO  [synthetic] Received block blk_-1485109068671160157 of size 67108864 from /10.251.71.68
+2026-06-15T21:40:12Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:40:14Z INFO  [synthetic] BLOCK* NameSystem.addStoredBlock: blockMap updated: 10.251.109.209:50010 is added to blk_3764801892187716497 size 67108864
+2026-06-15T21:40:25Z INFO  [synthetic] BLOCK* ask 10.250.14.38:50010 to replicate blk_-7571492020523929240 to datanode(s) 10.251.122.38:50010
+2026-06-15T21:41:00Z INFO  [synthetic] PacketResponder 2 for block blk_-6811828069408410657 terminating
+2026-06-15T21:41:06Z INFO  [synthetic] Received block blk_-3702595599317472079 of size 67108864 from /10.251.25.237
+2026-06-15T21:41:49Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:41:53Z INFO  [synthetic] BLOCK* NameSystem.addStoredBlock: blockMap updated: 10.251.111.130:50010 is added to blk_4568434182693165548 size 67108864
+2026-06-15T21:42:01Z INFO  [synthetic] PacketResponder 2 for block blk_-3710747952520609225 terminating
+2026-06-15T21:42:26Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:42:56Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:43:31Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:43:49Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:43:51Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:43:58Z INFO  [synthetic] PacketResponder 2 for block blk_-7159695919045792245 terminating
+2026-06-15T21:44:36Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:45:24Z INFO  [synthetic] Received block blk_8699194381234371727 of size 67108864 from /10.251.214.67
+2026-06-15T21:46:08Z INFO  [synthetic] BLOCK* NameSystem.delete: blk_3858015337960682724 is added to invalidSet of 10.251.214.130:50010
+2026-06-15T21:46:31Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:46:54Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:48:24Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:49:53Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:50:31Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:50:38Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:50:54Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:51:45Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:52:54Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:54:30Z INFO  [synthetic] BLOCK* NameSystem.delete: blk_-5624558200776510955 is added to invalidSet of 10.251.107.242:50010
+2026-06-15T21:55:04Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:55:21Z INFO  [synthetic] BLOCK* NameSystem.addStoredBlock: blockMap updated: 10.251.39.144:50010 is added to blk_1526403491950199810 size 3534443
+2026-06-15T21:55:28Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:56:20Z INFO  [synthetic] BLOCK* NameSystem.addStoredBlock: blockMap updated: 10.251.29.239:50010 is added to blk_-762982068597249045 size 67108864
+2026-06-15T21:57:52Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:58:13Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T21:58:27Z INFO  [synthetic] PacketResponder 0 for block blk_7412933088374169877 terminating
+2026-06-15T21:58:42Z INFO  [synthetic] BLOCK* NameSystem.allocateBlock: /user/root/randtxt2/_temporary/_task_200811101024_0002_m_001080_0/part-01080. blk_2847401988110989655
+2026-06-15T21:59:32Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:01:52Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:02:11Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:02:19Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:02:46Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:02:47Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:03:52Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:04:30Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:05:37Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:06:11Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:06:23Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:06:43Z INFO  [synthetic] Verification succeeded for blk_1584196996810164915
+2026-06-15T22:08:00Z WARN  [synthetic] 10.251.70.5:50010:Got exception while serving blk_4581070264530964999 to /10.250.13.188:
+2026-06-15T22:09:09Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:09:16Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:09:20Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:09:22Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:10:57Z INFO  [synthetic] BLOCK* NameSystem.allocateBlock: /user/root/randtxt3/_temporary/_task_200811101024_0007_m_000374_0/part-00374. blk_-1941312615450572331
+2026-06-15T22:14:47Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:15:09Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:15:31Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:16:17Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:16:48Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:19:03Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:21:02Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:22:53Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:23:32Z INFO  [synthetic] BLOCK* NameSystem.allocateBlock: /user/root/rand5/_temporary/_task_200811101024_0011_m_001730_0/part-01730. blk_6400082566804273401
+2026-06-15T22:24:09Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:24:23Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:24:34Z INFO  [synthetic] PacketResponder 1 for block blk_6465095458973828118 terminating
+2026-06-15T22:25:09Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:26:41Z INFO  [synthetic] PacketResponder 1 for block blk_-357695136519539363 terminating
+2026-06-15T22:26:43Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:27:18Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:27:19Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:27:24Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:28:55Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:30:37Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:31:32Z INFO  [synthetic] BLOCK* NameSystem.addStoredBlock: blockMap updated: 10.251.122.65:50010 is added to blk_-5330522460969948971 size 67108864
+2026-06-15T22:34:09Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:39:11Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:42:15Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:43:23Z INFO  [synthetic] Deleting block blk_9142114171015520823 file /mnt/hadoop/dfs/data/current/subdir48/blk_9142114171015520823
+2026-06-15T22:43:52Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:44:00Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:44:23Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:44:24Z WARN  [synthetic] 10.250.9.207:50010:Got exception while serving blk_-3140754468249228022 to /10.250.9.207:
+2026-06-15T22:44:42Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:45:00Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:45:14Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:46:15Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:47:24Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:47:54Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:48:27Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:48:45Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:50:20Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:50:53Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:51:31Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:52:06Z INFO  [synthetic] Receiving block blk_-3752135158991310104 src: /10.251.70.5:44375 dest: /10.251.70.5:50010
+2026-06-15T22:52:27Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:52:28Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:53:13Z INFO  [synthetic] Receiving block blk_2380775154966815858 src: /10.251.107.50:33333 dest: /10.251.107.50:50010
+2026-06-15T22:53:31Z INFO  [synthetic] BLOCK* NameSystem.delete: blk_356592557993755459 is added to invalidSet of 10.251.109.236:50010
+2026-06-15T22:53:57Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:54:06Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:54:29Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:54:36Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:56:14Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:57:23Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:57:42Z INFO  [synthetic] PacketResponder 2 for block blk_-1485317050914225917 terminating
+2026-06-15T22:58:32Z INFO  [synthetic] BLOCK* NameSystem.delete: blk_2426255659473300323 is added to invalidSet of 10.251.106.37:50010
+2026-06-15T22:58:48Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T22:59:10Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:00:02Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:01:43Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:02:07Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:02:36Z INFO  [synthetic] Deleting block blk_5100975846124291571 file /mnt/hadoop/dfs/data/current/subdir38/blk_5100975846124291571
+2026-06-15T23:02:44Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:02:45Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:03:16Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:03:28Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:03:39Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:04:37Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:04:40Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:05:22Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:07:04Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:07:36Z INFO  [synthetic] BLOCK* NameSystem.addStoredBlock: blockMap updated: 10.251.90.239:50010 is added to blk_-5927343391895571936 size 67108864
+2026-06-15T23:10:06Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:11:11Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:12:02Z INFO  [synthetic] PacketResponder 2 for block blk_8487226415276391460 terminating
+2026-06-15T23:12:42Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:13:06Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:13:18Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:13:25Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:14:38Z INFO  [synthetic] Received block blk_-2020273862360001901 of size 67108864 from /10.250.7.244
+2026-06-15T23:15:42Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:16:58Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:17:41Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:17:45Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable
+2026-06-15T23:18:55Z ERROR [synthetic] Call to node-svc failed: HTTP 503 Service Unavailable

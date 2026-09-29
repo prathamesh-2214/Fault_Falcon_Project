@@ -1,0 +1,103 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-08-13T14:29:53.261628+00:00",
+ "incident_start": "2026-08-13T14:29:53.261628+00:00",
+ "source": "synthetic",
+ "scenario_type": "FLAG_DORMANT",
+ "planned_cause": "storage-svc",
+ "anomaly_id": "evt_4341",
+ "mitigated_at": "2026-08-13T17:17:20.899568+00:00",
+ "id": "INC-100",
+ "scenario_family": "complex",
+ "scenario_title": "Feature flag enabled a dormant code path",
+ "category": "config",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-08-13 14:29-17:19: api-gateway: 196 of 249 log lines were non-INFO between 2026-08-13 14:29 and 2026-08-13 17:19 UTC (peak error ratio 0.93 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 0.414 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.929,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 196,
+  "lines": 249,
+  "p95_latency": 0.414,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-100",
+ "scenario_event_ids": [
+  "evt_4210",
+  "evt_4211",
+  "evt_4213",
+  "evt_4214",
+  "evt_4217",
+  "evt_4220",
+  "evt_4335",
+  "evt_4363"
+ ],
+ "cause_event_id": "evt_4335",
+ "culprit_change_id": "chg_2317",
+ "contributing_ids": [
+  "evt_4220"
+ ],
+ "cause_service": "storage-svc",
+ "blast_radius": [
+  "storage-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change turned {key} on, activating a code path shipped days earlier.",
+  "micro": "{file}:{line} ({symbol}), deployed in {culprit_event}, runs only when the flag is on and skips the safety check of the old path.",
+  "remediation": "Turn feature.fast_ack off again in config/storage-svc.yaml; fix the flag-guarded branch at {file}:{line} before re-enabling."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_4336",
+  "evt_4337",
+  "evt_4338"
+ ],
+ "remediation_ids": [
+  "evt_4363"
+ ],
+ "expected_files": [
+  "config/storage-svc.yaml"
+ ],
+ "expected_params": [
+  "feature.fast_ack"
+ ],
+ "culprit": {
+  "change_id": "chg_2317",
+  "event_id": "evt_4220",
+  "file": "storage/datanode/PacketResponder.java",
+  "line": 374,
+  "symbol": "PacketResponder.run",
+  "diff": "@@ -373,2 +373,5 @@ PacketResponder.run\n     boolean ackBeforeFlush = false;\n+    if (flags.isOn(\"fast_ack\")) {\n+      ackBeforeFlush = true;  // lower latency\n+    }\n     sendAck(seqno, ackBeforeFlush);",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Config change turned feature.fast_ack on, activating a code path shipped days earlier.",
+  "micro": "storage/datanode/PacketResponder.java:374 (PacketResponder.run), deployed in evt_4220, runs only when the flag is on and skips the safety check of the old path.",
+  "remediation": "Turn feature.fast_ack off again in config/storage-svc.yaml; fix the flag-guarded branch at storage/datanode/PacketResponder.java:374 before re-enabling."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Add a regression test covering PacketResponder.run (storage/datanode/PacketResponder.java).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

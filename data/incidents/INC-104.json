@@ -1,0 +1,99 @@
+{
+ "service": "compute-svc",
+ "planned_start": "2026-08-19T19:31:04.734615+00:00",
+ "incident_start": "2026-08-19T19:31:04.734615+00:00",
+ "source": "synthetic",
+ "scenario_type": "PARTIAL_ROLLBACK",
+ "planned_cause": "compute-svc",
+ "anomaly_id": "evt_4537",
+ "mitigated_at": "2026-08-19T22:44:58.567774+00:00",
+ "id": "INC-104",
+ "scenario_family": "special",
+ "scenario_title": "Partial rollback of a bad deploy",
+ "category": "code",
+ "title": "Elevated 5xx errors on compute-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "compute-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on compute-svc",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] compute-svc 2026-08-19 19:31-22:51: compute-svc: 223 of 307 log lines were non-INFO between 2026-08-19 19:31 and 2026-08-19 22:51 UTC (peak error ratio 0.86 vs baseline median 0.0). 3 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "unhandled error in request handler: <*> failures in 60 s",
+  "Address change detected. Old: <*> New: <*>",
+  "ERROR IN CONTACTING RM."
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.857,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 223,
+  "lines": 307,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-104",
+ "scenario_event_ids": [
+  "evt_4517",
+  "evt_4518",
+  "evt_4520",
+  "evt_4521",
+  "evt_4528",
+  "evt_4530",
+  "evt_4535",
+  "evt_4543"
+ ],
+ "cause_event_id": "evt_4530",
+ "culprit_change_id": "chg_2496",
+ "contributing_ids": [],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} introduced a regression.",
+  "micro": "{file}:{line} ({symbol}) changes the condition / constant shown in the diff.",
+  "remediation": "Complete the rollback of {svc} to {version_from} on all nodes; revert {file}:{line}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_4535",
+  "evt_4533",
+  "evt_4531",
+  "evt_4534"
+ ],
+ "remediation_ids": [
+  "evt_4543"
+ ],
+ "expected_files": [
+  "compute/dfs/LeaseRenewer.java",
+  "compute/rpc/RMClient.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2496",
+  "event_id": "evt_4530",
+  "file": "compute/rpc/RMClient.java",
+  "line": 152,
+  "symbol": "RMClient.allocate",
+  "diff": "@@ -151,4 +151,4 @@ RMClient.allocate\n     attempt++;\n-    if (attempt < maxAttempts) {\n+    if (attempt > maxAttempts) {\n       return retry(request);\n     }",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v2.33.0 of compute-svc introduced a regression.",
+  "micro": "compute/rpc/RMClient.java:152 (RMClient.allocate) changes the condition / constant shown in the diff.",
+  "remediation": "Complete the rollback of compute-svc to v2.32.0 on all nodes; revert compute/rpc/RMClient.java:152."
+ },
+ "action_items": [
+  "Add a regression test covering RMClient.allocate (compute/rpc/RMClient.java).",
+  "Alert on the error signature `unhandled error in request handler: <*> failures in 60 s`."
+ ]
+}

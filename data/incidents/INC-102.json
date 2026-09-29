@@ -1,0 +1,94 @@
+{
+ "service": "cloud-api",
+ "planned_start": "2026-08-16T16:10:09.458700+00:00",
+ "incident_start": "2026-08-16T16:10:09.458700+00:00",
+ "source": "synthetic",
+ "scenario_type": "RDS_MAX_CONNECTIONS",
+ "planned_cause": "meta-db",
+ "anomaly_id": "evt_4405",
+ "mitigated_at": "2026-08-16T20:25:09.942948+00:00",
+ "id": "INC-102",
+ "scenario_family": "planned",
+ "scenario_title": "RDS parameter group cut max_connections",
+ "category": "infra",
+ "title": "Connection failures on cloud-api",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "cloud-api: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "refused"
+ },
+ "impact": "Requests failed while connections were refused on cloud-api",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] cloud-api 2026-08-16 16:10-20:30: cloud-api: 502 of 602 log lines were non-INFO between 2026-08-16 16:10 and 2026-08-16 20:30 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 1.953 s vs baseline band up to 0.453 s.",
+ "error_templates": [
+  "<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>",
+  "Unexpected exception while calling meta-db: FATAL: sorry, too many clients already"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 502,
+  "lines": 602,
+  "p95_latency": 1.953,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-102",
+ "scenario_event_ids": [
+  "evt_4400",
+  "evt_4423"
+ ],
+ "cause_event_id": "evt_4400",
+ "culprit_change_id": "chg_2398",
+ "contributing_ids": [],
+ "cause_service": "meta-db",
+ "blast_radius": [
+  "meta-db",
+  "auth-svc",
+  "cloud-api",
+  "compute-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change to the {svc} parameter group cut max_connections {old} -> {new}; after the next reboot the services' pools exceeded it and new connections were refused.",
+  "micro": "{file}:{line} sets max_connections {old} -> {new} on {resource}.",
+  "remediation": "Restore max_connections = {old} on {resource} and reboot in the maintenance window."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_4402",
+  "evt_4403"
+ ],
+ "remediation_ids": [
+  "evt_4423"
+ ],
+ "expected_files": [
+  "infra/meta-db.tf"
+ ],
+ "expected_params": [
+  "rds_max_connections"
+ ],
+ "culprit": {
+  "change_id": "chg_2398",
+  "event_id": "evt_4400",
+  "file": "infra/meta-db.tf",
+  "line": 70,
+  "symbol": "aws_db_parameter_group.meta_db",
+  "diff": "@@ -66,7 +66,7 @@ aws_db_parameter_group.meta_db\n resource \"aws_db_parameter_group\" \"meta_db\" {\n   family = \"postgres15\"\n   parameter {\n     name  = \"max_connections\"\n-    value = \"500\"\n+    value = \"100\"\n     apply_method = \"pending-reboot\"\n   }",
+  "param_key": "rds_max_connections"
+ },
+ "rca": {
+  "macro": "Terraform change to the meta-db parameter group cut max_connections 500 -> 100; after the next reboot the services' pools exceeded it and new connections were refused.",
+  "micro": "infra/meta-db.tf:70 sets max_connections 500 -> 100 on aws_db_parameter_group.meta_db.",
+  "remediation": "Restore max_connections = 500 on aws_db_parameter_group.meta_db and reboot in the maintenance window."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>`."
+ ]
+}

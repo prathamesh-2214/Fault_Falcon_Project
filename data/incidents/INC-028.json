@@ -1,0 +1,76 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-04-17T19:20:45.583626+00:00",
+ "incident_start": "2026-04-17T19:20:45.583626+00:00",
+ "source": "synthetic",
+ "scenario_type": "SES_THROTTLED",
+ "planned_cause": "notification-svc",
+ "anomaly_id": "evt_1336",
+ "mitigated_at": "2026-04-17T22:03:31.249960+00:00",
+ "id": "INC-028",
+ "scenario_family": "planned",
+ "scenario_title": "Amazon SES sending quota throttled",
+ "category": "external",
+ "title": "Throttling (429) on billing-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "billing-svc: 429 rate > 1 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "throttle"
+ },
+ "impact": "Customers were throttled on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-04-17 19:20-22:10: billing-svc: 198 of 264 log lines were non-INFO between 2026-04-17 19:20 and 2026-04-17 22:10 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 1 first seen in this span.",
+ "error_templates": [
+  "c.f.b.client.NotificationClient - call to notification-svc failed: HTTP 429 Too Many Requests",
+  "c.f.b.api.UsageController - account <*> requested usage for a closed period"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 198,
+  "lines": 264,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-028",
+ "scenario_event_ids": [],
+ "cause_event_id": null,
+ "culprit_change_id": null,
+ "contributing_ids": [],
+ "cause_service": "notification-svc",
+ "blast_radius": [
+  "notification-svc",
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "No change explains the anomaly: Amazon SES throttled the account after a bounce-rate review by AWS.",
+  "micro": "",
+  "remediation": "No rollback needed; AWS support restored the sending quota; bounce handling was improved."
+ },
+ "_decoy_window_h": null,
+ "_fix": "none",
+ "external_factor": "Amazon SES throttled the account after a bounce-rate review by AWS",
+ "decoy_ids": [
+  "evt_1330",
+  "evt_1331",
+  "evt_1332"
+ ],
+ "remediation_ids": [],
+ "expected_files": [],
+ "expected_params": [],
+ "culprit": null,
+ "rca": {
+  "macro": "No change explains the anomaly: Amazon SES throttled the account after a bounce-rate review by AWS.",
+  "micro": "",
+  "remediation": "No rollback needed; AWS support restored the sending quota; bounce handling was improved."
+ },
+ "action_items": [
+  "Alert on the error signature `c.f.b.client.NotificationClient - call to notification-svc failed: HTTP 429 Too `."
+ ]
+}

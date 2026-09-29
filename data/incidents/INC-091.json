@@ -1,0 +1,99 @@
+{
+ "service": "image-svc",
+ "planned_start": "2026-07-29T14:06:45.384607+00:00",
+ "incident_start": "2026-07-29T14:06:45.384607+00:00",
+ "source": "synthetic",
+ "scenario_type": "SKIPPED_TEST",
+ "planned_cause": "image-svc",
+ "anomaly_id": "evt_3967",
+ "mitigated_at": "2026-07-29T17:47:50.361132+00:00",
+ "id": "INC-091",
+ "scenario_family": "special",
+ "scenario_title": "Regression behind a skipped load suite",
+ "category": "code",
+ "title": "Latency and timeouts on image-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "image-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on image-svc",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] image-svc 2026-07-29 14:06-17:46: image-svc: 155 of 239 log lines were non-INFO between 2026-07-29 14:06 and 2026-07-29 17:46 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 1 first seen in this span.",
+ "error_templates": [
+  "request took <*> ms (batch size 1)",
+  "{\"level\":\"warn\",\"msg\":\"slow s3 <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 155,
+  "lines": 239,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-091",
+ "scenario_event_ids": [
+  "evt_3950",
+  "evt_3951",
+  "evt_3956",
+  "evt_3957",
+  "evt_3960",
+  "evt_3961",
+  "evt_3973"
+ ],
+ "cause_event_id": "evt_3961",
+ "culprit_change_id": "chg_2188",
+ "contributing_ids": [],
+ "cause_service": "image-svc",
+ "blast_radius": [
+  "image-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} introduced a regression that only the skipped ppd load suite would have caught.",
+  "micro": "{file}:{line} ({symbol}) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; revert {file}:{line}. Make the ppd load suite mandatory."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_3964",
+  "evt_3965",
+  "evt_3963"
+ ],
+ "remediation_ids": [
+  "evt_3973"
+ ],
+ "expected_files": [
+  "images/internal/api/handlers.go",
+  "images/internal/registry/s3.go",
+  "images/internal/verify/checksum.go"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2188",
+  "event_id": "evt_3961",
+  "file": "images/internal/verify/checksum.go",
+  "line": 63,
+  "symbol": "VerifyChecksum",
+  "diff": "@@ -62,2 +62,2 @@ VerifyChecksum\n \t// items per pipeline flush\n-\tconst batchSize = 512\n+\tconst batchSize = 1",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v1.19.0 of image-svc introduced a regression that only the skipped ppd load suite would have caught.",
+  "micro": "images/internal/verify/checksum.go:63 (VerifyChecksum) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back image-svc v1.19.0 -> v1.18.0; revert images/internal/verify/checksum.go:63. Make the ppd load suite mandatory."
+ },
+ "action_items": [
+  "Make the ppd load test suite mandatory before prod.",
+  "Add a regression test covering VerifyChecksum (images/internal/verify/checksum.go).",
+  "Alert on the error signature `request took <*> ms (batch size 1)`."
+ ]
+}

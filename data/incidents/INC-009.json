@@ -1,0 +1,93 @@
+{
+ "service": "auth-svc",
+ "planned_start": "2026-03-17T19:48:21.725459+00:00",
+ "incident_start": "2026-03-17T19:48:21.725459+00:00",
+ "source": "synthetic",
+ "scenario_type": "LB_HEALTHCHECK",
+ "planned_cause": "auth-svc",
+ "anomaly_id": "evt_542",
+ "mitigated_at": "2026-03-18T00:21:09.855339+00:00",
+ "id": "INC-009",
+ "scenario_family": "planned",
+ "scenario_title": "Target-group health check too aggressive",
+ "category": "infra",
+ "title": "Connection failures on auth-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "auth-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "refused"
+ },
+ "impact": "Requests failed while connections were refused on auth-svc",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] auth-svc 2026-03-17 19:48-00:18: auth-svc: 295 of 384 log lines were non-INFO between 2026-03-17 19:48 and 2026-03-18 00:18 UTC (peak error ratio 1.0 vs baseline median 0.0). 3 error templates, 2 first seen in this span.",
+ "error_templates": [
+  "received SIGTERM, draining connections (target deregistered)",
+  "health check took <*> s (target group timeout 2 s)",
+  "{\"level\":\"warn\",\"msg\":\"login failed: bad <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 295,
+  "lines": 384,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-009",
+ "scenario_event_ids": [
+  "evt_534",
+  "evt_551"
+ ],
+ "cause_event_id": "evt_534",
+ "culprit_change_id": "chg_282",
+ "contributing_ids": [],
+ "cause_service": "auth-svc",
+ "blast_radius": [
+  "auth-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change cut the {svc} target-group health-check timeout {old} -> {new} s; targets under load flapped unhealthy and the ALB returned 502.",
+  "micro": "{file}:{line} sets health_check timeout {old} -> {new} on {resource}.",
+  "remediation": "Restore the health-check timeout = {old} on {resource}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_539",
+  "evt_540",
+  "evt_538"
+ ],
+ "remediation_ids": [
+  "evt_551"
+ ],
+ "expected_files": [
+  "infra/auth-svc.tf"
+ ],
+ "expected_params": [
+  "lb_healthcheck_timeout_s"
+ ],
+ "culprit": {
+  "change_id": "chg_282",
+  "event_id": "evt_534",
+  "file": "infra/auth-svc.tf",
+  "line": 69,
+  "symbol": "aws_lb_target_group.auth_svc",
+  "diff": "@@ -67,4 +67,4 @@ aws_lb_target_group.auth_svc\n resource \"aws_lb_target_group\" \"auth_svc\" {\n   health_check {\n-    timeout = 5\n+    timeout = 2\n   }",
+  "param_key": "lb_healthcheck_timeout_s"
+ },
+ "rca": {
+  "macro": "Terraform change cut the auth-svc target-group health-check timeout 5 -> 2 s; targets under load flapped unhealthy and the ALB returned 502.",
+  "micro": "infra/auth-svc.tf:69 sets health_check timeout 5 -> 2 on aws_lb_target_group.auth_svc.",
+  "remediation": "Restore the health-check timeout = 5 on aws_lb_target_group.auth_svc."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `received SIGTERM, draining connections (target deregistered)`."
+ ]
+}

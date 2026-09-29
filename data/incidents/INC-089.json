@@ -1,0 +1,95 @@
+{
+ "service": "cloud-api",
+ "planned_start": "2026-07-26T16:09:24.030851+00:00",
+ "incident_start": "2026-07-26T16:09:24.030851+00:00",
+ "source": "synthetic",
+ "scenario_type": "DEPENDENCY_UPGRADE",
+ "planned_cause": "image-svc",
+ "anomaly_id": "evt_3842",
+ "mitigated_at": "2026-07-26T21:02:25.751937+00:00",
+ "id": "INC-089",
+ "scenario_family": "planned",
+ "scenario_title": "Library upgrade changed runtime behaviour",
+ "category": "code",
+ "title": "Elevated 5xx errors on cloud-api",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "cloud-api: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on cloud-api",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] cloud-api 2026-07-26 16:09-21:09: cloud-api: 610 of 740 log lines were non-INFO between 2026-07-26 16:09 and 2026-07-26 21:09 UTC (peak error ratio 0.95 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 1.945 s vs baseline band up to 0.453 s.",
+ "error_templates": [
+  "<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>",
+  "Unexpected exception while calling <*> HTTPError: 503 Server Error: Service Unavailable"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.952,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 610,
+  "lines": 740,
+  "p95_latency": 1.945,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-089",
+ "scenario_event_ids": [
+  "evt_3822",
+  "evt_3823",
+  "evt_3827",
+  "evt_3829",
+  "evt_3833",
+  "evt_3834",
+  "evt_3880"
+ ],
+ "cause_event_id": "evt_3834",
+ "culprit_change_id": "chg_2120",
+ "contributing_ids": [],
+ "cause_service": "image-svc",
+ "blast_radius": [
+  "image-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} was a routine dependency bump; the new S3 client sends checksum headers the bucket policy denies.",
+  "micro": "{file}:{line} upgrades the library: the new S3 client sends checksum headers the bucket policy denies.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; pin the previous version in {file} until the upgrade is tested against the real dependency."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_3836"
+ ],
+ "remediation_ids": [
+  "evt_3880"
+ ],
+ "expected_files": [
+  "images/go.mod",
+  "images/internal/registry/s3.go"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2120",
+  "event_id": "evt_3834",
+  "file": "images/go.mod",
+  "line": 310,
+  "symbol": "go.mod",
+  "diff": "@@ -309,2 +309,2 @@ go.mod\n require (\n-\tgithub.com/aws/aws-sdk-go-v2/service/s3 v1.40.0\n+\tgithub.com/aws/aws-sdk-go-v2/service/s3 v1.58.0",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v1.17.0 of image-svc was a routine dependency bump; the new S3 client sends checksum headers the bucket policy denies.",
+  "micro": "images/go.mod:310 upgrades the library: the new S3 client sends checksum headers the bucket policy denies.",
+  "remediation": "Roll back image-svc v1.17.0 -> v1.16.0; pin the previous version in images/go.mod until the upgrade is tested against the real dependency."
+ },
+ "action_items": [
+  "Add a regression test covering go.mod (images/go.mod).",
+  "Alert on the error signature `<*> <*> <*> HTTP/1.1\" status: <*> len: <*> time: <*>`."
+ ]
+}

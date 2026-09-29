@@ -1,0 +1,74 @@
+{
+ "service": "notification-svc",
+ "planned_start": "2026-03-21T01:35:44.392300+00:00",
+ "incident_start": "2026-03-21T01:35:44.392300+00:00",
+ "source": "synthetic",
+ "scenario_type": "CERT_EXPIRY",
+ "planned_cause": "notification-svc",
+ "anomaly_id": "evt_643",
+ "mitigated_at": "2026-03-21T04:17:00.903576+00:00",
+ "id": "INC-011",
+ "scenario_family": "planned",
+ "scenario_title": "Customer webhook certificate expired",
+ "category": "external",
+ "title": "Processing errors on notification-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "notification-svc: error-log rate > 20/min (CloudWatch Logs metric filter)",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "data"
+ },
+ "impact": "Background processing failed; customer-visible data was delayed or wrong on notification-svc",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] notification-svc 2026-03-21 01:35-04:25: notification-svc: 211 of 278 log lines were non-INFO between 2026-03-21 01:35 and 2026-03-21 04:25 UTC (peak error ratio 0.91 vs baseline median 0.0). 2 error templates, 1 first seen in this span.",
+ "error_templates": [
+  "[ERROR] webhook delivery failed endpoint=hooks.acme.example.com: SSLError certificate verify failed: certificate has expired",
+  "[WARNING] webhook endpoint <*> answered 410 Gone, disabling"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.909,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 211,
+  "lines": 278,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-011",
+ "scenario_event_ids": [],
+ "cause_event_id": null,
+ "culprit_change_id": null,
+ "contributing_ids": [],
+ "cause_service": "notification-svc",
+ "blast_radius": [
+  "notification-svc",
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "No change explains the anomaly: the TLS certificate of a large customer's webhook endpoint expired.",
+  "micro": "",
+  "remediation": "No rollback needed; the customer renewed the certificate; webhook failures for that endpoint are now alerted separately."
+ },
+ "_decoy_window_h": null,
+ "_fix": "none",
+ "external_factor": "the TLS certificate of a large customer's webhook endpoint expired",
+ "decoy_ids": [
+  "evt_640"
+ ],
+ "remediation_ids": [],
+ "expected_files": [],
+ "expected_params": [],
+ "culprit": null,
+ "rca": {
+  "macro": "No change explains the anomaly: the TLS certificate of a large customer's webhook endpoint expired.",
+  "micro": "",
+  "remediation": "No rollback needed; the customer renewed the certificate; webhook failures for that endpoint are now alerted separately."
+ },
+ "action_items": [
+  "Alert on the error signature `[ERROR] webhook delivery failed endpoint=hooks.acme.example.com: SSLError certif`."
+ ]
+}

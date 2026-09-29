@@ -1,0 +1,92 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-04-14T16:35:16.542926+00:00",
+ "incident_start": "2026-04-14T16:35:16.542926+00:00",
+ "source": "synthetic",
+ "scenario_type": "REDIS_NOEVICTION",
+ "planned_cause": "session-cache",
+ "anomaly_id": "evt_1265",
+ "mitigated_at": "2026-04-14T19:12:45.367379+00:00",
+ "id": "INC-026",
+ "scenario_family": "planned",
+ "scenario_title": "Redis eviction policy set to noeviction",
+ "category": "infra",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-04-14 16:35-19:15: api-gateway: 156 of 223 log lines were non-INFO between 2026-04-14 16:35 and 2026-04-14 19:15 UTC (peak error ratio 1.0 vs baseline median 0.0). 1 error templates, 0 first seen in this span. Peak p95 latency 0.584 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "POST <*> <*> <*> target=auth-svc"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 156,
+  "lines": 223,
+  "p95_latency": 0.584,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-026",
+ "scenario_event_ids": [
+  "evt_1256",
+  "evt_1281"
+ ],
+ "cause_event_id": "evt_1256",
+ "culprit_change_id": "chg_695",
+ "contributing_ids": [],
+ "cause_service": "session-cache",
+ "blast_radius": [
+  "session-cache",
+  "auth-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change set maxmemory-policy {old} -> {new}; when memory filled, Redis rejected writes (OOM command not allowed) and new sessions could not be created.",
+  "micro": "{file}:{line} sets maxmemory-policy {old} -> {new} on {resource}.",
+  "remediation": "Restore maxmemory-policy = {old} on {resource}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_1258",
+  "evt_1260",
+  "evt_1261"
+ ],
+ "remediation_ids": [
+  "evt_1281"
+ ],
+ "expected_files": [
+  "infra/session-cache.tf"
+ ],
+ "expected_params": [
+  "redis_maxmemory_policy"
+ ],
+ "culprit": {
+  "change_id": "chg_695",
+  "event_id": "evt_1256",
+  "file": "infra/session-cache.tf",
+  "line": 113,
+  "symbol": "aws_elasticache_parameter_group.session_cache",
+  "diff": "@@ -109,6 +109,6 @@ aws_elasticache_parameter_group.session_cache\n resource \"aws_elasticache_parameter_group\" \"session_cache\" {\n   family = \"redis7\"\n   parameter {\n     name  = \"maxmemory-policy\"\n-    value = \"volatile-lru\"\n+    value = \"noeviction\"\n   }",
+  "param_key": "redis_maxmemory_policy"
+ },
+ "rca": {
+  "macro": "Terraform change set maxmemory-policy volatile-lru -> noeviction; when memory filled, Redis rejected writes (OOM command not allowed) and new sessions could not be created.",
+  "micro": "infra/session-cache.tf:113 sets maxmemory-policy volatile-lru -> noeviction on aws_elasticache_parameter_group.session_cache.",
+  "remediation": "Restore maxmemory-policy = volatile-lru on aws_elasticache_parameter_group.session_cache."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `POST <*> <*> <*> target=auth-svc`."
+ ]
+}

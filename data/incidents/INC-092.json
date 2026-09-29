@@ -1,0 +1,90 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-07-31T12:40:33.044793+00:00",
+ "incident_start": "2026-07-31T12:40:33.044793+00:00",
+ "source": "synthetic",
+ "scenario_type": "APIGW_THROTTLE",
+ "planned_cause": "api-gateway",
+ "anomaly_id": "evt_3997",
+ "mitigated_at": "2026-07-31T17:26:11.602969+00:00",
+ "id": "INC-092",
+ "scenario_family": "planned",
+ "scenario_title": "API Gateway burst limit cut",
+ "category": "infra",
+ "title": "Throttling (429) on api-gateway",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "api-gateway: 429 rate > 1 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "throttle"
+ },
+ "impact": "Customers were throttled on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-07-31 12:40-17:00: api-gateway: 181 of 283 log lines were non-INFO between 2026-07-31 12:40 and 2026-07-31 17:00 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 0.492 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET /v1/servers <*> <*> <*>",
+  "POST /v1/servers <*> <*> <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 181,
+  "lines": 283,
+  "p95_latency": 0.492,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-092",
+ "scenario_event_ids": [
+  "evt_3994",
+  "evt_4004"
+ ],
+ "cause_event_id": "evt_3994",
+ "culprit_change_id": "chg_2207",
+ "contributing_ids": [],
+ "cause_service": "api-gateway",
+ "blast_radius": [
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change cut the API Gateway usage-plan {key} {old} -> {new}; traffic at the morning peak got 429 Too Many Requests.",
+  "micro": "{file}:{line} sets burst_limit {old} -> {new} on {resource}.",
+  "remediation": "Restore burst_limit = {old} on {resource}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_3995",
+  "evt_3996"
+ ],
+ "remediation_ids": [
+  "evt_4004"
+ ],
+ "expected_files": [
+  "infra/api-gateway.tf"
+ ],
+ "expected_params": [
+  "apigw_burst_limit"
+ ],
+ "culprit": {
+  "change_id": "chg_2207",
+  "event_id": "evt_3994",
+  "file": "infra/api-gateway.tf",
+  "line": 6,
+  "symbol": "aws_api_gateway_usage_plan.api_gateway",
+  "diff": "@@ -4,4 +4,4 @@ aws_api_gateway_usage_plan.api_gateway\n resource \"aws_api_gateway_usage_plan\" \"api_gateway\" {\n   throttle_settings {\n-    burst_limit = 5000\n+    burst_limit = 500\n   }",
+  "param_key": "apigw_burst_limit"
+ },
+ "rca": {
+  "macro": "Terraform change cut the API Gateway usage-plan apigw_burst_limit 5000 -> 500; traffic at the morning peak got 429 Too Many Requests.",
+  "micro": "infra/api-gateway.tf:6 sets burst_limit 5000 -> 500 on aws_api_gateway_usage_plan.api_gateway.",
+  "remediation": "Restore burst_limit = 5000 on aws_api_gateway_usage_plan.api_gateway."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `GET /v1/servers <*> <*> <*>`."
+ ]
+}

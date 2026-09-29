@@ -1,0 +1,98 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-04-08T04:19:45.995929+00:00",
+ "incident_start": "2026-04-08T04:19:45.995929+00:00",
+ "source": "synthetic",
+ "scenario_type": "PARTIAL_ROLLBACK",
+ "planned_cause": "notification-svc",
+ "anomaly_id": "evt_1144",
+ "mitigated_at": "2026-04-08T08:17:52.740452+00:00",
+ "id": "INC-022",
+ "scenario_family": "special",
+ "scenario_title": "Partial rollback of a bad deploy",
+ "category": "code",
+ "title": "Elevated 5xx errors on billing-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "billing-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-04-08 04:19-08:19: billing-svc: 230 of 329 log lines were non-INFO between 2026-04-08 04:19 and 2026-04-08 08:19 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 1 first seen in this span.",
+ "error_templates": [
+  "c.f.b.client.NotificationClient - call to notification-svc failed: HTTP 503 Service Unavailable",
+  "c.f.b.api.UsageController - account <*> requested usage for a closed period"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 230,
+  "lines": 329,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-022",
+ "scenario_event_ids": [
+  "evt_1104",
+  "evt_1105",
+  "evt_1123",
+  "evt_1126",
+  "evt_1135",
+  "evt_1137",
+  "evt_1139",
+  "evt_1153"
+ ],
+ "cause_event_id": "evt_1137",
+ "culprit_change_id": "chg_620",
+ "contributing_ids": [],
+ "cause_service": "notification-svc",
+ "blast_radius": [
+  "notification-svc",
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} introduced a regression.",
+  "micro": "{file}:{line} ({symbol}) changes the condition / constant shown in the diff.",
+  "remediation": "Complete the rollback of {svc} to {version_from} on all nodes; revert {file}:{line}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_1139",
+  "evt_1138",
+  "evt_1141"
+ ],
+ "remediation_ids": [
+  "evt_1153"
+ ],
+ "expected_files": [
+  "notify/handlers/invoice_email.py",
+  "notify/ses_client.py"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_620",
+  "event_id": "evt_1137",
+  "file": "notify/ses_client.py",
+  "line": 148,
+  "symbol": "SesClient.send",
+  "diff": "@@ -147,3 +147,3 @@ SesClient.send\n         cached = self._cache.get(key)\n-        if not cached:\n+        if cached:\n             cached = self._fetch(key)",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v2.9.0 of notification-svc introduced a regression.",
+  "micro": "notify/ses_client.py:148 (SesClient.send) changes the condition / constant shown in the diff.",
+  "remediation": "Complete the rollback of notification-svc to v2.8.0 on all nodes; revert notify/ses_client.py:148."
+ },
+ "action_items": [
+  "Add a regression test covering SesClient.send (notify/ses_client.py).",
+  "Alert on the error signature `c.f.b.client.NotificationClient - call to notification-svc failed: HTTP 503 Serv`."
+ ]
+}

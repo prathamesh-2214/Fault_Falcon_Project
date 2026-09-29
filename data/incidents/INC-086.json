@@ -1,0 +1,92 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-07-21T10:12:19.561150+00:00",
+ "incident_start": "2026-07-21T10:12:19.561150+00:00",
+ "source": "synthetic",
+ "scenario_type": "BREAKER_SENSITIVE",
+ "planned_cause": "billing-svc",
+ "anomaly_id": "evt_3758",
+ "mitigated_at": "2026-07-21T13:13:03.751893+00:00",
+ "id": "INC-086",
+ "scenario_family": "planned",
+ "scenario_title": "Circuit breaker threshold too low, breaker stuck open",
+ "category": "config",
+ "title": "Elevated 5xx errors on billing-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "billing-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-07-21 10:12-13:12: billing-svc: 203 of 278 log lines were non-INFO between 2026-07-21 10:12 and 2026-07-21 13:12 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 2 first seen in this span.",
+ "error_templates": [
+  "circuit breaker OPEN: failure rate <*> above threshold 5%",
+  "circuit breaker HALF_OPEN: trial call succeeded"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 203,
+  "lines": 278,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-086",
+ "scenario_event_ids": [
+  "evt_3745",
+  "evt_3762"
+ ],
+ "cause_event_id": "evt_3745",
+ "culprit_change_id": "chg_2073",
+ "contributing_ids": [],
+ "cause_service": "billing-svc",
+ "blast_radius": [
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change set {key} {old} -> {new}; ordinary error blips opened the circuit breaker and {svc} returned 503 for healthy downstreams.",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old} in {file}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_3756",
+  "evt_3753",
+  "evt_3751"
+ ],
+ "remediation_ids": [
+  "evt_3762"
+ ],
+ "expected_files": [
+  "config/billing-svc.yaml"
+ ],
+ "expected_params": [
+  "breaker.failure_pct"
+ ],
+ "culprit": {
+  "change_id": "chg_2073",
+  "event_id": "evt_3745",
+  "file": "config/billing-svc.yaml",
+  "line": 105,
+  "symbol": "breaker.failure_pct",
+  "diff": "@@ -104,3 +104,3 @@ breaker.failure_pct\n circuit_breaker:\n-  failure_rate_threshold_pct: 50\n+  failure_rate_threshold_pct: 5\n   # managed by the platform team",
+  "param_key": "breaker.failure_pct"
+ },
+ "rca": {
+  "macro": "Config change set breaker.failure_pct 50 -> 5; ordinary error blips opened the circuit breaker and billing-svc returned 503 for healthy downstreams.",
+  "micro": "config/billing-svc.yaml:105 sets breaker.failure_pct 50 -> 5.",
+  "remediation": "Revert breaker.failure_pct to 50 in config/billing-svc.yaml."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `circuit breaker OPEN: failure rate <*> above threshold 5%`."
+ ]
+}

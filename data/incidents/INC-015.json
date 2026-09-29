@@ -1,0 +1,92 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-03-27T14:52:39.922698+00:00",
+ "incident_start": "2026-03-27T14:52:39.922698+00:00",
+ "source": "synthetic",
+ "scenario_type": "IAM_POLICY",
+ "planned_cause": "image-svc",
+ "anomaly_id": "evt_817",
+ "mitigated_at": "2026-03-27T19:20:55.859507+00:00",
+ "id": "INC-015",
+ "scenario_family": "planned",
+ "scenario_title": "IAM policy lost s3:GetObject",
+ "category": "infra",
+ "title": "Missing resources on api-gateway",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "api-gateway: 4XX rate > 5 % for 10 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "notfound"
+ },
+ "impact": "Operations on older resources failed on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-03-27 14:52-18:42: api-gateway: 182 of 276 log lines were non-INFO between 2026-03-27 14:52 and 2026-03-27 18:42 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 0.641 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 182,
+  "lines": 276,
+  "p95_latency": 0.641,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-015",
+ "scenario_event_ids": [
+  "evt_811",
+  "evt_838"
+ ],
+ "cause_event_id": "evt_811",
+ "culprit_change_id": "chg_425",
+ "contributing_ids": [],
+ "cause_service": "image-svc",
+ "blast_radius": [
+  "image-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change narrowed the image-svc task role to {new}; reads of base images from S3 failed with AccessDenied and cloud-api could not find base files.",
+  "micro": "{file}:{line} sets the policy actions {old} -> {new}.",
+  "remediation": "Restore actions = [{old}] on {resource}; test IAM changes with the IAM policy simulator."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_813",
+  "evt_814"
+ ],
+ "remediation_ids": [
+  "evt_838"
+ ],
+ "expected_files": [
+  "infra/image-svc.tf"
+ ],
+ "expected_params": [
+  "iam_s3_actions"
+ ],
+ "culprit": {
+  "change_id": "chg_425",
+  "event_id": "evt_811",
+  "file": "infra/image-svc.tf",
+  "line": 118,
+  "symbol": "aws_iam_policy_document.image_svc",
+  "diff": "@@ -115,6 +115,6 @@ aws_iam_policy_document.image_svc\n data \"aws_iam_policy_document\" \"image_svc\" {\n   statement {\n     effect    = \"Allow\"\n-    actions   = [\"s3:GetObject\", \"s3:ListBucket\"]\n+    actions   = [\"s3:ListBucket\"]\n     resources = [\"${aws_s3_bucket.object_store.arn}/images/*\"]\n   }",
+  "param_key": "iam_s3_actions"
+ },
+ "rca": {
+  "macro": "Terraform change narrowed the image-svc task role to s3:ListBucket; reads of base images from S3 failed with AccessDenied and cloud-api could not find base files.",
+  "micro": "infra/image-svc.tf:118 sets the policy actions s3:GetObject,s3:ListBucket -> s3:ListBucket.",
+  "remediation": "Restore actions = [s3:GetObject,s3:ListBucket] on aws_iam_policy_document.image_svc; test IAM changes with the IAM policy simulator."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

@@ -1,0 +1,93 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-06-02T18:35:53.625471+00:00",
+ "incident_start": "2026-06-02T18:35:53.625471+00:00",
+ "source": "synthetic",
+ "scenario_type": "RDS_MAINTENANCE",
+ "planned_cause": "billing-db",
+ "anomaly_id": "evt_2475",
+ "mitigated_at": "2026-06-02T21:37:48.860999+00:00",
+ "id": "INC-056",
+ "scenario_family": "planned",
+ "scenario_title": "Engine upgrade applied immediately at peak",
+ "category": "infra",
+ "title": "Connection failures on billing-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "billing-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "refused"
+ },
+ "impact": "Requests failed while connections were refused on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-06-02 18:35-21:35: billing-svc: 141 of 215 log lines were non-INFO between 2026-06-02 18:35 and 2026-06-02 21:35 UTC (peak error ratio 0.91 vs baseline median 0.0). 2 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "c.f.b.repo.InvoiceRepository - call to billing-db failed: <*> <*> <*> <*> <*> <*>",
+  "c.f.b.api.UsageController - account <*> requested usage for a closed period"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.909,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 141,
+  "lines": 215,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-056",
+ "scenario_event_ids": [
+  "evt_2466",
+  "evt_2487"
+ ],
+ "cause_event_id": "evt_2466",
+ "culprit_change_id": "chg_1351",
+ "contributing_ids": [],
+ "cause_service": "billing-db",
+ "blast_radius": [
+  "billing-db",
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change upgraded {svc} with apply_immediately = true; the Multi-AZ failover happened at peak and JVM clients kept stale connections and DNS for minutes.",
+  "micro": "{file}:{line} sets {key} {old} -> {new} on {resource}.",
+  "remediation": "Set apply_immediately back to false (maintenance window); cap JVM DNS TTL at 30 s; enable pool validation."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_2469",
+  "evt_2472",
+  "evt_2467"
+ ],
+ "remediation_ids": [
+  "evt_2487"
+ ],
+ "expected_files": [
+  "infra/billing-db.tf"
+ ],
+ "expected_params": [
+  "rds_apply_immediately",
+  "rds_engine_version"
+ ],
+ "culprit": {
+  "change_id": "chg_1351",
+  "event_id": "evt_2466",
+  "file": "infra/billing-db.tf",
+  "line": 15,
+  "symbol": "aws_db_instance.billing_db",
+  "diff": "@@ -14,3 +14,3 @@ aws_db_instance.billing_db\n resource \"aws_db_instance\" \"billing_db\" {\n-  apply_immediately = \"false\"\n+  apply_immediately = \"true\"\n   tags = local.tags",
+  "param_key": "rds_apply_immediately"
+ },
+ "rca": {
+  "macro": "Terraform change upgraded billing-db with apply_immediately = true; the Multi-AZ failover happened at peak and JVM clients kept stale connections and DNS for minutes.",
+  "micro": "infra/billing-db.tf:15 sets rds_apply_immediately false -> true on aws_db_instance.billing_db.",
+  "remediation": "Set apply_immediately back to false (maintenance window); cap JVM DNS TTL at 30 s; enable pool validation."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `c.f.b.repo.InvoiceRepository - call to billing-db failed: <*> <*> <*> <*> <*> <*`."
+ ]
+}

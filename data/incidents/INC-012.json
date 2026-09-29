@@ -1,0 +1,92 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-03-22T14:31:30.933293+00:00",
+ "incident_start": "2026-03-22T14:31:30.933293+00:00",
+ "source": "synthetic",
+ "scenario_type": "CONSUMER_CONCURRENCY",
+ "planned_cause": "billing-svc",
+ "anomaly_id": "evt_656",
+ "mitigated_at": "2026-03-22T18:26:30.229280+00:00",
+ "id": "INC-012",
+ "scenario_family": "planned",
+ "scenario_title": "Consumer concurrency raised past the DB connection limit",
+ "category": "config",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-03-22 14:31-18:31: api-gateway: 273 of 382 log lines were non-INFO between 2026-03-22 14:31 and 2026-03-22 18:31 UTC (peak error ratio 0.93 vs baseline median 0.0). 1 error templates, 0 first seen in this span. Peak p95 latency 0.582 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=billing-svc"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.933,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 273,
+  "lines": 382,
+  "p95_latency": 0.582,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-012",
+ "scenario_event_ids": [
+  "evt_650",
+  "evt_669"
+ ],
+ "cause_event_id": "evt_650",
+ "culprit_change_id": "chg_320",
+ "contributing_ids": [],
+ "cause_service": "billing-svc",
+ "blast_radius": [
+  "billing-svc",
+  "api-gateway",
+  "billing-db"
+ ],
+ "_templates": {
+  "macro": "Config change raised {key} {old} -> {new} to drain the usage backlog faster; every consumer thread held a billing-db connection and the database refused new ones.",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old}; size consumer concurrency against db.pool.max_size and RDS max_connections."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_652",
+  "evt_651",
+  "evt_654"
+ ],
+ "remediation_ids": [
+  "evt_669"
+ ],
+ "expected_files": [
+  "config/billing-svc.yaml"
+ ],
+ "expected_params": [
+  "consumer.concurrency"
+ ],
+ "culprit": {
+  "change_id": "chg_320",
+  "event_id": "evt_650",
+  "file": "config/billing-svc.yaml",
+  "line": 100,
+  "symbol": "consumer.concurrency",
+  "diff": "@@ -99,3 +99,3 @@ consumer.concurrency\n consumer:\n-  concurrency: 8\n+  concurrency: 64\n   # managed by the platform team",
+  "param_key": "consumer.concurrency"
+ },
+ "rca": {
+  "macro": "Config change raised consumer.concurrency 8 -> 64 to drain the usage backlog faster; every consumer thread held a billing-db connection and the database refused new ones.",
+  "micro": "config/billing-svc.yaml:100 sets consumer.concurrency 8 -> 64.",
+  "remediation": "Revert consumer.concurrency to 8; size consumer concurrency against db.pool.max_size and RDS max_connections."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `GET <*> <*> <*> target=billing-svc`."
+ ]
+}

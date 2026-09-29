@@ -1,0 +1,75 @@
+{
+ "service": "image-svc",
+ "planned_start": "2026-08-11T14:26:48.713995+00:00",
+ "incident_start": "2026-08-11T14:26:48.713995+00:00",
+ "source": "synthetic",
+ "scenario_type": "AWS_S3_DEGRADED",
+ "planned_cause": "object-store",
+ "anomaly_id": "evt_4308",
+ "mitigated_at": "2026-08-11T18:12:24.459396+00:00",
+ "id": "INC-099",
+ "scenario_family": "planned",
+ "scenario_title": "Amazon S3 regional degradation",
+ "category": "external",
+ "title": "Elevated 5xx errors on image-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "image-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on image-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] image-svc 2026-08-11 14:26-18:16: image-svc: 206 of 290 log lines were non-INFO between 2026-08-11 14:26 and 2026-08-11 18:16 UTC (peak error ratio 0.88 vs baseline median 0.0). 2 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "{\"level\":\"error\",\"msg\":\"s3 GetObject failed\",\"err\":\"api error SlowDown: Please reduce your request <*>",
+  "{\"level\":\"warn\",\"msg\":\"slow s3 <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.875,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 206,
+  "lines": 290,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-099",
+ "scenario_event_ids": [],
+ "cause_event_id": null,
+ "culprit_change_id": null,
+ "contributing_ids": [],
+ "cause_service": "object-store",
+ "blast_radius": [
+  "object-store",
+  "image-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "No change explains the anomaly: Amazon S3 in us-east-1 returned elevated 503 SlowDown errors (AWS Health event).",
+  "micro": "",
+  "remediation": "No rollback needed; waited for AWS to recover; added jittered retries and a regional fallback read."
+ },
+ "_decoy_window_h": null,
+ "_fix": "none",
+ "external_factor": "Amazon S3 in us-east-1 returned elevated 503 SlowDown errors (AWS Health event)",
+ "decoy_ids": [
+  "evt_4305",
+  "evt_4301"
+ ],
+ "remediation_ids": [],
+ "expected_files": [],
+ "expected_params": [],
+ "culprit": null,
+ "rca": {
+  "macro": "No change explains the anomaly: Amazon S3 in us-east-1 returned elevated 503 SlowDown errors (AWS Health event).",
+  "micro": "",
+  "remediation": "No rollback needed; waited for AWS to recover; added jittered retries and a regional fallback read."
+ },
+ "action_items": [
+  "Alert on the error signature `{\"level\":\"error\",\"msg\":\"s3 GetObject failed\",\"err\":\"api error SlowDown: Please r`."
+ ]
+}

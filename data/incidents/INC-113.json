@@ -1,0 +1,100 @@
+{
+ "service": "compute-svc",
+ "incident_start": "2026-08-28T18:43:12+00:00",
+ "planned_start": "2026-08-28T18:43:12+00:00",
+ "anomaly_id": "evt_4883",
+ "source": "loghub",
+ "planned_cause": null,
+ "error_templates": [
+  "Container complete event for unknown container id container_1445144423722_0020_01_000012"
+ ],
+ "scenario_type": "FLAG_DORMANT",
+ "mitigated_at": "2026-08-28T22:19:31.657565+00:00",
+ "id": "INC-113",
+ "scenario_family": "complex",
+ "scenario_title": "Feature flag enabled a dormant code path",
+ "category": "config",
+ "title": "Elevated 5xx errors on compute-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "compute-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on compute-svc",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] compute-svc 2026-08-28 18:43-19:12: compute-svc: 1 of 22 log lines were non-INFO between 2026-08-28 18:43 and 2026-08-28 19:12 UTC (peak error ratio 0.05 vs baseline median 0.83). 1 error templates, 1 first seen in this span.",
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.045,
+  "baseline_median_error_ratio": 0.833,
+  "error_lines": 1,
+  "lines": 22,
+  "p95_latency": null,
+  "reasons": [
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-113",
+ "scenario_event_ids": [
+  "evt_4704",
+  "evt_4706",
+  "evt_4707",
+  "evt_4708",
+  "evt_4709",
+  "evt_4710",
+  "evt_4877",
+  "evt_4908"
+ ],
+ "cause_event_id": "evt_4877",
+ "culprit_change_id": "chg_2584",
+ "contributing_ids": [
+  "evt_4710"
+ ],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change turned {key} on, activating a code path shipped days earlier.",
+  "micro": "{file}:{line} ({symbol}), deployed in {culprit_event}, runs only when the flag is on and skips the safety check of the old path.",
+  "remediation": "Turn feature.new_scheduler off again in config/compute-svc.yaml; fix the flag-guarded branch at {file}:{line} before re-enabling."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_4882",
+  "evt_4881",
+  "evt_4879"
+ ],
+ "remediation_ids": [
+  "evt_4908"
+ ],
+ "expected_files": [
+  "config/compute-svc.yaml"
+ ],
+ "expected_params": [
+  "feature.new_scheduler"
+ ],
+ "culprit": {
+  "change_id": "chg_2584",
+  "event_id": "evt_4710",
+  "file": "compute/scheduler/TaskRunner.java",
+  "line": 312,
+  "symbol": "TaskRunner.assignSlots",
+  "diff": "@@ -311,2 +311,5 @@ TaskRunner.assignSlots\n     int slots = Math.min(requested, node.freeSlots());\n+    if (flags.isOn(\"new_scheduler\")) {\n+      slots = requested;  // trust the request\n+    }\n     node.reserve(slots);",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Config change turned feature.new_scheduler on, activating a code path shipped days earlier.",
+  "micro": "compute/scheduler/TaskRunner.java:312 (TaskRunner.assignSlots), deployed in evt_4710, runs only when the flag is on and skips the safety check of the old path.",
+  "remediation": "Turn feature.new_scheduler off again in config/compute-svc.yaml; fix the flag-guarded branch at compute/scheduler/TaskRunner.java:312 before re-enabling."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Add a regression test covering TaskRunner.assignSlots (compute/scheduler/TaskRunner.java).",
+  "Alert on the error signature `Container complete event for unknown container id container_1445144423722_0020_0`."
+ ]
+}

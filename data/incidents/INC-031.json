@@ -1,0 +1,102 @@
+{
+ "service": "compute-svc",
+ "planned_start": "2026-04-22T13:45:53.035478+00:00",
+ "incident_start": "2026-04-22T13:45:53.035478+00:00",
+ "source": "synthetic",
+ "scenario_type": "EBS_THROUGHPUT",
+ "planned_cause": "storage-svc",
+ "anomaly_id": "evt_1461",
+ "mitigated_at": "2026-04-22T18:26:11.986757+00:00",
+ "id": "INC-031",
+ "scenario_family": "complex",
+ "scenario_title": "EBS gp3 throughput cut",
+ "category": "infra",
+ "title": "Latency and timeouts on compute-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "compute-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on compute-svc",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] compute-svc 2026-04-22 13:45-18:35: compute-svc: 332 of 433 log lines were non-INFO between 2026-04-22 13:45 and 2026-04-22 18:35 UTC (peak error ratio 0.93 vs baseline median 0.0). 5 error templates, 2 first seen in this span.",
+ "error_templates": [
+  "Call to <*> failed: java.net.SocketTimeoutException: Read timed out",
+  "Failed to renew lease for [DFSClient_NONMAPREDUCE_1537864556_1] for <*> seconds. Will retry shortly ...",
+  "ERROR IN CONTACTING RM.",
+  "Address change detected. Old: <*> New: <*>",
+  "Task: attempt_1445144423722_0020_m_000002_0 - exited : java.net.NoRouteToHostException: No Route to Host from MININT-FNANLI5/<IP> to msra-sa-41:9000 failed on socket timeout exception: java.net.NoRouteToHostException: No route to host: no further information; For more details see: http://wiki.apache.org/hadoop/NoRouteToHost"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.933,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 332,
+  "lines": 433,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-031",
+ "scenario_event_ids": [
+  "evt_1452",
+  "evt_1368",
+  "evt_1475",
+  "evt_1477"
+ ],
+ "cause_event_id": "evt_1368",
+ "culprit_change_id": "chg_739",
+ "contributing_ids": [
+  "evt_1452"
+ ],
+ "cause_service": "storage-svc",
+ "blast_radius": [
+  "storage-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change to the storage-svc datanode EBS volume cut gp3 throughput and IOPS; the extra replica writes after dfs.replication was raised then saturated the volume.",
+  "micro": "{file}:{line} sets {key} {old} -> {new} on {resource}.",
+  "remediation": "Restore throughput/IOPS on {resource} (terraform {version_from}); alarm on EBS VolumeQueueLength and BurstBalance."
+ },
+ "_decoy_window_h": 12.0,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_1453",
+  "evt_1456"
+ ],
+ "remediation_ids": [
+  "evt_1475",
+  "evt_1477"
+ ],
+ "expected_files": [
+  "infra/storage-svc.tf"
+ ],
+ "expected_params": [
+  "ebs_iops",
+  "ebs_throughput"
+ ],
+ "culprit": {
+  "change_id": "chg_739",
+  "event_id": "evt_1368",
+  "file": "infra/storage-svc.tf",
+  "line": 49,
+  "symbol": "aws_ebs_volume.storage_svc_data",
+  "diff": "@@ -48,3 +48,3 @@ aws_ebs_volume.storage_svc_data\n resource \"aws_ebs_volume\" \"storage_svc_data\" {\n-  throughput = 250\n+  throughput = 125\n   tags = local.tags",
+  "param_key": "ebs_throughput"
+ },
+ "rca": {
+  "macro": "Terraform change to the storage-svc datanode EBS volume cut gp3 throughput and IOPS; the extra replica writes after dfs.replication was raised then saturated the volume.",
+  "micro": "infra/storage-svc.tf:49 sets ebs_throughput 250 -> 125 on aws_ebs_volume.storage_svc_data.",
+  "remediation": "Restore throughput/IOPS on aws_ebs_volume.storage_svc_data (terraform tf-r2); alarm on EBS VolumeQueueLength and BurstBalance."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `Call to <*> failed: java.net.SocketTimeoutException: Read timed out`."
+ ]
+}

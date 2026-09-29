@@ -1,0 +1,91 @@
+{
+ "service": "billing-svc",
+ "planned_start": "2026-05-28T12:43:14.983023+00:00",
+ "incident_start": "2026-05-28T12:43:14.983023+00:00",
+ "source": "synthetic",
+ "scenario_type": "CONSUMER_CONCURRENCY",
+ "planned_cause": "billing-svc",
+ "anomaly_id": "evt_2319",
+ "mitigated_at": "2026-05-28T17:31:50.522836+00:00",
+ "id": "INC-053",
+ "scenario_family": "planned",
+ "scenario_title": "Consumer concurrency raised past the DB connection limit",
+ "category": "config",
+ "title": "Elevated 5xx errors on billing-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "billing-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on billing-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] billing-svc 2026-05-28 12:43-17:33: billing-svc: 251 of 365 log lines were non-INFO between 2026-05-28 12:43 and 2026-05-28 17:33 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "c.f.b.consumer.UsageEventConsumer - HikariPool-1 - Connection is not available, request timed out after 30000ms.",
+  "c.f.b.api.UsageController - account <*> requested usage for a closed period"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 251,
+  "lines": 365,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-053",
+ "scenario_event_ids": [
+  "evt_2315",
+  "evt_2349"
+ ],
+ "cause_event_id": "evt_2315",
+ "culprit_change_id": "chg_1277",
+ "contributing_ids": [],
+ "cause_service": "billing-svc",
+ "blast_radius": [
+  "billing-svc",
+  "api-gateway",
+  "billing-db"
+ ],
+ "_templates": {
+  "macro": "Config change raised {key} {old} -> {new} to drain the usage backlog faster; every consumer thread held a billing-db connection and the database refused new ones.",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old}; size consumer concurrency against db.pool.max_size and RDS max_connections."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_2316",
+  "evt_2317"
+ ],
+ "remediation_ids": [
+  "evt_2349"
+ ],
+ "expected_files": [
+  "config/billing-svc.yaml"
+ ],
+ "expected_params": [
+  "consumer.concurrency"
+ ],
+ "culprit": {
+  "change_id": "chg_1277",
+  "event_id": "evt_2315",
+  "file": "config/billing-svc.yaml",
+  "line": 100,
+  "symbol": "consumer.concurrency",
+  "diff": "@@ -99,3 +99,3 @@ consumer.concurrency\n consumer:\n-  concurrency: 8\n+  concurrency: 64\n   # managed by the platform team",
+  "param_key": "consumer.concurrency"
+ },
+ "rca": {
+  "macro": "Config change raised consumer.concurrency 8 -> 64 to drain the usage backlog faster; every consumer thread held a billing-db connection and the database refused new ones.",
+  "micro": "config/billing-svc.yaml:100 sets consumer.concurrency 8 -> 64.",
+  "remediation": "Revert consumer.concurrency to 8; size consumer concurrency against db.pool.max_size and RDS max_connections."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `c.f.b.consumer.UsageEventConsumer - HikariPool-1 - Connection is not available, `."
+ ]
+}

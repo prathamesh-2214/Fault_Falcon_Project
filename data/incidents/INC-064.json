@@ -1,0 +1,93 @@
+{
+ "service": "storage-svc",
+ "planned_start": "2026-06-15T18:33:45.691497+00:00",
+ "incident_start": "2026-06-15T18:33:45.691497+00:00",
+ "source": "synthetic",
+ "scenario_type": "MEMORY_INFRA",
+ "planned_cause": "node-svc",
+ "anomaly_id": "evt_2748",
+ "mitigated_at": "2026-06-15T23:21:03.802707+00:00",
+ "id": "INC-064",
+ "scenario_family": "simple",
+ "scenario_title": "Instance downsize",
+ "category": "infra",
+ "title": "Elevated 5xx errors on storage-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "storage-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on storage-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] storage-svc 2026-06-15 18:33-23:23: storage-svc: 283 of 386 log lines were non-INFO between 2026-06-15 18:33 and 2026-06-15 23:23 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 1 first seen in this span.",
+ "error_templates": [
+  "Call to node-svc failed: HTTP 503 Service Unavailable",
+  "<*> exception while serving <*> to <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 283,
+  "lines": 386,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-064",
+ "scenario_event_ids": [
+  "evt_2697",
+  "evt_2766"
+ ],
+ "cause_event_id": "evt_2697",
+ "culprit_change_id": "chg_1485",
+ "contributing_ids": [],
+ "cause_service": "node-svc",
+ "blast_radius": [
+  "node-svc",
+  "compute-svc",
+  "storage-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Launch-template change moved {svc} to a smaller instance type.",
+  "micro": "{file}:{line} sets {key} {old} -> {new} on {resource}.",
+  "remediation": "Restore {key} = {old} on {resource} (terraform {version_from})."
+ },
+ "_decoy_window_h": 10.0,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_2736"
+ ],
+ "remediation_ids": [
+  "evt_2766"
+ ],
+ "expected_files": [
+  "infra/node-svc.tf"
+ ],
+ "expected_params": [
+  "instance_type"
+ ],
+ "culprit": {
+  "change_id": "chg_1485",
+  "event_id": "evt_2697",
+  "file": "infra/node-svc.tf",
+  "line": 127,
+  "symbol": "aws_launch_template.node_svc",
+  "diff": "@@ -126,3 +126,3 @@ aws_launch_template.node_svc\n resource \"aws_launch_template\" \"node_svc\" {\n-  instance_type = \"m5.4xlarge\"\n+  instance_type = \"m5.xlarge\"\n   tags = local.tags",
+  "param_key": "instance_type"
+ },
+ "rca": {
+  "macro": "Launch-template change moved node-svc to a smaller instance type.",
+  "micro": "infra/node-svc.tf:127 sets instance_type m5.4xlarge -> m5.xlarge on aws_launch_template.node_svc.",
+  "remediation": "Restore instance_type = m5.4xlarge on aws_launch_template.node_svc (terraform tf-r11)."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `Call to node-svc failed: HTTP 503 Service Unavailable`."
+ ]
+}

@@ -1,0 +1,242 @@
+2026-05-13T21:31:55Z ERROR [synthetic] outbound call failed after 8 attempts
+2026-05-13T21:33:47Z ERROR [synthetic] outbound call failed after 54 attempts
+2026-05-13T21:35:12Z ERROR [synthetic] outbound call failed after 44 attempts
+2026-05-13T21:35:27Z ERROR [synthetic] outbound call failed after 32 attempts
+2026-05-13T21:38:47Z ERROR [synthetic] outbound call failed after 26 attempts
+2026-05-13T21:40:11Z INFO  [synthetic] generating core.7881
+2026-05-13T21:41:02Z INFO  [synthetic] data cache search parity error detected. attempting to correct
+2026-05-13T21:41:37Z ERROR [synthetic] outbound call failed after 36 attempts
+2026-05-13T21:41:52Z ERROR [synthetic] outbound call failed after 40 attempts
+2026-05-13T21:42:42Z INFO  [synthetic] generating core.145
+2026-05-13T21:43:08Z ERROR [synthetic] outbound call failed after 14 attempts
+2026-05-13T21:43:31Z ERROR [synthetic] outbound call failed after 18 attempts
+2026-05-13T21:43:47Z ERROR [synthetic] outbound call failed after 3 attempts
+2026-05-13T21:44:10Z ERROR [synthetic] outbound call failed after 33 attempts
+2026-05-13T21:44:25Z ERROR [synthetic] outbound call failed after 16 attempts
+2026-05-13T21:44:56Z INFO  [synthetic] 0 microseconds spent in the rbs signal handler during 0 calls. 0 microseconds was the maximum time for a single instance of a correctable ddr.
+2026-05-13T21:46:55Z INFO  [synthetic] generating core.2481
+2026-05-13T21:47:04Z ERROR [synthetic] outbound call failed after 40 attempts
+2026-05-13T21:47:39Z ERROR [synthetic] outbound call failed after 55 attempts
+2026-05-13T21:48:19Z ERROR [synthetic] outbound call failed after 37 attempts
+2026-05-13T21:49:56Z ERROR [synthetic] outbound call failed after 46 attempts
+2026-05-13T21:49:57Z ERROR [synthetic] outbound call failed after 7 attempts
+2026-05-13T21:49:57Z INFO  [synthetic] generating core.37807
+2026-05-13T21:50:06Z INFO  [synthetic] generating core.1521
+2026-05-13T21:50:15Z INFO  [synthetic] 1146800 double-hummer alignment exceptions
+2026-05-13T21:51:11Z ERROR [synthetic] outbound call failed after 26 attempts
+2026-05-13T21:51:44Z ERROR [synthetic] outbound call failed after 16 attempts
+2026-05-13T21:51:49Z ERROR [synthetic] outbound call failed after 51 attempts
+2026-05-13T21:51:58Z ERROR [synthetic] outbound call failed after 32 attempts
+2026-05-13T21:52:27Z INFO  [synthetic] 1 ddr error(s) detected and corrected on rank 0, symbol 24 over 335 seconds
+2026-05-13T21:53:03Z ERROR [synthetic] outbound call failed after 18 attempts
+2026-05-13T21:53:51Z ERROR [synthetic] outbound call failed after 55 attempts
+2026-05-13T21:55:50Z INFO  [synthetic] generating core.13752
+2026-05-13T21:56:32Z ERROR [synthetic] outbound call failed after 19 attempts
+2026-05-13T21:57:49Z ERROR [synthetic] outbound call failed after 59 attempts
+2026-05-13T21:58:17Z ERROR [synthetic] outbound call failed after 32 attempts
+2026-05-13T21:58:20Z ERROR [synthetic] outbound call failed after 34 attempts
+2026-05-13T21:58:33Z ERROR [synthetic] outbound call failed after 2 attempts
+2026-05-13T21:59:20Z ERROR [synthetic] outbound call failed after 6 attempts
+2026-05-13T21:59:20Z ERROR [synthetic] outbound call failed after 11 attempts
+2026-05-13T21:59:21Z ERROR [synthetic] outbound call failed after 10 attempts
+2026-05-13T21:59:28Z INFO  [synthetic] 1146800 double-hummer alignment exceptions
+2026-05-13T21:59:42Z ERROR [synthetic] outbound call failed after 33 attempts
+2026-05-13T21:59:46Z ERROR [synthetic] outbound call failed after 27 attempts
+2026-05-13T22:00:14Z ERROR [synthetic] outbound call failed after 51 attempts
+2026-05-13T22:01:27Z ERROR [synthetic] outbound call failed after 41 attempts
+2026-05-13T22:01:47Z ERROR [synthetic] outbound call failed after 45 attempts
+2026-05-13T22:02:40Z INFO  [synthetic] generating core.23873
+2026-05-13T22:05:02Z ERROR [synthetic] outbound call failed after 12 attempts
+2026-05-13T22:06:51Z ERROR [synthetic] outbound call failed after 48 attempts
+2026-05-13T22:07:11Z ERROR [synthetic] outbound call failed after 53 attempts
+2026-05-13T22:07:15Z ERROR [synthetic] outbound call failed after 55 attempts
+2026-05-13T22:07:43Z INFO  [synthetic] 4 ddr errors(s) detected and corrected on rank 0, symbol 13, bit 5
+2026-05-13T22:07:43Z ERROR [synthetic] outbound call failed after 25 attempts
+2026-05-13T22:08:13Z ERROR [synthetic] outbound call failed after 33 attempts
+2026-05-13T22:08:17Z INFO  [synthetic] iar 003a929c dear 01291228
+2026-05-13T22:08:27Z ERROR [synthetic] outbound call failed after 22 attempts
+2026-05-13T22:09:04Z INFO  [synthetic] iar 00106200 dear 0247019c
+2026-05-13T22:09:15Z ERROR [synthetic] outbound call failed after 47 attempts
+2026-05-13T22:09:52Z FATAL [synthetic] rts panic! - stopping execution
+2026-05-13T22:10:06Z ERROR [synthetic] outbound call failed after 43 attempts
+2026-05-13T22:10:16Z ERROR [synthetic] outbound call failed after 21 attempts
+2026-05-13T22:11:10Z ERROR [synthetic] outbound call failed after 55 attempts
+2026-05-13T22:11:18Z ERROR [synthetic] outbound call failed after 27 attempts
+2026-05-13T22:11:45Z ERROR [synthetic] outbound call failed after 3 attempts
+2026-05-13T22:12:50Z ERROR [synthetic] outbound call failed after 29 attempts
+2026-05-13T22:12:52Z ERROR [synthetic] outbound call failed after 46 attempts
+2026-05-13T22:13:23Z ERROR [synthetic] outbound call failed after 16 attempts
+2026-05-13T22:13:38Z ERROR [synthetic] outbound call failed after 15 attempts
+2026-05-13T22:14:17Z ERROR [synthetic] outbound call failed after 60 attempts
+2026-05-13T22:14:53Z ERROR [synthetic] outbound call failed after 14 attempts
+2026-05-13T22:16:06Z ERROR [synthetic] outbound call failed after 31 attempts
+2026-05-13T22:16:18Z ERROR [synthetic] outbound call failed after 11 attempts
+2026-05-13T22:16:21Z ERROR [synthetic] outbound call failed after 42 attempts
+2026-05-13T22:17:10Z ERROR [synthetic] outbound call failed after 28 attempts
+2026-05-13T22:17:12Z ERROR [synthetic] outbound call failed after 16 attempts
+2026-05-13T22:18:08Z ERROR [synthetic] outbound call failed after 38 attempts
+2026-05-13T22:18:08Z ERROR [synthetic] outbound call failed after 12 attempts
+2026-05-13T22:18:14Z ERROR [synthetic] outbound call failed after 52 attempts
+2026-05-13T22:18:32Z INFO  [synthetic] generating core.43008
+2026-05-13T22:19:49Z ERROR [synthetic] outbound call failed after 38 attempts
+2026-05-13T22:20:16Z INFO  [synthetic] iar 00106534 dear 02494c3c
+2026-05-13T22:20:46Z ERROR [synthetic] outbound call failed after 59 attempts
+2026-05-13T22:21:04Z ERROR [synthetic] outbound call failed after 12 attempts
+2026-05-13T22:22:15Z ERROR [synthetic] outbound call failed after 44 attempts
+2026-05-13T22:22:23Z ERROR [synthetic] outbound call failed after 7 attempts
+2026-05-13T22:23:01Z INFO  [synthetic] generating core.16623
+2026-05-13T22:27:09Z ERROR [synthetic] outbound call failed after 58 attempts
+2026-05-13T22:27:35Z ERROR [synthetic] outbound call failed after 4 attempts
+2026-05-13T22:27:48Z ERROR [synthetic] outbound call failed after 16 attempts
+2026-05-13T22:28:26Z INFO  [synthetic] iar 003a929c dear 01291708
+2026-05-13T22:28:48Z INFO  [synthetic] exception syndrome register: 0x08000000
+2026-05-13T22:30:36Z ERROR [synthetic] outbound call failed after 48 attempts
+2026-05-13T22:30:56Z ERROR [synthetic] outbound call failed after 15 attempts
+2026-05-13T22:32:42Z ERROR [synthetic] outbound call failed after 23 attempts
+2026-05-13T22:33:36Z INFO  [synthetic] CE sym 26, at 0x07a95e80, mask 0x10
+2026-05-13T22:33:40Z INFO  [synthetic] generating core.11357
+2026-05-13T22:34:41Z INFO  [synthetic] iar 00106210 dear 0244c23c
+2026-05-13T22:34:44Z INFO  [synthetic] 1 ddr errors(s) detected and corrected on rank 0, symbol 28, bit 0
+2026-05-13T22:35:20Z ERROR [synthetic] outbound call failed after 3 attempts
+2026-05-13T22:35:29Z INFO  [synthetic] generating core.7156
+2026-05-13T22:36:40Z ERROR [synthetic] outbound call failed after 25 attempts
+2026-05-13T22:36:54Z INFO  [synthetic] iar 001007a8 dear 065b4cac
+2026-05-13T22:37:06Z ERROR [synthetic] outbound call failed after 5 attempts
+2026-05-13T22:37:31Z INFO  [synthetic] iar 00106390 dear 02f67cfc
+2026-05-13T22:37:42Z ERROR [synthetic] outbound call failed after 11 attempts
+2026-05-13T22:37:43Z ERROR [synthetic] outbound call failed after 50 attempts
+2026-05-13T22:38:18Z INFO  [synthetic] 45684 floating point alignment exceptions
+2026-05-13T22:39:17Z ERROR [synthetic] outbound call failed after 40 attempts
+2026-05-13T22:39:42Z INFO  [synthetic] iar 001061dc dear 0244c28c
+2026-05-13T22:39:58Z ERROR [synthetic] outbound call failed after 34 attempts
+2026-05-13T22:40:01Z ERROR [synthetic] outbound call failed after 55 attempts
+2026-05-13T22:45:18Z ERROR [synthetic] outbound call failed after 44 attempts
+2026-05-13T22:45:51Z ERROR [synthetic] outbound call failed after 53 attempts
+2026-05-13T22:46:23Z ERROR [synthetic] outbound call failed after 37 attempts
+2026-05-13T22:46:33Z INFO  [synthetic] iar 00106704 dear 0245b77c
+2026-05-13T22:46:44Z ERROR [synthetic] outbound call failed after 58 attempts
+2026-05-13T22:46:59Z INFO  [synthetic] iar 001066c4 dear 0252529c
+2026-05-13T22:47:29Z INFO  [synthetic] generating core.45674
+2026-05-13T22:47:56Z ERROR [synthetic] outbound call failed after 12 attempts
+2026-05-13T22:48:12Z ERROR [synthetic] outbound call failed after 2 attempts
+2026-05-13T22:49:14Z ERROR [synthetic] outbound call failed after 38 attempts
+2026-05-13T22:49:19Z ERROR [synthetic] outbound call failed after 49 attempts
+2026-05-13T22:49:24Z ERROR [synthetic] outbound call failed after 23 attempts
+2026-05-13T22:49:33Z INFO  [synthetic] generating core.12883
+2026-05-13T22:51:16Z INFO  [synthetic] 1146800 double-hummer alignment exceptions
+2026-05-13T22:52:41Z ERROR [synthetic] outbound call failed after 16 attempts
+2026-05-13T22:53:40Z ERROR [synthetic] outbound call failed after 24 attempts
+2026-05-13T22:54:04Z ERROR [synthetic] outbound call failed after 16 attempts
+2026-05-13T22:54:49Z INFO  [synthetic] generating core.22886
+2026-05-13T22:55:32Z ERROR [synthetic] outbound call failed after 49 attempts
+2026-05-13T22:56:12Z ERROR [synthetic] outbound call failed after 49 attempts
+2026-05-13T22:56:38Z ERROR [synthetic] outbound call failed after 36 attempts
+2026-05-13T22:57:10Z INFO  [synthetic] generating core.30230
+2026-05-13T22:57:17Z ERROR [synthetic] outbound call failed after 20 attempts
+2026-05-13T22:57:27Z ERROR [synthetic] outbound call failed after 14 attempts
+2026-05-13T22:57:34Z INFO  [synthetic] generating core.16300
+2026-05-13T22:59:55Z INFO  [synthetic] generating core.17467
+2026-05-13T22:59:57Z ERROR [synthetic] outbound call failed after 37 attempts
+2026-05-13T23:00:52Z INFO  [synthetic] 15 floating point alignment exceptions
+2026-05-13T23:01:26Z ERROR [synthetic] outbound call failed after 9 attempts
+2026-05-13T23:02:00Z INFO  [synthetic] generating core.29732
+2026-05-13T23:02:01Z ERROR [synthetic] outbound call failed after 50 attempts
+2026-05-13T23:06:02Z ERROR [synthetic] outbound call failed after 50 attempts
+2026-05-13T23:06:07Z INFO  [synthetic] generating core.7205
+2026-05-13T23:07:02Z ERROR [synthetic] outbound call failed after 34 attempts
+2026-05-13T23:08:16Z INFO  [synthetic] generating core.24671
+2026-05-13T23:10:47Z INFO  [synthetic] generating core.28666
+2026-05-13T23:10:57Z ERROR [synthetic] outbound call failed after 50 attempts
+2026-05-13T23:11:28Z INFO  [synthetic] generating core.9778
+2026-05-13T23:13:09Z INFO  [synthetic] generating core.7672
+2026-05-13T23:13:50Z INFO  [synthetic] instruction cache parity error corrected
+2026-05-13T23:14:37Z ERROR [synthetic] outbound call failed after 30 attempts
+2026-05-13T23:14:37Z ERROR [synthetic] outbound call failed after 35 attempts
+2026-05-13T23:14:45Z ERROR [synthetic] outbound call failed after 33 attempts
+2026-05-13T23:15:01Z ERROR [synthetic] outbound call failed after 25 attempts
+2026-05-13T23:15:03Z ERROR [synthetic] outbound call failed after 11 attempts
+2026-05-13T23:16:19Z ERROR [synthetic] outbound call failed after 22 attempts
+2026-05-13T23:16:28Z ERROR [synthetic] outbound call failed after 10 attempts
+2026-05-13T23:16:42Z INFO  [synthetic] generating core.1990
+2026-05-13T23:17:04Z ERROR [synthetic] outbound call failed after 40 attempts
+2026-05-13T23:18:45Z INFO  [synthetic] generating core.4614
+2026-05-13T23:20:16Z ERROR [synthetic] outbound call failed after 13 attempts
+2026-05-13T23:21:54Z INFO  [synthetic] 8 floating point alignment exceptions
+2026-05-13T23:21:56Z ERROR [synthetic] outbound call failed after 47 attempts
+2026-05-13T23:22:31Z ERROR [synthetic] outbound call failed after 36 attempts
+2026-05-13T23:22:55Z ERROR [synthetic] outbound call failed after 28 attempts
+2026-05-13T23:23:43Z ERROR [synthetic] outbound call failed after 23 attempts
+2026-05-13T23:24:21Z ERROR [synthetic] outbound call failed after 21 attempts
+2026-05-13T23:24:32Z FATAL [synthetic] data TLB error interrupt
+2026-05-13T23:24:50Z ERROR [synthetic] outbound call failed after 58 attempts
+2026-05-13T23:24:59Z ERROR [synthetic] outbound call failed after 47 attempts
+2026-05-13T23:25:58Z FATAL [synthetic] ciod: Error loading /bgl/apps/scaletest/performance/MINIBEN/mb_243_0810/allreduce.rts: invalid or missing program image, Exec format error
+2026-05-13T23:26:15Z INFO  [synthetic] 5 floating point alignment exceptions
+2026-05-13T23:26:29Z ERROR [synthetic] outbound call failed after 17 attempts
+2026-05-13T23:29:48Z ERROR [synthetic] outbound call failed after 11 attempts
+2026-05-13T23:29:59Z ERROR [synthetic] outbound call failed after 52 attempts
+2026-05-13T23:30:22Z INFO  [synthetic] total of 1 ddr error(s) detected and corrected
+2026-05-13T23:30:49Z ERROR [synthetic] outbound call failed after 51 attempts
+2026-05-13T23:31:43Z ERROR [synthetic] outbound call failed after 16 attempts
+2026-05-13T23:31:47Z ERROR [synthetic] outbound call failed after 47 attempts
+2026-05-13T23:33:20Z ERROR [synthetic] outbound call failed after 9 attempts
+2026-05-13T23:34:02Z ERROR [synthetic] outbound call failed after 58 attempts
+2026-05-13T23:34:04Z ERROR [synthetic] outbound call failed after 9 attempts
+2026-05-13T23:34:32Z ERROR [synthetic] outbound call failed after 19 attempts
+2026-05-13T23:35:01Z ERROR [synthetic] outbound call failed after 3 attempts
+2026-05-13T23:36:39Z ERROR [synthetic] outbound call failed after 47 attempts
+2026-05-13T23:36:40Z INFO  [synthetic] total of 1 ddr error(s) detected and corrected
+2026-05-13T23:37:03Z ERROR [synthetic] outbound call failed after 23 attempts
+2026-05-13T23:39:26Z ERROR [synthetic] outbound call failed after 22 attempts
+2026-05-13T23:41:25Z INFO  [synthetic] iar 0014a150 dear 00991c88
+2026-05-13T23:41:40Z ERROR [synthetic] outbound call failed after 29 attempts
+2026-05-13T23:42:00Z INFO  [synthetic] generating core.418
+2026-05-13T23:43:01Z INFO  [synthetic] 113170696 double-hummer alignment exceptions
+2026-05-13T23:43:04Z INFO  [synthetic] 685 floating point alignment exceptions
+2026-05-13T23:45:38Z ERROR [synthetic] outbound call failed after 31 attempts
+2026-05-13T23:46:22Z ERROR [synthetic] outbound call failed after 38 attempts
+2026-05-13T23:46:29Z ERROR [synthetic] outbound call failed after 28 attempts
+2026-05-13T23:46:30Z INFO  [synthetic] generating core.1103
+2026-05-13T23:46:33Z ERROR [synthetic] outbound call failed after 15 attempts
+2026-05-13T23:46:41Z INFO  [synthetic] iar 00106204 dear 02f75edc
+2026-05-13T23:46:52Z ERROR [synthetic] outbound call failed after 29 attempts
+2026-05-13T23:47:13Z INFO  [synthetic] CE sym 8, at 0x0a2ae600, mask 0x10
+2026-05-13T23:48:38Z ERROR [synthetic] outbound call failed after 60 attempts
+2026-05-13T23:49:06Z ERROR [synthetic] outbound call failed after 6 attempts
+2026-05-13T23:49:12Z ERROR [synthetic] outbound call failed after 4 attempts
+2026-05-13T23:49:56Z ERROR [synthetic] outbound call failed after 7 attempts
+2026-05-13T23:50:08Z INFO  [synthetic] 8 floating point alignment exceptions
+2026-05-13T23:50:29Z INFO  [synthetic] 24669022 double-hummer alignment exceptions
+2026-05-13T23:50:43Z ERROR [synthetic] outbound call failed after 51 attempts
+2026-05-13T23:51:27Z ERROR [synthetic] outbound call failed after 35 attempts
+2026-05-13T23:52:27Z INFO  [synthetic] 8 floating point alignment exceptions
+2026-05-13T23:52:38Z INFO  [synthetic] generating core.1887
+2026-05-13T23:52:39Z INFO  [synthetic] 5 floating point alignment exceptions
+2026-05-13T23:53:16Z ERROR [synthetic] outbound call failed after 7 attempts
+2026-05-13T23:53:23Z ERROR [synthetic] outbound call failed after 32 attempts
+2026-05-13T23:53:32Z ERROR [synthetic] outbound call failed after 47 attempts
+2026-05-13T23:54:18Z ERROR [synthetic] outbound call failed after 53 attempts
+2026-05-13T23:55:04Z ERROR [synthetic] outbound call failed after 14 attempts
+2026-05-13T23:55:40Z ERROR [synthetic] outbound call failed after 58 attempts
+2026-05-13T23:56:28Z ERROR [synthetic] outbound call failed after 15 attempts
+2026-05-13T23:57:22Z INFO  [synthetic] generating core.145
+2026-05-13T23:59:04Z ERROR [synthetic] outbound call failed after 32 attempts
+2026-05-13T23:59:18Z ERROR [synthetic] outbound call failed after 21 attempts
+2026-05-14T00:01:12Z ERROR [synthetic] outbound call failed after 6 attempts
+2026-05-14T00:01:21Z ERROR [synthetic] outbound call failed after 33 attempts
+2026-05-14T00:01:23Z ERROR [synthetic] outbound call failed after 27 attempts
+2026-05-14T00:01:26Z ERROR [synthetic] outbound call failed after 11 attempts
+2026-05-14T00:01:35Z INFO  [synthetic] 6182400 double-hummer alignment exceptions
+2026-05-14T00:01:42Z ERROR [synthetic] outbound call failed after 58 attempts
+2026-05-14T00:03:10Z ERROR [synthetic] outbound call failed after 23 attempts
+2026-05-14T00:04:23Z ERROR [synthetic] outbound call failed after 54 attempts
+2026-05-14T00:04:27Z ERROR [synthetic] outbound call failed after 30 attempts
+2026-05-14T00:05:29Z INFO  [synthetic] 3091200 double-hummer alignment exceptions
+2026-05-14T00:05:58Z INFO  [synthetic] instruction cache parity error corrected
+2026-05-14T00:06:16Z INFO  [synthetic] 1146800 double-hummer alignment exceptions
+2026-05-14T00:06:41Z ERROR [synthetic] outbound call failed after 5 attempts
+2026-05-14T00:07:22Z ERROR [synthetic] outbound call failed after 10 attempts
+2026-05-14T00:07:52Z ERROR [synthetic] outbound call failed after 44 attempts
+2026-05-14T00:09:26Z ERROR [synthetic] outbound call failed after 6 attempts
+2026-05-14T00:09:57Z INFO  [synthetic] generating core.28370
+2026-05-14T00:29:39Z INFO  [synthetic] CE sym 14, at 0x06047860, mask 0x20

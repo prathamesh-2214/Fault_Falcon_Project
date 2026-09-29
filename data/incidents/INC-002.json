@@ -1,0 +1,96 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-03-06T15:47:18.222944+00:00",
+ "incident_start": "2026-03-06T15:47:18.222944+00:00",
+ "source": "synthetic",
+ "scenario_type": "DEPENDENCY_UPGRADE",
+ "planned_cause": "auth-svc",
+ "anomaly_id": "evt_147",
+ "mitigated_at": "2026-03-06T20:04:24.060152+00:00",
+ "id": "INC-002",
+ "scenario_family": "planned",
+ "scenario_title": "Library upgrade changed runtime behaviour",
+ "category": "code",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-03-06 15:47-18:27: api-gateway: 97 of 177 log lines were non-INFO between 2026-03-06 15:47 and 2026-03-06 18:27 UTC (peak error ratio 0.92 vs baseline median 0.0). 2 error templates, 1 first seen in this span. Peak p95 latency 0.969 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "authorizer: ImmatureSignatureError: The token is not yet valid (iat)",
+  "POST <*> <*> <*> target=auth-svc"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.923,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 97,
+  "lines": 177,
+  "p95_latency": 0.969,
+  "reasons": [
+   "error_ratio",
+   "new_error_template",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-002",
+ "scenario_event_ids": [
+  "evt_129",
+  "evt_130",
+  "evt_137",
+  "evt_138",
+  "evt_141",
+  "evt_142",
+  "evt_188"
+ ],
+ "cause_event_id": "evt_142",
+ "culprit_change_id": "chg_93",
+ "contributing_ids": [],
+ "cause_service": "auth-svc",
+ "blast_radius": [
+  "auth-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} was a routine dependency bump; go-redis 9.5 enables client-side caching handshakes (CLIENT TRACKING) the cluster rejects.",
+  "micro": "{file}:{line} upgrades the library: go-redis 9.5 enables client-side caching handshakes (CLIENT TRACKING) the cluster rejects.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; pin the previous version in {file} until the upgrade is tested against the real dependency."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_145",
+  "evt_144"
+ ],
+ "remediation_ids": [
+  "evt_188"
+ ],
+ "expected_files": [
+  "auth/go.mod",
+  "auth/internal/session/store.go"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_93",
+  "event_id": "evt_142",
+  "file": "auth/go.mod",
+  "line": 116,
+  "symbol": "go.mod",
+  "diff": "@@ -115,2 +115,2 @@ go.mod\n require (\n-\tgithub.com/redis/go-redis/v9 v9.0.5\n+\tgithub.com/redis/go-redis/v9 v9.5.1",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v3.2.0 of auth-svc was a routine dependency bump; go-redis 9.5 enables client-side caching handshakes (CLIENT TRACKING) the cluster rejects.",
+  "micro": "auth/go.mod:116 upgrades the library: go-redis 9.5 enables client-side caching handshakes (CLIENT TRACKING) the cluster rejects.",
+  "remediation": "Roll back auth-svc v3.2.0 -> v3.1.0; pin the previous version in auth/go.mod until the upgrade is tested against the real dependency."
+ },
+ "action_items": [
+  "Add a regression test covering go.mod (auth/go.mod).",
+  "Alert on the error signature `authorizer: ImmatureSignatureError: The token is not yet valid (iat)`."
+ ]
+}

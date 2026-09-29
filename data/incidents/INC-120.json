@@ -1,0 +1,102 @@
+{
+ "service": "node-svc",
+ "incident_start": "2026-08-30T13:26:24+00:00",
+ "planned_start": "2026-08-30T13:26:24+00:00",
+ "anomaly_id": "evt_5039",
+ "source": "loghub",
+ "planned_cause": null,
+ "error_templates": [
+  "Node card is not fully functional",
+  "Lustre mount FAILED : <*> : block_id : location",
+  "PrepareForService shutting down Node card(mLctn(R10-M1-N2), mCardSernum(<HEX>), mLp(FF:F2:9F:16:E0:DA:00:0D:60:E9:1F:25), mIp(<IP>), mType(4)) as part of Service Action 648",
+  "minus normalized number..................0",
+  "fraction rounded.........................0"
+ ],
+ "scenario_type": "BAD_DEPLOY",
+ "mitigated_at": "2026-08-30T18:01:40.496640+00:00",
+ "id": "INC-120",
+ "scenario_family": "simple",
+ "scenario_title": "Bad deploy",
+ "category": "code",
+ "title": "Elevated 5xx errors on node-svc",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "node-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on node-svc",
+ "split": "heldout",
+ "detected": true,
+ "symptom": "[ANOMALY] node-svc 2026-08-30 13:26-14:52: node-svc: 6 of 27 log lines were non-INFO between 2026-08-30 13:26 and 2026-08-30 14:52 UTC (peak error ratio 1.0 vs baseline median 0.0). 6 error templates, 4 first seen in this span. 1 lines carry an alert label.",
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 6,
+  "lines": 27,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-120",
+ "scenario_event_ids": [
+  "evt_5002",
+  "evt_5005",
+  "evt_5019",
+  "evt_5025",
+  "evt_5033",
+  "evt_5034",
+  "evt_5055"
+ ],
+ "cause_event_id": "evt_5034",
+ "culprit_change_id": "chg_2735",
+ "contributing_ids": [],
+ "cause_service": "node-svc",
+ "blast_radius": [
+  "node-svc",
+  "compute-svc",
+  "storage-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} introduced a regression.",
+  "micro": "{file}:{line} ({symbol}) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; revert {file}:{line}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_5038",
+  "evt_5037",
+  "evt_5036"
+ ],
+ "remediation_ids": [
+  "evt_5055"
+ ],
+ "expected_files": [
+  "node/ciod/ciod_loader.c",
+  "node/io/lustre_mount.c"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2735",
+  "event_id": "evt_5034",
+  "file": "node/io/lustre_mount.c",
+  "line": 230,
+  "symbol": "lustre_mount",
+  "diff": "@@ -229,4 +229,4 @@ lustre_mount\n     rc = submit(req);\n-    if (rc < 0) {\n+    if (rc <= 0) {\n         return handle_error(rc);\n     }",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v5.25.0 of node-svc introduced a regression.",
+  "micro": "node/io/lustre_mount.c:230 (lustre_mount) changes the condition / constant shown in the diff.",
+  "remediation": "Roll back node-svc v5.25.0 -> v5.20.0; revert node/io/lustre_mount.c:230."
+ },
+ "action_items": [
+  "Add a regression test covering lustre_mount (node/io/lustre_mount.c).",
+  "Alert on the error signature `Node card is not fully functional`."
+ ]
+}

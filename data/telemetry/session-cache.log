@@ -1,0 +1,162 @@
+2026-05-10T15:30:59Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:34:23Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:34:47Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:36:42Z INFO  [synthetic] * DB saved on disk
+2026-05-10T15:36:51Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:37:10Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:38:06Z INFO  [synthetic] * Background saving started by pid 2
+2026-05-10T15:41:14Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:41:51Z WARN  [synthetic] # WARNING: slow command HGETALL took 62 ms
+2026-05-10T15:42:12Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:44:08Z INFO  [synthetic] * 50 changes in 60 seconds. Saving...
+2026-05-10T15:44:09Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:45:09Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:46:34Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:48:19Z INFO  [synthetic] * 43 changes in 60 seconds. Saving...
+2026-05-10T15:49:02Z INFO  [synthetic] * DB saved on disk
+2026-05-10T15:49:25Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:49:30Z INFO  [synthetic] * 35 changes in 60 seconds. Saving...
+2026-05-10T15:50:46Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:50:57Z INFO  [synthetic] * Background saving started by pid 12
+2026-05-10T15:51:21Z INFO  [synthetic] * 8 changes in 60 seconds. Saving...
+2026-05-10T15:51:32Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:52:15Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:53:32Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:54:28Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:54:59Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:55:11Z INFO  [synthetic] * DB saved on disk
+2026-05-10T15:55:59Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:56:06Z INFO  [synthetic] * DB saved on disk
+2026-05-10T15:56:19Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:56:32Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:56:37Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T15:59:12Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:00:02Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:01:53Z INFO  [synthetic] * Background saving started by pid 56
+2026-05-10T16:02:09Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:02:50Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:04:01Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:05:21Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:06:03Z INFO  [synthetic] * 60 changes in 60 seconds. Saving...
+2026-05-10T16:06:17Z INFO  [synthetic] * 23 changes in 60 seconds. Saving...
+2026-05-10T16:08:19Z INFO  [synthetic] * DB saved on disk
+2026-05-10T16:08:44Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:08:47Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:09:27Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:12:25Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:12:25Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:13:01Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:13:08Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:13:18Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:13:57Z INFO  [synthetic] * 60 changes in 60 seconds. Saving...
+2026-05-10T16:14:08Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:14:29Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:15:03Z INFO  [synthetic] * 24 changes in 60 seconds. Saving...
+2026-05-10T16:17:54Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:18:20Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:19:09Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:19:48Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:22:08Z INFO  [synthetic] * 29 changes in 60 seconds. Saving...
+2026-05-10T16:23:01Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:23:05Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:23:14Z INFO  [synthetic] * 29 changes in 60 seconds. Saving...
+2026-05-10T16:24:17Z INFO  [synthetic] * 6 changes in 60 seconds. Saving...
+2026-05-10T16:26:09Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:26:48Z INFO  [synthetic] * Background saving started by pid 47
+2026-05-10T16:28:06Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:28:13Z INFO  [synthetic] * DB saved on disk
+2026-05-10T16:29:55Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:30:46Z INFO  [synthetic] * DB saved on disk
+2026-05-10T16:33:07Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:34:33Z INFO  [synthetic] * 24 changes in 60 seconds. Saving...
+2026-05-10T16:35:38Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:38:05Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:38:54Z INFO  [synthetic] * Background saving started by pid 3
+2026-05-10T16:41:00Z INFO  [synthetic] * 16 changes in 60 seconds. Saving...
+2026-05-10T16:42:15Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:42:25Z INFO  [synthetic] * DB saved on disk
+2026-05-10T16:43:29Z INFO  [synthetic] * DB saved on disk
+2026-05-10T16:43:42Z INFO  [synthetic] * DB saved on disk
+2026-05-10T16:43:47Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:44:30Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:44:58Z INFO  [synthetic] * DB saved on disk
+2026-05-10T16:46:52Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:47:33Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:48:22Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:48:46Z INFO  [synthetic] * Background saving started by pid 46
+2026-05-10T16:49:47Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:50:19Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:50:34Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:50:48Z INFO  [synthetic] * 12 changes in 60 seconds. Saving...
+2026-05-10T16:51:31Z INFO  [synthetic] * 12 changes in 60 seconds. Saving...
+2026-05-10T16:52:03Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:52:07Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:54:11Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:54:51Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:55:39Z WARN  [synthetic] # WARNING: slow command HGETALL took 57 ms
+2026-05-10T16:55:51Z INFO  [synthetic] * Background saving started by pid 17
+2026-05-10T16:57:06Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T16:57:20Z INFO  [synthetic] * 28 changes in 60 seconds. Saving...
+2026-05-10T16:57:53Z INFO  [synthetic] * Background saving started by pid 48
+2026-05-10T16:59:35Z INFO  [synthetic] * 20 changes in 60 seconds. Saving...
+2026-05-10T16:59:52Z INFO  [synthetic] * DB saved on disk
+2026-05-10T17:01:29Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:05:54Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:06:47Z INFO  [synthetic] * 7 changes in 60 seconds. Saving...
+2026-05-10T17:06:59Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:07:36Z INFO  [synthetic] * Background saving started by pid 41
+2026-05-10T17:11:04Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:11:14Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:11:55Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:12:11Z INFO  [synthetic] * DB saved on disk
+2026-05-10T17:12:12Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:12:38Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:14:09Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:16:24Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:19:12Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:19:14Z INFO  [synthetic] * Background saving started by pid 5
+2026-05-10T17:20:15Z INFO  [synthetic] * DB saved on disk
+2026-05-10T17:20:27Z INFO  [synthetic] * DB saved on disk
+2026-05-10T17:20:44Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:22:51Z INFO  [synthetic] * Background saving started by pid 50
+2026-05-10T17:25:35Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:25:49Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:26:15Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:26:37Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:27:22Z WARN  [synthetic] # WARNING: slow command HGETALL took 7 ms
+2026-05-10T17:27:50Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:28:25Z INFO  [synthetic] * 8 changes in 60 seconds. Saving...
+2026-05-10T17:28:57Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:29:26Z INFO  [synthetic] * Background saving started by pid 25
+2026-05-10T17:30:10Z INFO  [synthetic] * 35 changes in 60 seconds. Saving...
+2026-05-10T17:30:16Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:30:22Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:30:24Z ERROR [synthetic] -OOM command not allowed when used memory > 'maxmemory'.
+2026-05-10T17:33:26Z INFO  [synthetic] * 46 changes in 60 seconds. Saving...
+2026-05-10T17:33:48Z INFO  [synthetic] * 9 changes in 60 seconds. Saving...
+2026-05-10T17:33:59Z INFO  [synthetic] * 46 changes in 60 seconds. Saving...
+2026-05-10T17:36:53Z INFO  [synthetic] * 19 changes in 60 seconds. Saving...
+2026-05-10T17:37:03Z INFO  [synthetic] * Background saving started by pid 29
+2026-05-10T17:37:53Z INFO  [synthetic] * Background saving started by pid 13
+2026-05-10T17:38:19Z INFO  [synthetic] * 27 changes in 60 seconds. Saving...
+2026-05-10T17:42:35Z INFO  [synthetic] * DB saved on disk
+2026-05-10T17:44:59Z INFO  [synthetic] * 44 changes in 60 seconds. Saving...
+2026-05-10T17:46:49Z INFO  [synthetic] * Background saving started by pid 57
+2026-05-10T17:46:53Z INFO  [synthetic] * DB saved on disk
+2026-05-10T17:50:50Z INFO  [synthetic] * 14 changes in 60 seconds. Saving...
+2026-05-10T17:52:43Z INFO  [synthetic] * Background saving started by pid 9
+2026-05-10T18:03:23Z INFO  [synthetic] * DB saved on disk
+2026-05-10T18:06:06Z INFO  [synthetic] * DB saved on disk
+2026-05-10T18:08:54Z INFO  [synthetic] * Background saving started by pid 58
+2026-05-10T18:09:08Z WARN  [synthetic] # WARNING: slow command HGETALL took 46 ms
+2026-05-10T18:11:32Z INFO  [synthetic] * DB saved on disk
+2026-05-10T18:11:47Z INFO  [synthetic] * DB saved on disk
+2026-05-10T18:12:22Z INFO  [synthetic] * Background saving started by pid 2
+2026-05-10T18:12:56Z INFO  [synthetic] * DB saved on disk
+2026-05-10T18:13:53Z INFO  [synthetic] * 51 changes in 60 seconds. Saving...
+2026-05-10T18:17:07Z INFO  [synthetic] * DB saved on disk
+2026-05-10T18:17:57Z INFO  [synthetic] * 38 changes in 60 seconds. Saving...
+2026-05-10T18:23:34Z INFO  [synthetic] * DB saved on disk
+2026-05-10T18:25:00Z INFO  [synthetic] * 8 changes in 60 seconds. Saving...
+2026-05-10T18:25:17Z INFO  [synthetic] * 4 changes in 60 seconds. Saving...
+2026-05-10T18:26:31Z INFO  [synthetic] * Background saving started by pid 31

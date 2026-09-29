@@ -1,0 +1,98 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-07-19T22:41:21.261260+00:00",
+ "incident_start": "2026-07-19T22:41:21.261260+00:00",
+ "source": "synthetic",
+ "scenario_type": "MISSING_INDEX",
+ "planned_cause": "compute-svc",
+ "anomaly_id": "evt_3671",
+ "mitigated_at": "2026-07-20T01:26:06.071904+00:00",
+ "id": "INC-085",
+ "scenario_family": "planned",
+ "scenario_title": "Dropped index, sequential scans at peak",
+ "category": "data",
+ "title": "Latency and timeouts on api-gateway",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "api-gateway: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-07-19 22:41-01:31: api-gateway: 182 of 241 log lines were non-INFO between 2026-07-19 22:41 and 2026-07-20 01:31 UTC (peak error ratio 0.9 vs baseline median 0.0). 2 error templates, 0 first seen in this span. Peak p95 latency 28.716 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=cloud-api",
+  "POST <*> <*> <*> target=cloud-api"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.9,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 182,
+  "lines": 241,
+  "p95_latency": 28.716,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-085",
+ "scenario_event_ids": [
+  "evt_3648",
+  "evt_3649",
+  "evt_3653",
+  "evt_3655",
+  "evt_3660",
+  "evt_3662",
+  "evt_3691"
+ ],
+ "cause_event_id": "evt_3662",
+ "culprit_change_id": "chg_2012",
+ "contributing_ids": [],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "meta-db",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} dropped index ix_jobs_state on meta-db.jobs (it looked unused on the replica); the hot query fell back to sequential scans and timed out at peak.",
+  "micro": "{file}:{line} drops ix_jobs_state.",
+  "remediation": "Recreate ix_jobs_state CONCURRENTLY on meta-db; roll back {svc} if needed; check index usage on the primary before dropping."
+ },
+ "_decoy_window_h": 6.0,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_3667",
+  "evt_3665",
+  "evt_3666"
+ ],
+ "remediation_ids": [
+  "evt_3691"
+ ],
+ "expected_files": [
+  "compute/db/migrations/V90__cleanup_indexes.sql",
+  "compute/scheduler/TaskRunner.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_2012",
+  "event_id": "evt_3662",
+  "file": "compute/db/migrations/V90__cleanup_indexes.sql",
+  "line": 2,
+  "symbol": "migration",
+  "diff": "@@ -1,2 +1,3 @@ migration\n -- index cleanup (storage cost)\n+DROP INDEX IF EXISTS ix_jobs_state;  -- unused according to pg_stat_user_indexes (replica only)\n COMMIT;",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v2.28.0 of compute-svc dropped index ix_jobs_state on meta-db.jobs (it looked unused on the replica); the hot query fell back to sequential scans and timed out at peak.",
+  "micro": "compute/db/migrations/V90__cleanup_indexes.sql:2 drops ix_jobs_state.",
+  "remediation": "Recreate ix_jobs_state CONCURRENTLY on meta-db; roll back compute-svc if needed; check index usage on the primary before dropping."
+ },
+ "action_items": [
+  "Add a regression test covering migration (compute/db/migrations/V90__cleanup_indexes.sql).",
+  "Alert on the error signature `GET <*> <*> <*> target=cloud-api`."
+ ]
+}

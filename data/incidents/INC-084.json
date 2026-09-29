@@ -1,0 +1,94 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-07-18T08:14:09.327524+00:00",
+ "incident_start": "2026-07-18T08:14:09.327524+00:00",
+ "source": "synthetic",
+ "scenario_type": "MEMORY_LEAK",
+ "planned_cause": "billing-svc",
+ "anomaly_id": "evt_3634",
+ "mitigated_at": "2026-07-18T11:54:43.280651+00:00",
+ "id": "INC-084",
+ "scenario_family": "planned",
+ "scenario_title": "Unbounded in-memory cache, OOM-killed tasks",
+ "category": "code",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-07-18 08:14-11:54: api-gateway: 235 of 316 log lines were non-INFO between 2026-07-18 08:14 and 2026-07-18 11:54 UTC (peak error ratio 1.0 vs baseline median 0.0). 1 error templates, 0 first seen in this span. Peak p95 latency 0.407 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=billing-svc"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 235,
+  "lines": 316,
+  "p95_latency": 0.407,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-084",
+ "scenario_event_ids": [
+  "evt_3609",
+  "evt_3610",
+  "evt_3612",
+  "evt_3613",
+  "evt_3614",
+  "evt_3615",
+  "evt_3643"
+ ],
+ "cause_event_id": "evt_3615",
+ "culprit_change_id": "chg_1991",
+ "contributing_ids": [],
+ "cause_service": "billing-svc",
+ "blast_radius": [
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of {svc} added an unbounded in-memory structure; memory grew for hours until tasks were OOM-killed and restarted in a loop.",
+  "micro": "{file}:{line} ({symbol}) adds entries that are never evicted.",
+  "remediation": "Roll back {svc} {version_to} -> {version_from}; bound or remove the structure at {file}:{line}; alert on memory growth per task."
+ },
+ "_decoy_window_h": 8.0,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_3630",
+  "evt_3628"
+ ],
+ "remediation_ids": [
+  "evt_3643"
+ ],
+ "expected_files": [
+  "billing/consumer/UsageEventConsumer.java",
+  "billing/invoice/InvoiceService.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_1991",
+  "event_id": "evt_3615",
+  "file": "billing/consumer/UsageEventConsumer.java",
+  "line": 333,
+  "symbol": "UsageEventConsumer.onMessage",
+  "diff": "@@ -332,2 +332,3 @@ UsageEventConsumer.onMessage\n   public void onMessage(Message msg) {\n+    SEEN.put(msg.getMessageId(), msg);  // de-duplicate redeliveries\n     process(parse(msg));",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v4.36.0 of billing-svc added an unbounded in-memory structure; memory grew for hours until tasks were OOM-killed and restarted in a loop.",
+  "micro": "billing/consumer/UsageEventConsumer.java:333 (UsageEventConsumer.onMessage) adds entries that are never evicted.",
+  "remediation": "Roll back billing-svc v4.36.0 -> v4.35.1; bound or remove the structure at billing/consumer/UsageEventConsumer.java:333; alert on memory growth per task."
+ },
+ "action_items": [
+  "Add a regression test covering UsageEventConsumer.onMessage (billing/consumer/UsageEventConsumer.java).",
+  "Alert on the error signature `GET <*> <*> <*> target=billing-svc`."
+ ]
+}

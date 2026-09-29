@@ -1,0 +1,97 @@
+{
+ "service": "storage-svc",
+ "planned_start": "2026-07-28T06:50:13.529246+00:00",
+ "incident_start": "2026-07-28T06:50:13.529246+00:00",
+ "source": "synthetic",
+ "scenario_type": "EBS_THROUGHPUT",
+ "planned_cause": "storage-svc",
+ "anomaly_id": "evt_3905",
+ "mitigated_at": "2026-07-28T09:47:14.845081+00:00",
+ "id": "INC-090",
+ "scenario_family": "complex",
+ "scenario_title": "EBS gp3 throughput cut",
+ "category": "infra",
+ "title": "Latency and timeouts on storage-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "storage-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on storage-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] storage-svc 2026-07-28 06:50-09:50: storage-svc: 159 of 218 log lines were non-INFO between 2026-07-28 06:50 and 2026-07-28 09:50 UTC (peak error ratio 1.0 vs baseline median 0.0). 2 error templates, 0 first seen in this span.",
+ "error_templates": [
+  "<*> exception while serving <*> to <*>",
+  "Slow BlockReceiver write data to disk <*> (threshold=300ms)"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 1.0,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 159,
+  "lines": 218,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio"
+  ]
+ },
+ "plan_id": "P-090",
+ "scenario_event_ids": [
+  "evt_3896",
+  "evt_3820",
+  "evt_3916",
+  "evt_3924"
+ ],
+ "cause_event_id": "evt_3820",
+ "culprit_change_id": "chg_2111",
+ "contributing_ids": [
+  "evt_3896"
+ ],
+ "cause_service": "storage-svc",
+ "blast_radius": [
+  "storage-svc",
+  "compute-svc",
+  "cloud-api",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change to the storage-svc datanode EBS volume cut gp3 throughput and IOPS; the extra replica writes after dfs.replication was raised then saturated the volume.",
+  "micro": "{file}:{line} sets {key} {old} -> {new} on {resource}.",
+  "remediation": "Restore throughput/IOPS on {resource} (terraform {version_from}); alarm on EBS VolumeQueueLength and BurstBalance."
+ },
+ "_decoy_window_h": 12.0,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_3897"
+ ],
+ "remediation_ids": [
+  "evt_3916",
+  "evt_3924"
+ ],
+ "expected_files": [
+  "infra/storage-svc.tf"
+ ],
+ "expected_params": [
+  "ebs_iops",
+  "ebs_throughput"
+ ],
+ "culprit": {
+  "change_id": "chg_2111",
+  "event_id": "evt_3820",
+  "file": "infra/storage-svc.tf",
+  "line": 49,
+  "symbol": "aws_ebs_volume.storage_svc_data",
+  "diff": "@@ -48,3 +48,3 @@ aws_ebs_volume.storage_svc_data\n resource \"aws_ebs_volume\" \"storage_svc_data\" {\n-  throughput = 250\n+  throughput = 125\n   tags = local.tags",
+  "param_key": "ebs_throughput"
+ },
+ "rca": {
+  "macro": "Terraform change to the storage-svc datanode EBS volume cut gp3 throughput and IOPS; the extra replica writes after dfs.replication was raised then saturated the volume.",
+  "micro": "infra/storage-svc.tf:49 sets ebs_throughput 250 -> 125 on aws_ebs_volume.storage_svc_data.",
+  "remediation": "Restore throughput/IOPS on aws_ebs_volume.storage_svc_data (terraform tf-r12); alarm on EBS VolumeQueueLength and BurstBalance."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `<*> exception while serving <*> to <*>`."
+ ]
+}

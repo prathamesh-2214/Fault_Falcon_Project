@@ -1,0 +1,93 @@
+{
+ "service": "auth-svc",
+ "planned_start": "2026-05-04T08:25:20.957582+00:00",
+ "incident_start": "2026-05-04T08:25:20.957582+00:00",
+ "source": "synthetic",
+ "scenario_type": "ECS_MEMORY",
+ "planned_cause": "auth-svc",
+ "anomaly_id": "evt_1714",
+ "mitigated_at": "2026-05-04T12:45:31.987831+00:00",
+ "id": "INC-038",
+ "scenario_family": "planned",
+ "scenario_title": "ECS task memory halved",
+ "category": "infra",
+ "title": "Elevated 5xx errors on auth-svc",
+ "severity": "SEV-2",
+ "detection": {
+  "alert": "auth-svc: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on auth-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] auth-svc 2026-05-04 08:25-12:45: auth-svc: 287 of 368 log lines were non-INFO between 2026-05-04 08:25 and 2026-05-04 12:45 UTC (peak error ratio 0.93 vs baseline median 0.0). 3 error templates, 2 first seen in this span.",
+ "error_templates": [
+  "ECS service started 1 task (replacing a stopped task)",
+  "ECS task stopped: OutOfMemoryError: Container killed due to memory usage",
+  "{\"level\":\"warn\",\"msg\":\"login failed: bad <*>"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.933,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 287,
+  "lines": 368,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-038",
+ "scenario_event_ids": [
+  "evt_1707",
+  "evt_1726"
+ ],
+ "cause_event_id": "evt_1707",
+ "culprit_change_id": "chg_951",
+ "contributing_ids": [],
+ "cause_service": "auth-svc",
+ "blast_radius": [
+  "auth-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Terraform change halved {svc} task memory {old} -> {new} MB; tasks were OOM-killed under load and the service restarted in a loop.",
+  "micro": "{file}:{line} sets memory {old} -> {new} on {resource}.",
+  "remediation": "Restore memory = {old} on {resource}; alarm on MemoryUtilization."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_1712",
+  "evt_1708",
+  "evt_1711"
+ ],
+ "remediation_ids": [
+  "evt_1726"
+ ],
+ "expected_files": [
+  "infra/auth-svc.tf"
+ ],
+ "expected_params": [
+  "ecs_task_memory_mb"
+ ],
+ "culprit": {
+  "change_id": "chg_951",
+  "event_id": "evt_1707",
+  "file": "infra/auth-svc.tf",
+  "line": 96,
+  "symbol": "aws_ecs_task_definition.auth_svc",
+  "diff": "@@ -95,3 +95,3 @@ aws_ecs_task_definition.auth_svc\n resource \"aws_ecs_task_definition\" \"auth_svc\" {\n-  memory = 2048\n+  memory = 1024\n   tags = local.tags",
+  "param_key": "ecs_task_memory_mb"
+ },
+ "rca": {
+  "macro": "Terraform change halved auth-svc task memory 2048 -> 1024 MB; tasks were OOM-killed under load and the service restarted in a loop.",
+  "micro": "infra/auth-svc.tf:96 sets memory 2048 -> 1024 on aws_ecs_task_definition.auth_svc.",
+  "remediation": "Restore memory = 2048 on aws_ecs_task_definition.auth_svc; alarm on MemoryUtilization."
+ },
+ "action_items": [
+  "Require a reviewed `terraform plan` and a CloudWatch alarm for the changed AWS resource.",
+  "Alert on the error signature `ECS service started 1 task (replacing a stopped task)`."
+ ]
+}

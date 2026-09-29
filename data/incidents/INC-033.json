@@ -1,0 +1,104 @@
+{
+ "service": "compute-svc",
+ "planned_start": "2026-04-25T19:53:31.976227+00:00",
+ "incident_start": "2026-04-25T19:53:31.976227+00:00",
+ "source": "synthetic",
+ "scenario_type": "RETRY_STORM",
+ "planned_cause": "compute-svc",
+ "anomaly_id": "evt_1552",
+ "mitigated_at": "2026-04-25T23:46:10.006609+00:00",
+ "id": "INC-033",
+ "scenario_family": "complex",
+ "scenario_title": "Retry storm after backoff removal",
+ "category": "code",
+ "title": "Latency and timeouts on compute-svc",
+ "severity": "SEV-3",
+ "detection": {
+  "alert": "compute-svc: p99 latency > 2 s for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "timeout"
+ },
+ "impact": "Requests slowed down and a share of them timed out on compute-svc",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] compute-svc 2026-04-25 19:53-20:13: compute-svc: 19 of 26 log lines were non-INFO between 2026-04-25 19:53 and 2026-04-25 20:13 UTC (peak error ratio 0.79 vs baseline median 0.0). 2 error templates, 1 first seen in this span.",
+ "error_templates": [
+  "Retrying connect to server: resourcemanager:8030. Already tried <*> time(s)",
+  "ERROR IN CONTACTING RM."
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.786,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 19,
+  "lines": 26,
+  "p95_latency": null,
+  "reasons": [
+   "error_ratio",
+   "new_error_template"
+  ]
+ },
+ "plan_id": "P-033",
+ "scenario_event_ids": [
+  "evt_1544",
+  "evt_1536",
+  "evt_1538",
+  "evt_1541",
+  "evt_1542",
+  "evt_1547",
+  "evt_1548",
+  "evt_1562",
+  "evt_1563"
+ ],
+ "cause_event_id": "evt_1548",
+ "culprit_change_id": "chg_862",
+ "contributing_ids": [
+  "evt_1544"
+ ],
+ "cause_service": "compute-svc",
+ "blast_radius": [
+  "compute-svc",
+  "cloud-api",
+  "api-gateway",
+  "storage-svc",
+  "coord-svc"
+ ],
+ "_templates": {
+  "macro": "Deploy {version_to} of compute-svc removed exponential backoff from ResourceManager calls; combined with retry.max raised earlier it created a retry storm.",
+  "micro": "{file}:{line} ({symbol}) replaces exponential backoff with a constant BASE_BACKOFF_MS.",
+  "remediation": "Roll back compute-svc {version_to} -> {version_from}; restore `backoffMs = Math.min(backoffMs * 2, MAX_BACKOFF_MS)` at {file}:{line}; revert retry.max to its previous value."
+ },
+ "_decoy_window_h": null,
+ "_fix": "rollback",
+ "decoy_ids": [
+  "evt_1551",
+  "evt_1550"
+ ],
+ "remediation_ids": [
+  "evt_1562",
+  "evt_1563"
+ ],
+ "expected_files": [
+  "compute/mapreduce/ShuffleHandler.java",
+  "compute/rpc/RMClient.java",
+  "compute/scheduler/TaskRunner.java"
+ ],
+ "expected_params": [],
+ "culprit": {
+  "change_id": "chg_862",
+  "event_id": "evt_1548",
+  "file": "compute/rpc/RMClient.java",
+  "line": 308,
+  "symbol": "RMClient.allocate",
+  "diff": "@@ -306,5 +306,5 @@ RMClient.allocate\n       } catch (IOException e) {\n         attempts++;\n-        backoffMs = Math.min(backoffMs * 2, MAX_BACKOFF_MS);\n+        backoffMs = BASE_BACKOFF_MS;  // simpler: constant retry interval\n         Thread.sleep(backoffMs);\n       }",
+  "param_key": null
+ },
+ "rca": {
+  "macro": "Deploy v2.10.0 of compute-svc removed exponential backoff from ResourceManager calls; combined with retry.max raised earlier it created a retry storm.",
+  "micro": "compute/rpc/RMClient.java:308 (RMClient.allocate) replaces exponential backoff with a constant BASE_BACKOFF_MS.",
+  "remediation": "Roll back compute-svc v2.10.0 -> v2.9.0; restore `backoffMs = Math.min(backoffMs * 2, MAX_BACKOFF_MS)` at compute/rpc/RMClient.java:308; revert retry.max to its previous value."
+ },
+ "action_items": [
+  "Add a regression test covering RMClient.allocate (compute/rpc/RMClient.java).",
+  "Alert on the error signature `Retrying connect to server: resourcemanager:8030. Already tried <*> time(s)`."
+ ]
+}

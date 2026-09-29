@@ -1,0 +1,90 @@
+{
+ "service": "api-gateway",
+ "planned_start": "2026-06-12T12:01:34.217157+00:00",
+ "incident_start": "2026-06-12T12:01:34.217157+00:00",
+ "source": "synthetic",
+ "scenario_type": "MEMORY_HEAP",
+ "planned_cause": "billing-svc",
+ "anomaly_id": "evt_2691",
+ "mitigated_at": "2026-06-12T14:51:11.863931+00:00",
+ "id": "INC-062",
+ "scenario_family": "simple",
+ "scenario_title": "Heap cut",
+ "category": "config",
+ "title": "Elevated 5xx errors on api-gateway",
+ "severity": "SEV-1",
+ "detection": {
+  "alert": "api-gateway: 5XX error rate > 2 % for 5 min",
+  "source": "CloudWatch alarm -> PagerDuty",
+  "flavor": "5xx"
+ },
+ "impact": "A share of requests failed with 5xx on api-gateway",
+ "split": "dev",
+ "detected": true,
+ "symptom": "[ANOMALY] api-gateway 2026-06-12 12:01-14:51: api-gateway: 178 of 244 log lines were non-INFO between 2026-06-12 12:01 and 2026-06-12 14:51 UTC (peak error ratio 0.89 vs baseline median 0.0). 1 error templates, 0 first seen in this span. Peak p95 latency 0.512 s vs baseline band up to 0.245 s.",
+ "error_templates": [
+  "GET <*> <*> <*> target=billing-svc"
+ ],
+ "anomaly_numbers": {
+  "peak_error_ratio": 0.889,
+  "baseline_median_error_ratio": 0.0,
+  "error_lines": 178,
+  "lines": 244,
+  "p95_latency": 0.512,
+  "reasons": [
+   "error_ratio",
+   "p95_latency"
+  ]
+ },
+ "plan_id": "P-062",
+ "scenario_event_ids": [
+  "evt_2682",
+  "evt_2696"
+ ],
+ "cause_event_id": "evt_2682",
+ "culprit_change_id": "chg_1477",
+ "contributing_ids": [],
+ "cause_service": "billing-svc",
+ "blast_radius": [
+  "billing-svc",
+  "api-gateway"
+ ],
+ "_templates": {
+  "macro": "Config change cut the {svc} JVM heap.",
+  "micro": "{file}:{line} sets {key} {old} -> {new}.",
+  "remediation": "Revert {key} to {old} in {file}."
+ },
+ "_decoy_window_h": null,
+ "_fix": "revert",
+ "decoy_ids": [
+  "evt_2686",
+  "evt_2684"
+ ],
+ "remediation_ids": [
+  "evt_2696"
+ ],
+ "expected_files": [
+  "config/billing-svc.yaml"
+ ],
+ "expected_params": [
+  "jvm.heap_mb"
+ ],
+ "culprit": {
+  "change_id": "chg_1477",
+  "event_id": "evt_2682",
+  "file": "config/billing-svc.yaml",
+  "line": 113,
+  "symbol": "jvm.heap_mb",
+  "diff": "@@ -112,3 +112,3 @@ jvm.heap_mb\n jvm:\n-  heap_mb: 7168\n+  heap_mb: 1792\n   # managed by the platform team",
+  "param_key": "jvm.heap_mb"
+ },
+ "rca": {
+  "macro": "Config change cut the billing-svc JVM heap.",
+  "micro": "config/billing-svc.yaml:113 sets jvm.heap_mb 7168 -> 1792.",
+  "remediation": "Revert jvm.heap_mb to 7168 in config/billing-svc.yaml."
+ },
+ "action_items": [
+  "Add validation bounds and a canary for risky config keys (pool / timeout / retry / flags).",
+  "Alert on the error signature `GET <*> <*> <*> target=billing-svc`."
+ ]
+}
