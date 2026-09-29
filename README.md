@@ -15,7 +15,7 @@
 > its interface, models and evaluation are still changing.
 
 <p align="center">
-  <img src="docs/screenshots/08_rca_report.png" width="900" alt="FaultFalcon investigating an incident">
+  <img src="docs/screenshots/05_root_cause.png" width="900" alt="FaultFalcon investigating an incident">
 </p>
 
 **See a full demo run with screenshots: [EXAMPLE.md](EXAMPLE.md)**
