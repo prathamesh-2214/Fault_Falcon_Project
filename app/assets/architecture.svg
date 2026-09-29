@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13">
+  <title>FaultFalcon architecture</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="560" fill="#ffffff"/>
+  <text x="20" y="30" font-size="18" font-weight="700" fill="#0f172a">FaultFalcon: real logs + simulated changes -&gt; stage-aware retrieval -&gt; anchored StreamingLLM</text>
+
+  <!-- ingest column -->
+  <g>
+    <rect x="20" y="60" width="210" height="70" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="32" y="84" font-weight="700" fill="#14532d">LogHub 2k logs (REAL)</text>
+    <text x="32" y="102" fill="#14532d">OpenStack, Hadoop, HDFS,</text>
+    <text x="32" y="119" fill="#14532d">Zookeeper, BGL (never modified)</text>
+
+    <rect x="20" y="150" width="210" height="84" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="32" y="174" font-weight="700" fill="#14532d">Log events</text>
+    <text x="32" y="192" fill="#14532d">Drain3 templates, windows,</text>
+    <text x="32" y="209" fill="#14532d">baseline, ANOMALY, ERROR_SIG</text>
+    <text x="32" y="226" fill="#14532d">(LLM narrates numbers only)</text>
+
+    <rect x="20" y="254" width="210" height="84" rx="8" fill="#fef3c7" stroke="#d97706"/>
+    <text x="32" y="278" font-weight="700" fill="#78350f">Pipeline simulator (SEEDED)</text>
+    <text x="32" y="296" fill="#78350f">deploys, config, infra, tests,</text>
+    <text x="32" y="313" fill="#78350f">scans; cause + decoys anchored</text>
+    <text x="32" y="330" fill="#78350f">to each real anomaly</text>
+
+    <rect x="20" y="358" width="210" height="62" rx="8" fill="#fef3c7" stroke="#d97706"/>
+    <text x="32" y="382" font-weight="700" fill="#78350f">Deploy summarizer + docs</text>
+    <text x="32" y="400" fill="#78350f">fixed template, rule significance,</text>
+    <text x="32" y="415" fill="#78350f">runbooks from latest config</text>
+  </g>
+  <line x1="125" y1="130" x2="125" y2="148" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="125" y1="234" x2="125" y2="252" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="125" y1="338" x2="125" y2="356" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- stores -->
+  <rect x="270" y="200" width="170" height="110" rx="8" fill="#e0e7ff" stroke="#4f46e5"/>
+  <text x="282" y="224" font-weight="700" fill="#312e81">Stores</text>
+  <text x="282" y="244" fill="#312e81">SQLite: events, change</text>
+  <text x="282" y="261" fill="#312e81">details, baselines, ledger,</text>
+  <text x="282" y="278" fill="#312e81">audit. Chroma (ONNX</text>
+  <text x="282" y="295" fill="#312e81">MiniLM): events, runbooks</text>
+  <line x1="230" y1="192" x2="268" y2="232" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="230" y1="389" x2="268" y2="290" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- ranker -->
+  <rect x="480" y="200" width="190" height="110" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="492" y="224" font-weight="700" fill="#0c4a6e">Ranker (600-token budget)</text>
+  <text x="492" y="244" fill="#0c4a6e">lens + dependency filters,</text>
+  <text x="492" y="261" fill="#0c4a6e">stage filter; 0.45 sim +</text>
+  <text x="492" y="278" fill="#0c4a6e">0.25 recency + 0.20 sig + 0.10 kw</text>
+  <text x="492" y="295" fill="#0c4a6e">guarantees, skips anchored ids</text>
+  <line x1="440" y1="255" x2="478" y2="255" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- session / graph -->
+  <rect x="710" y="60" width="270" height="110" rx="8" fill="#f1f5f9" stroke="#64748b"/>
+  <text x="722" y="84" font-weight="700" fill="#0f172a">Session (optional LangGraph flow)</text>
+  <text x="722" y="104" fill="#0f172a">scope -&gt; pick anchors -&gt; retrieve -&gt;</text>
+  <text x="722" y="121" fill="#0f172a">generate -&gt; engineer (interrupt) -&gt;</text>
+  <text x="722" y="138" fill="#0f172a">apply action (ledger / pin / lens)</text>
+  <text x="722" y="155" fill="#0f172a">citation check, audit row</text>
+  <line x1="670" y1="230" x2="760" y2="172" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- model -->
+  <rect x="710" y="200" width="270" height="110" rx="8" fill="#fae8ff" stroke="#a21caf"/>
+  <text x="722" y="224" font-weight="700" fill="#701a75">Small Llama model on CPU</text>
+  <text x="722" y="244" fill="#701a75">SmolLM2-360M (default) or TinyLlama</text>
+  <text x="722" y="261" fill="#701a75">transformers 4.33, manual token loop,</text>
+  <text x="722" y="278" fill="#701a75">pos-shift attention (mit-han-lab),</text>
+  <text x="722" y="295" fill="#701a75">StartRecentKVCache eviction</text>
+  <line x1="845" y1="170" x2="845" y2="198" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- KV cache bar -->
+  <text x="270" y="360" font-weight="700" fill="#0f172a">KV cache (1,536 tokens): never-evicted start region, then the rolling window</text>
+  <g font-size="12" fill="#ffffff">
+    <rect x="270" y="372" width="40" height="46" fill="#1f2937"/><text x="276" y="400">sinks</text>
+    <rect x="310" y="372" width="70" height="46" fill="#4b5563"/><text x="318" y="400">system</text>
+    <rect x="380" y="372" width="90" height="46" fill="#7c3aed"/><text x="386" y="392">initial</text><text x="386" y="408">query</text>
+    <rect x="470" y="372" width="110" height="46" fill="#a855f7"/><text x="478" y="400">checkpoints</text>
+    <rect x="580" y="372" width="90" height="46" fill="#2563eb"/><text x="586" y="392">lens +</text><text x="586" y="408">baseline</text>
+    <rect x="670" y="372" width="80" height="46" fill="#0891b2"/><text x="680" y="400">ledger</text>
+    <rect x="750" y="372" width="230" height="46" fill="#16a34a"/><text x="760" y="400">rolling window (&gt;= 600): turns, context</text>
+  </g>
+  <text x="270" y="440" fill="#334155">Ordered never-changing -&gt; most-changing: a ledger click re-encodes only the ledger + last turn;</text>
+  <text x="270" y="458" fill="#334155">the initial query and checkpoints are encoded once per session (attention is causal).</text>
+  <line x1="845" y1="310" x2="845" y2="370" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- UI -->
+  <rect x="20" y="480" width="960" height="60" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <text x="32" y="504" font-weight="700" fill="#0f172a">Streamlit app</text>
+  <text x="32" y="524" fill="#0f172a">Incident chat (anchor card, ledger buttons, KV bar, files to inspect) | Timeline (simulated changes vs REAL anomaly bands) | Logs | Experiment | About</text>
+</svg>
