@@ -128,7 +128,7 @@ cd <repo-name>
 
 | File | Size | Download |
 | --- | --- | --- |
-| `smollm2-360m-ff-chat.zip` (the fine-tuned model) | ~0.7 GB | **[Google Drive](MODEL_DRIVE_LINK)** |
+| `smollm2-360m-ff-chat.zip` (the fine-tuned model) | ~0.7 GB | **[Google Drive](https://drive.google.com/file/d/1tTU9WJ1LXxBtItiR3lRd9GAuqwm8r9FF/view?usp=drive_link)** |
 
 Unzip it into the `models/` folder of the project so that this file exists:
 
