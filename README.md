@@ -306,6 +306,33 @@ This is a **prototype in development**. Current state:
 | Left panel (incident list) is not visible | Widen the window or click **» Incidents** below the top bar |
 
 ---
+## References
 
+### Research papers
+
+- **StreamingLLM:** G. Xiao, Y. Tian, B. Chen, S. Han, M. Lewis. *Efficient Streaming Language Models with Attention Sinks.* ICLR 2024.
+  [arXiv:2309.17453](https://arxiv.org/abs/2309.17453) · [Code: mit-han-lab/streaming-llm](https://github.com/mit-han-lab/streaming-llm) · [MIT HAN Lab](https://hanlab.mit.edu/)
+- **LoRA:** E. J. Hu et al. *LoRA: Low-Rank Adaptation of Large Language Models.* ICLR 2022.
+  [arXiv:2106.09685](https://arxiv.org/abs/2106.09685)
+- **SmolLM2:** L. Ben Allal et al. *SmolLM2: When Smol Goes Big: Data-Centric Training of a Small Language Model.* 2025.
+  [arXiv:2502.02737](https://arxiv.org/abs/2502.02737)
+- **LogHub:** J. Zhu, S. He, P. He, J. Liu, M. R. Lyu. *Loghub: A Large Collection of System Log Datasets for AI-driven Log Analytics.* ISSRE 2023.
+  [arXiv:2008.06448](https://arxiv.org/abs/2008.06448) · [Dataset: logpai/loghub](https://github.com/logpai/loghub)
+- **Drain:** P. He, J. Zhu, Z. Zheng, M. R. Lyu. *Drain: An Online Log Parsing Approach with Fixed Depth Tree.* ICWS 2017.
+  [Code: logpai/Drain3](https://github.com/logpai/Drain3)
+
+### Related work
+
+- **RCAEval:** L. Pham et al. *RCAEval: A Benchmark for Root Cause Analysis of Microservice Systems with Telemetry Data.* WWW 2025 Companion.
+  [arXiv:2412.17015](https://arxiv.org/abs/2412.17015) · [Code: phamquiluan/RCAEval](https://github.com/phamquiluan/RCAEval)
+
+### Models, data and libraries
+
+- [HuggingFaceTB/SmolLM2-360M-Instruct](https://huggingface.co/HuggingFaceTB/SmolLM2-360M-Instruct): the base model, fine-tuned with LoRA
+- [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2): text embeddings for retrieval (ONNX build via ChromaDB)
+- [LogHub](https://github.com/logpai/loghub): real system logs (OpenStack, Hadoop, HDFS, Zookeeper, BGL)
+- [Hugging Face Transformers](https://github.com/huggingface/transformers) · [PyTorch](https://pytorch.org/) · [ChromaDB](https://www.trychroma.com/) · [LangGraph](https://github.com/langchain-ai/langgraph) · [Streamlit](https://streamlit.io/) · [uv](https://docs.astral.sh/uv/)
+
+All datasets, models and libraries are used under their respective open-source licenses.
 <sub>FaultFalcon · a prototype by Prathamesh Deshpande. Uses LogHub log samples, the SmolLM2 model and the
 StreamingLLM method under their respective licenses.</sub>
